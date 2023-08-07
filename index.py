@@ -17,6 +17,9 @@ conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_
 def home():
     return render_template('home.html')
 
+@app.route("/interface")
+def interface():
+    return render_template('interface.html')
 
 @app.route("/showdata")
 def showdata():
