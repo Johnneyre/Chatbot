@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Data</h2>
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>Nombre</td>
+            <td>Marca</td>
+            <td>Modelo</td>
+            <td>Cilindraje</td>
+            <td>Cantidad</td>
+            <td>Precio</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in list_products %}
+          <tr>
+            <td>{{row["id_repuestos"]}}</td>
+            <td>{{row["repuestos"]}}</td>
+            <td>{{row["marcas"]}}</td>
+            <td>{{row["modelo"]}}</td>
+            <td>{{row["cilindraje"]}}</td>
+            <td>{{row["cantidad"]}}</td>
+            <td>{{row["precio"]}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
