@@ -6,9 +6,9 @@ const boton4 = document.getElementById("4");
 const boton5 = document.getElementById("5");
 const boton6 = document.getElementById("6");
 const chat = document.getElementById("chat");
+const table = document.getElementById("table")
 
 const data = {
-    Accesorios: 'LoremIpsumAccesorio',
     Info: 'LoremIpsumInfo'
 }
 
@@ -19,11 +19,9 @@ let chat1 = document.createElement("P");
 contenedor.appendChild(chat1);
 
 let chat2 = document.createElement("P");
-// chat2.style.color = 'red'
 contenedor.appendChild(chat2);
 
 function mostrar(value) {
-    document.getElementById("premio").style.display = "block";
     if (value === "Repuestos") {
         respuesta.innerHTML = `Yo: ${value}`;
         chat1.innerHTML = `Chat: ${value} es tu opcion seleccionada`;
@@ -33,21 +31,7 @@ function mostrar(value) {
     } else if (value === "Accesorios") {
         respuesta.innerHTML = `Yo: ${value}`;
         chat1.innerHTML = `Chat: ${value} es tu opcion seleccionada`;
-        let tHtml = `<table>
-                        <thead>
-                          <tr>
-                            <th>ID</th>
-                            <th>Accesorios</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                              <td>1</td>
-                              <td>Nombre</td>
-                            </tr>
-                        </tbody>
-                      </table>`
-        chat2.innerHTML = tHtml;
+        table.style.display = "block";
     } else if (value === "Sobre Nosotros") {
         respuesta.innerHTML = `Yo: ${value}`;
         chat1.innerHTML = `Chat: ${value} es tu opcion seleccionada`;
