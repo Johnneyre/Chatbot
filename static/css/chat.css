@@ -26,10 +26,32 @@ body,html{
 .card-header{
 	border-radius: 15px 15px 0 0 !important;
 	border-bottom: 0 !important;
+	background-color: rgba(38, 51, 61, .2);
 }
 .card-footer{
-border-radius: 0 0 15px 15px !important;
+	border-radius: 0 0 15px 15px !important;
 	border-top: 0 !important;
+	display: flex;
+	text-align: center;
+	justify-content: space-evenly;
+	background-color: rgba(38, 51, 61, .2);
+}
+.options{
+	background-color: rgba(41, 43, 71, .2);
+	color: white;
+	border-radius: 20px;
+	border: solid rgb(33, 33, 78) 1px;
+	width: 30%;
+	transition: width .5s, height .7s;
+	transition-timing-function: ease;
+	box-shadow: 2px 5px 10px rgba(0,0,0,0.5);
+}
+.options:hover{
+	background-color: rgba(49, 50, 99, 0.5);
+	border-radius: 20px;
+	border: solid rgb(33, 33, 78) 1px;
+	width: 32%;
+	height: 110%;
 }
 .container{
 	align-content: center;
