@@ -1,0 +1,191 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Raleway", sans-serif;
+}
+
+:root {
+  --color: rgb(255, 106, 0);
+}
+
+.app {
+  height: 100vh;
+}
+
+.app__header {
+  width: 100%;
+  height: 9%;
+  display: flex;
+  align-items: center;
+}
+
+.app__header-link {
+  font-weight: bolder;
+  width: 100%;
+  font-size: 1.6rem;
+  margin-left: 1.8%;
+  color: var(--color);
+  text-decoration: none;
+}
+
+.app__container {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 3% 0% 0% 0%;
+  display: flex;
+}
+
+.app__container-img {
+  width: 800px;
+  margin-left: 10%;
+}
+
+.app__container-img img {
+  min-height: 100%;
+  width: 100%;
+  min-width: 100%;
+  max-width: 800px;
+  height: auto;
+  object-fit: cover;
+}
+
+.app__container-text {
+  color: var(--color);
+  width: 100%;
+  transform: translateX(9%);
+  margin: 3.5% 8% 0% 0%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 1.05rem;
+  line-height: 1.6rem;
+  letter-spacing: 1px;
+}
+
+.app__container-text h2 {
+  font-size: 4rem;
+}
+
+.app__container-text h3 {
+  font-size: 1.26rem;
+  margin-top: 1.8%;
+}
+
+.app__container-text p {
+  color: rgba(0, 0, 0, 0.808);
+  margin-bottom: 1.1%;
+}
+
+.app__container-button{
+  width: 100%;
+}
+
+.app__container-button a {
+  font-size: 15px;
+  padding: 1.6%;
+  background: #0077ee;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 1180px) {
+  .app__container {
+    margin-top: 6%;
+  }
+
+  .app__container-img {
+    margin: 0;
+  }
+
+  .app__container-text p {
+    margin-right: 5%;
+  }
+
+  .app__container-button a{
+    padding: 2%;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .app__container-text {
+    font-size: 0.95rem;
+  }
+
+  .app__container-text h2 {
+    font-size: 3.5rem;
+  }
+
+  .app__container-text h3 {
+    font-size: 1.2rem;
+  }
+
+  .app__container-button a{
+    padding: 4%;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .app__header {
+    height: 8.8%;
+  }
+
+  .app__header-link {
+    font-size: 1.8rem;
+    margin-left: 5%;
+  }
+
+  .app__container {
+    width: 100%;
+    display: block;
+    margin: 0;
+  }
+
+  .app__container-img {
+    width: 100%;
+  }
+
+  .app__container-text {
+    width: 100%;
+    transform: translateX(0%);
+    margin: 7.5% 0% 0% 0%;
+    align-items: center;
+    font-size: 1rem;
+    line-height: 1.6rem;
+  }
+
+  .app__container-text h2 {
+    font-size: 3.8rem;
+  }
+
+  .app__container-text h3 {
+    font-size: 1.3rem;
+    margin: 0 7%;
+    margin-top: 0.7%;
+    text-align: center;
+    line-height: 1.5rem;
+  }
+
+  .app__container-text p {
+    margin: 0% 8% 3% 8%;
+    line-height: 1.4rem;
+    letter-spacing: 0.24px;
+    text-align: justify;
+  }
+
+  .app__container-text p::before{
+    content: 'Puede que se haya expirado la página.';
+  }
+
+  .app__container-button{
+    margin-bottom: 7%;
+    text-align: center;
+  }
+
+  .app__container-button a {
+    padding: 3% 29%;
+  }
+}
