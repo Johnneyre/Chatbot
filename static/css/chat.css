@@ -2,8 +2,9 @@ body,html{
 	height: 100%;
 	margin: 0;
 	background: rgb(44, 47, 59);
-   background: -webkit-linear-gradient(to right, rgb(40, 59, 34), rgb(54, 60, 70), rgb(32, 32, 43));
-	background: linear-gradient(to right, rgb(38, 51, 61), rgb(50, 55, 65), rgb(33, 33, 78));
+   background: -webkit-linear-gradient(to right, rgb(59, 34, 34), rgb(70, 54, 54), rgb(43, 32, 32));
+	background: linear-gradient(to right, rgb(61, 41, 38), rgb(65, 50, 50), rgb(78, 33, 33));
+	box-sizing: border-box;
 }
 
 .chat{
@@ -23,6 +24,26 @@ body,html{
 .msg_card_body{
 	overflow-y: auto;
 }
+
+.bubblemsg {
+	display: flex;
+	box-sizing: border-box;
+	width: fit-content;
+	background-color: #4d2222;
+	border: solid rgb(102, 16, 16) 1px;
+	border-radius: 20px 20px 20px 0 ;
+	padding: 20px;
+	margin-bottom: 0;
+	align-items: center;
+	
+}
+
+.msg{
+	color: white;
+	font-size: 16px;
+	margin: 0;
+}
+
 .card-header{
 	border-radius: 15px 15px 0 0 !important;
 	border-bottom: 0 !important;
@@ -37,19 +58,19 @@ body,html{
 	background-color: rgba(38, 51, 61, .2);
 }
 .options{
-	background-color: rgba(41, 43, 71, .2);
+	background-color: rgba(71, 41, 41, 0.2);
 	color: white;
 	border-radius: 20px;
-	border: solid rgb(33, 33, 78) 1px;
+	border: solid rgb(78, 33, 33) 1px;
 	width: 30%;
 	transition: width .5s, height .7s;
 	transition-timing-function: ease;
 	box-shadow: 2px 5px 10px rgba(0,0,0,0.5);
 }
 .options:hover{
-	background-color: rgba(49, 50, 99, 0.5);
+	background-color: rgba(99, 49, 49, 0.5);
 	border-radius: 20px;
-	border: solid rgb(33, 33, 78) 1px;
+	border: solid rgb(78, 33, 33) 1px;
 	width: 32%;
 	height: 110%;
 }
