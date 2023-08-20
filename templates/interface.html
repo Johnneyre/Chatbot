@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interfaz</title>
+  </head>
+  <body>
+    <div class="container">
+      <p id="chat">Chat: Elige una opcion</p>
+    </div>
+
+    <div class="container-buttons">
+      <button
+        type="submit"
+        value="Repuestos"
+        id="1"
+        style="display: inline-block"
+      >
+        Repuestos
+      </button>
+      <button
+        type="submit"
+        value="Accesorios"
+        id="2"
+        style="display: inline-block"
+      >
+        Accesorios
+      </button>
+      <button
+        type="submit"
+        id="3"
+        value="Sobre Nosotros"
+        style="display: inline-block"
+      >
+        Sobre Nosotros
+      </button>
+    </div>
+
+    <div class="container-buttons2">
+      <button type="submit" value="Repuestos" id="4" style="display: none">
+        Cilindraje
+      </button>
+      <button type="submit" value="Accesorios" id="5" style="display: none">
+        Marcas
+      </button>
+      <button type="submit" value="Sobre Nosotros" id="6" style="display: none">
+        Modelos
+      </button>
+    </div>
+
+    <div id="table" style="display: none;">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Accesorio</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in data_acce %}
+          <tr>
+            <td>{{row["id_accesorio"]}}</td>
+            <td>{{row["accesorio"]}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <script src="../static/javascript/interface.js"></script>
+  </body>
+</html>

@@ -10,12 +10,22 @@ DB_NAME = "chatbot"
 DB_USER = "postgres"
 DB_PASS = "admin"
 
-conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
+conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER,
+                        password=DB_PASS, host=DB_HOST)
 
 
 @app.route("/")
 def home():
     return render_template('home.html')
+
+
+@app.route("/interface")
+def interface():
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    s = 'SELECT * FROM accesorio'
+    cur.execute(s)
+    data_acce = cur.fetchall()
+    return render_template('interface.html', data_acce=data_acce)
 
 
 @app.route("/showdata")
@@ -25,6 +35,11 @@ def showdata():
     cur.execute(s)
     list_products = cur.fetchall()
     return render_template('showdata.html', list_products=list_products)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html"), 404
 
 
 if __name__ == '__main__':
