@@ -1,64 +1,109 @@
 const contenedor = document.querySelector(".container");
-const boton1 = document.getElementById("1");
-const boton2 = document.getElementById("2");
-const boton3 = document.getElementById("3");
-const boton4 = document.getElementById("4");
-const boton5 = document.getElementById("5");
-const boton6 = document.getElementById("6");
+const repuestos = document.getElementById("1");
+const accesorios = document.getElementById("2");
+const contactos = document.getElementById("3");
+const cilindraje = document.getElementById("4");
+const marca = document.getElementById("5");
+const modelo = document.getElementById("6");
 const chat = document.getElementById("chat");
-const table = document.getElementById("table");
+const r1 = document.getElementById("r1")
+const r1a = document.getElementById("r1a");
+const r2 = document.getElementById("r2");
+const r2a = document.getElementById("r2a");
+const catalogo = document.getElementById("catalogo");
+const sobreNosotros = document.getElementById("sobre-nosotros");
 
-const data = {
-  Info: "LoremIpsumInfo",
-};
+// funciones
 
-let respuesta = document.createElement("P");
-contenedor.appendChild(respuesta);
-
-let chat1 = document.createElement("P");
-contenedor.appendChild(chat1);
-
-let chat2 = document.createElement("P");
-contenedor.appendChild(chat2);
-
-function mostrar(value) {
-  if (value === "Repuestos") {
-    respuesta.innerHTML = `Yo: ${value}`;
-    chat1.innerHTML = `Chat: ${value} es tu opcion seleccionada`;
-    boton4.style.display = "inline-block";
-    boton5.style.display = "inline-block";
-    boton6.style.display = "inline-block";
-  } else if (value === "Accesorios") {
-    respuesta.innerHTML = `Yo: ${value}`;
-    chat1.innerHTML = `Chat: ${value} es tu opcion seleccionada`;
-    table.style.display = "block";
-  } else if (value === "Sobre Nosotros") {
-    respuesta.innerHTML = `Yo: ${value}`;
-    chat1.innerHTML = `Chat: ${value} es tu opcion seleccionada`;
-    chat2.innerHTML = data.Info;
-  }
+function mostrarR1() {
+  r1.style.display="block"
+  r1a.style.display="block"
 }
 
-function ocultarBotones() {
-  boton1.style.display = "none";
-  boton2.style.display = "none";
-  boton3.style.display = "none";
+function ocultarO1() {
+  repuestos.style.display = "none";
+  accesorios.style.display = "none";
+  contactos.style.display = "none";
 }
 
-boton1.addEventListener("click", () => {
-  console.log(boton1.value);
-  ocultarBotones();
-  mostrar(boton1.value);
-});
+function mostrarO2() {
+  cilindraje.style.display = "block";
+  marca.style.display = "block";
+  modelo.style.display = "block";
+}
 
-boton2.addEventListener("click", () => {
-  console.log(boton2.value);
-  ocultarBotones();
-  mostrar(boton2.value);
-});
+function mostrarR2() {
+  r2.style.display="block"
+  r2a.style.display="block"
+}
 
-boton3.addEventListener("click", () => {
-  console.log(boton3.value);
-  ocultarBotones();
-  mostrar(boton3.value);
-});
+function ocultarO2() { 
+  cilindraje.style.display = "none";
+  marca.style.display = "none";
+  modelo.style.display = "none";
+}
+  
+
+// opciones 
+
+let opcion1 
+let opcion2
+
+// click 
+
+repuestos.addEventListener("click", () => {
+  opcion1 = repuestos.value;
+  r1.innerText = opcion1;
+  r1a.innerText = "Perfecto, ahora salecciona alguna de estas opciones"
+  mostrarR1();
+  ocultarO1();
+  mostrarO2();
+})
+
+accesorios.addEventListener("click", () => {
+  opcion1 = accesorios.value;
+  r1.innerText = opcion1;
+  r1a.innerText = "Perfecto, aqui están nuestros accesorios disponibles"
+  mostrarR1();
+  ocultarO1();
+  catalogo.style.display = "flex";
+
+})
+
+contactos.addEventListener("click", () => {
+  opcion1 = contactos.value;
+  r1.innerText = opcion1;
+  r1a.innerText = "estos son nuestros datos de contacto"
+  mostrarR1();
+  ocultarO1();
+  catalogo.style.display = "block";
+})
+
+cilindraje.addEventListener("click", () => {
+  opcion2 = cilindraje.value;
+  mostrarR2();
+  r2.innerText = opcion2;
+  r2a.innerText = "Muy buen, aqui están nuestros repuestos por su cilindraje";
+  ocultarO2();
+  catalogo.style.display = "flex";
+})
+
+marca.addEventListener("click", () => {
+  opcion2 = marca.value;
+  mostrarR2();
+  r2.innerText = opcion2;
+  r2a.innerText = "Muy buen, aqui están nuestros repuestos segun su marca";
+  ocultarO2();
+  catalogo.style.display = "flex";
+
+})
+
+modelo.addEventListener("click", () => {
+  opcion2 = modelo.value;
+  mostrarR2();
+  r2.innerText = opcion2;
+  r2a.innerText = "Muy buen, aqui están nuestros repuestos segun su modelo";
+  ocultarO2();
+  catalogo.style.display = "flex";
+
+})

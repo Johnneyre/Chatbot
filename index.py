@@ -14,6 +14,10 @@ conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER,
                         password=DB_PASS, host=DB_HOST)
 
 
+@app.route("/chat")
+def chat():
+    return render_template('chat.html')
+
 @app.route("/")
 def home():
     return render_template('home.html')
