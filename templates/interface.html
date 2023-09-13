@@ -10,16 +10,16 @@
 		<link rel="stylesheet" href="/static/css/chat.css"/>
   </head>
   <body>
-    
+     <main>
 
-    <div class="container-fluid h-100">
-			<div class="row justify-content-center h-100">		
-				<div class="col-md-8 col-xl-6 chat">
+    <div class="container">
+			<div class="container-row">		
+				<div class="chat">
 					<div class="card">
 						<div class="card-header msg_head">
-							<div class="d-flex bd-highlight">
+							<div class="card-header--flex">
 								<div class="img_cont">
-									<img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img">
+									<img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="user_img">
 									<span class="online_icon"></span>
 								</div>
 								<div class="user_info">
@@ -37,10 +37,10 @@
               <div id="r1" class="bubblemsg right"></div>
               <div id="r1a" class="bubblemsg"></div>
 
-              <div id="r2" style="display: none" class="bubblemsg right"></div>
-              <div id="r2a" style="display: none" class="bubblemsg"></div>
+              <div id="r2" class="bubblemsg right"></div>
+              <div id="r2a" class="bubblemsg"></div>
 
-              <section id="catalogo" class="catalogo" style="display: none;">
+              <section id="catalogo" class="catalogo">
                 <article class="producto">
                   <div class="img">
                     <img src="/static/img/pngwing.com.png" alt="">
@@ -58,7 +58,7 @@
               </section>
 
               
-              <section id="sobre-nosotros" class="sobre-nosotros" style="display: none;">
+              <section id="sobre-nosotros" class="sobre-nosotros">
                   <div class="sobre-nosotros--header">
                     <div class="img">
                       <img src="/static/img/pngwing.com.png" alt="">
@@ -119,7 +119,8 @@
 					</div>
 				</div>
 			</div>
-        </div>
+      </div>
+      </main>
     <script src="../static/javascript/interface.js"></script>
   </body>
 </html>
