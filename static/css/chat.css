@@ -1,4 +1,4 @@
-body,html{
+body,html {
 	height: 100%;
 	margin: 0;
 	background: rgb(44, 47, 59);
@@ -7,49 +7,174 @@ body,html{
 	box-sizing: border-box;
 }
 
-.chat{
+.chat {
 	margin-top: auto;
 	margin-bottom: auto;
 }
-.card{
-	height: 500px;
+.card {
+	height: 600px;
 	border-radius: 15px !important;
 	background-color: rgba(0,0,0,0.4) !important;
 }
-.contacts_body{
-	padding:  0.75rem 0 !important;
+
+.msg_card_body {
+	height: 600px;
+	flex-direction: column;
 	overflow-y: auto;
-	white-space: nowrap;
+	min-height: 0
 }
-.msg_card_body{
-	overflow-y: auto;
+
+.msg_card_body > .right {
+	position: relative;
+	right: -82%;
 }
 
 .bubblemsg {
-	display: flex;
+	display: block;
 	box-sizing: border-box;
 	width: fit-content;
 	background-color: #4d2222;
 	border: solid rgb(102, 16, 16) 1px;
 	border-radius: 20px 20px 20px 0 ;
 	padding: 20px;
-	margin-bottom: 0;
+	margin: 10px 0;
 	align-items: center;
-	
+	color: white;
 }
 
-.msg{
+#r1 {
+	opacity: 0;
+	transition: opacity .8s;
+}
+
+#r1a {
+	opacity: 0;
+	transition: opacity .8s;
+}
+
+.right {
+	background-color: #4d2222;
+	border: solid rgb(102, 16, 16) 1px;
+	border-radius: 20px 20px 0 20px;
+}
+
+.msg {
 	color: white;
 	font-size: 16px;
 	margin: 0;
 }
 
-.card-header{
+.catalogo {
+	display: flex;
+	flex-direction: column;
+	height: 300px;
+	width: 95%;
+	margin: 0 auto 15px auto;
+	padding: 12px;
+	border-radius: 20px;
+	background-color: rgba(38, 51, 61, .2);
+	overflow-y: auto;
+}
+
+.producto {
+	width: 100%;
+	margin-bottom: 10px;
+	padding: 2px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	border-top: 1.5px solid black;
+}
+
+.producto:first-child {
+	border-top: none;
+}
+
+.img {
+	height: 100px;
+	width: 100px;
+	box-sizing: border-box;
+
+	overflow: auto;
+}
+
+.img img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.producto-inf {
+	width: 60%;
+	height: 100%;
+	max-height: 100px;
+	padding: 5px;
+	font-size: 10px;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	color: white;
+	
+}
+
+.producto-inf p {
+	margin: 5px;
+	font-size: 12px;
+}
+
+.button-info {
+	height: 50%;
+	width: 20%;
+	border: none;
+	border-radius: 20px;
+	background-color: rgb(59, 34, 34);
+	color: white;
+}
+
+
+.sobre-nosotros {
+	background-color: rgba(38, 51, 61, .2);
+	color: white;
+	padding: 20px;
+	margin: 15px 0;
+}
+
+.sobre-nosotros--header {
+	padding: 0 5px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.mb {
+	width: 100%;
+	text-align: center;
+	margin-right: 10px;
+}
+
+.mb > h1 > p {
+	display: inline;
+	color: red;
+}
+
+.mb > h1 > span {
+	font-size: 15px;
+}
+
+.sobre-nosotros--header > h1 {
+	margin-left: 20px;
+
+}
+
+.card-header {
 	border-radius: 15px 15px 0 0 !important;
 	border-bottom: 0 !important;
 	background-color: rgba(38, 51, 61, .2);
 }
-.card-footer{
+
+.card-footer {
 	border-radius: 0 0 15px 15px !important;
 	border-top: 0 !important;
 	display: flex;
@@ -57,7 +182,8 @@ body,html{
 	justify-content: space-evenly;
 	background-color: rgba(38, 51, 61, .2);
 }
-.options{
+
+.options {
 	background-color: rgba(71, 41, 41, 0.2);
 	color: white;
 	border-radius: 20px;
@@ -67,92 +193,34 @@ body,html{
 	transition-timing-function: ease;
 	box-shadow: 2px 5px 10px rgba(0,0,0,0.5);
 }
-.options:hover{
+
+.options:hover {
 	background-color: rgba(99, 49, 49, 0.5);
 	border-radius: 20px;
 	border: solid rgb(78, 33, 33) 1px;
 	width: 32%;
 	height: 110%;
 }
-.container{
+
+.container {
 	align-content: center;
+	height: 100%;
 }
-.search{
-	border-radius: 15px 0 0 15px !important;
-	background-color: rgba(0,0,0,0.3) !important;
-	border:0 !important;
-	color:white !important;
-}
-.search:focus{
-	 box-shadow:none !important;
-   outline:0px !important;
-}
-.type_msg{
-	background-color: rgba(0,0,0,0.3) !important;
-	border:0 !important;
-	color:white !important;
-	height: 60px !important;
-	overflow-y: auto;
-}
-	.type_msg:focus{
-	 box-shadow:none !important;
-   outline:0px !important;
-}
-.attach_btn{
-	border-radius: 15px 0 0 15px !important;
-	background-color: rgba(0,0,0,0.3) !important;
-	border:0 !important;
-	color: white !important;
-	cursor: pointer;
-}
-.send_btn{
-	border-radius: 0 15px 15px 0 !important;
-	background-color: rgba(0,0,0,0.3) !important;
-	border:0 !important;
-	color: white !important;
-	cursor: pointer;
-}
-.search_btn{
-	border-radius: 0 15px 15px 0 !important;
-	background-color: rgba(0,0,0,0.3) !important;
-	border:0 !important;
-	color: white !important;
-	cursor: pointer;
-}
-.contacts{
-	list-style: none;
-	padding: 0;
-}
-.contacts li{
-	width: 100% !important;
-	padding: 5px 10px;
-	margin-bottom: 15px !important;
-}
-.active{
-	background-color: rgba(0,0,0,0.3);
-}
-.user_img{
+
+.user_img {
 	height: 70px;
 	width: 70px;
 	border:1.5px solid #f5f6fa;
 
 }
-.user_img_msg{
-	height: 40px;
-	width: 40px;
-	border:1.5px solid #f5f6fa;
 
-}
-.img_cont{
+.img_cont {
 	position: relative;
 	height: 70px;
 	width: 70px;
 }
-.img_cont_msg{
-	height: 40px;
-	width: 40px;
-}
-.online_icon{
+
+.online_icon {
 	position: absolute;
 	height: 15px;
 	width:15px;
@@ -162,105 +230,34 @@ body,html{
 	right: 0.4em;
 	border:1.5px solid white;
 }
-.offline{
-	background-color: #c23616 !important;
-}
-.user_info{
+
+.user_info {
 	margin-top: auto;
 	margin-bottom: auto;
 	margin-left: 15px;
 }
-.user_info span{
+.user_info span {
 	font-size: 20px;
 	color: white;
 }
-.user_info p{
+.user_info p {
 	font-size: 10px;
 	color: rgba(255,255,255,0.6);
 }
-.video_cam{
-	margin-left: 50px;
-	margin-top: 5px;
-}
-.video_cam span{
-	color: white;
-	font-size: 20px;
-	cursor: pointer;
-	margin-right: 20px;
-}
-.msg_cotainer{
-	margin-top: auto;
-	margin-bottom: auto;
-	margin-left: 10px;
-	border-radius: 25px;
-	background-color: rgb(82, 172, 255);
-	padding: 10px;
+
+.msg_head {
 	position: relative;
 }
-.msg_cotainer_send{
-	margin-top: auto;
-	margin-bottom: auto;
-	margin-right: 10px;
-	border-radius: 25px;
-	background-color: #58cc71;
-	padding: 10px;
-	position: relative;
-}
-.msg_time{
-	position: absolute;
-	left: 0;
-	bottom: -15px;
-	color: rgba(255,255,255,0.5);
-	font-size: 10px;
-}
-.msg_time_send{
-	position: absolute;
-	right:0;
-	bottom: -15px;
-	color: rgba(255,255,255,0.5);
-	font-size: 10px;
-}
-.msg_head{
-	position: relative;
-}
-#action_menu_btn{
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	color: white;
-	cursor: pointer;
-	font-size: 20px;
-}
-.action_menu{
-	z-index: 1;
-	position: absolute;
-	padding: 15px 0;
-	background-color: rgba(0,0,0,0.5);
-	color: white;
-	border-radius: 15px;
-	top: 30px;
-	right: 15px;
-	display: none;
-}
-.action_menu ul{
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-.action_menu ul li{
-	width: 100%;
-	padding: 10px 15px;
-	margin-bottom: 5px;
-}
-.action_menu ul li i{
-	padding-right: 10px;
-}
-.action_menu ul li:hover{
-	cursor: pointer;
-	background-color: rgba(0,0,0,0.2);
-}
-@media(max-width: 576px){
+
+@media(max-width: 576px) {
 	.contacts_card{
 	margin-bottom: 15px !important;
-}
+	
+	}
+
+	.msg_card_body > .right {
+		position: relative;
+		right: -70%;
+	}
+
 }
