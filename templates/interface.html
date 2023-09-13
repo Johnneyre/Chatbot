@@ -4,67 +4,130 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chatbot</title>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<link rel="stylesheet" href="/static/css/chat.css"/>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/css/chat.css" />
   </head>
   <body>
-     <main>
-
-    <div class="container">
-			<div class="container-row">		
-				<div class="chat">
-					<div class="card">
-						<div class="card-header msg_head">
-							<div class="card-header--flex">
-								<div class="img_cont">
-									<img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="user_img">
-									<span class="online_icon"></span>
-								</div>
-								<div class="user_info">
-									<span>Soft-IA</span>
-									<p>ChatBot de Moto Betel</p>
-								</div>
-							</div>
-						</div>
-
-            <div id="messageFormeight" class="container msg_card_body">
-              <div class="bubblemsg">
-                <p class="msg" id="chat">Selecciona la opcion que desees</p>
+    <main class="app">
+      <div class="container-fluid h-100">
+        <div class="row justify-content-center h-100">
+          <div class="col-md-8 col-xl-6 chat">
+            <div class="card">
+              <div class="card-header msg_head">
+                <div class="d-flex bd-highlight">
+                  <div class="img_cont">
+                    <img
+                      src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png"
+                      class="rounded-circle user_img"
+                    />
+                    <span class="online_icon"></span>
+                  </div>
+                  <div class="user_info">
+                    <span>Soft-IA</span>
+                    <p>ChatBot de Moto Betel</p>
+                  </div>
+                </div>
               </div>
 
-              <div id="r1" class="bubblemsg right"></div>
-              <div id="r1a" class="bubblemsg"></div>
+              <div id="messageFormeight" class="container msg_card_body">
+                <div class="bubblemsg">
+                  <p class="msg" id="chat">Selecciona la opcion que desees</p>
+                </div>
 
-              <div id="r2" class="bubblemsg right"></div>
-              <div id="r2a" class="bubblemsg"></div>
+                <div id="r1" class="bubblemsg right"></div>
+                <div id="r1a" class="bubblemsg"></div>
 
-              <section id="catalogo" class="catalogo">
-                <article class="producto">
-                  <div class="img">
-                    <img src="/static/img/pngwing.com.png" alt="">
-                  </div>
-                  <div class="producto-inf">
-                    <p>precio:</p>
-                    <p>cantidad:</p>
-                    <p>precio:</p>
-                    <p>precio:</p>
-                    <p>precio:</p>
-                    <p>precio:</p>
-                  </div>
-                  <button class="button-info">info</button>
-                </article>
-              </section>
+                <div
+                  id="r2"
+                  style="display: none"
+                  class="bubblemsg right"
+                ></div>
+                <div id="r2a" style="display: none" class="bubblemsg"></div>
+                <div class="Select__container select-1">
+                  <span>Filtrar por:</span>
+                  <select name="" id="">
+                    {% for cilindraje in cilindraje %}
+                    <option value="{{ cilindraje[0] }}">{{ cilindraje[0] }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="Select__container select-2">
+                  <span>Filtrar por:</span>
+                  <select name="" id="">
+                    {% for marcas in marcas %}
+                    <option value="{{ marcas[0] }}">{{ marcas[0] }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="Select__container select-3">
+                  <span>Filtrar por:</span>
+                  <select name="" id="">
+                    {% for modelo in modelo %}
+                    <option value="{{ modelo[0] }}">{{ modelo[0] }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <section id="catalogo" class="catalogo" style="display: none">
+                  {% for row in list_products %}
+                  <article class="producto">
+                    <div class="img">
+                      <img src="/static/img/pngwing.com.png" alt="" />
+                    </div>
+                    <div class="producto-inf">
+                      <table>
+                        <thead>
+                          <tr>
+                            <td>Nombre</td>
+                            <td>Marca</td>
+                            <td>Modelo</td>
+                            <td>Cilindraje</td>
+                            <td>Cantidad</td>
+                            <td>Precio</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{{row["repuestos"]}}</td>
+                            <td>{{row["marcas"]}}</td>
+                            <td>{{row["modelo"]}}</td>
+                            <td>{{row["cilindraje"]}}</td>
+                            <td>{{row["cantidad"]}}</td>
+                            <td>{{row["precio"]}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </article>
+                  {% endfor %}
+                </section>
 
-              
-              <section id="sobre-nosotros" class="sobre-nosotros">
+                <section
+                  id="sobre-nosotros"
+                  class="sobre-nosotros"
+                  style="display: none"
+                >
                   <div class="sobre-nosotros--header">
                     <div class="img">
-                      <img src="/static/img/pngwing.com.png" alt="">
+                      <img src="/static/img/pngwing.com.png" alt="" />
                     </div>
                     <div class="mb">
-                      <h1>Moto <p>Betel</p> <span>inck</span></h1>
+                      <h1>
+                        Moto
+                        <p>Betel</p>
+                        <span>inck</span>
+                      </h1>
                     </div>
                   </div>
                   <div class="sobre-nosotros--text">
@@ -75,52 +138,59 @@
                     <p>precio:</p>
                     <p>precio:</p>
                   </div>
-                </article>
-              </section>
+                </section>
+              </div>
 
+              <div class="card-footer">
+                <button
+                  type="submit"
+                  value="repuestos"
+                  id="1"
+                  style="display: inline-block"
+                  class="options"
+                >
+                  Repuestos
+                </button>
+                <button class="options" type="submit" value="accesorios" id="2">
+                  Accesorios
+                </button>
+                <button class="options" type="submit" id="3" value="Contactos">
+                  Contactos
+                </button>
+
+                <button
+                  class="options"
+                  type="submit"
+                  value="Cilindraje"
+                  id="4"
+                  style="display: none"
+                >
+                  Cilindraje
+                </button>
+                <button
+                  class="options"
+                  type="submit"
+                  value="marca"
+                  id="5"
+                  style="display: none"
+                >
+                  Marcas
+                </button>
+                <button
+                  class="options"
+                  type="submit"
+                  value="modelo"
+                  id="6"
+                  style="display: none"
+                >
+                  Modelos
+                </button>
+              </div>
             </div>
-						
-						<div class="card-footer">
-							<button
-              type="submit"
-              value="repuestos"
-              id="1"
-              style="display: inline-block"
-              class="options"
-            >
-              Repuestos
-            </button>
-							<button 
-              class="options"
-              type="submit"
-              value="accesorios"
-              id="2"
-              >
-                Accesorios</button>
-							<button 
-              class="options"
-              type="submit"
-              id="3"
-              value="Contactos"
-              >
-                Contactos
-              </button>
-
-              <button class="options" type="submit" value="Cilindraje" id="4" style="display: none">
-                Cilindraje
-              </button>
-              <button class="options" type="submit" value="marca" id="5" style="display: none">
-                Marcas
-              </button>
-              <button class="options" type="submit" value="modelo" id="6" style="display: none">
-                Modelos
-              </button>
-						</div>
-					</div>
-				</div>
-			</div>
+          </div>
+        </div>
       </div>
-      </main>
+    </main>
     <script src="../static/javascript/interface.js"></script>
   </body>
 </html>
