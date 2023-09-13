@@ -15,11 +15,6 @@ const sobreNosotros = document.getElementById("sobre-nosotros");
 
 // funciones
 
-function mostrarR1() {
-  r1.style.display="block"
-  r1a.style.display="block"
-}
-
 function ocultarO1() {
   repuestos.style.display = "none";
   accesorios.style.display = "none";
@@ -42,6 +37,19 @@ function ocultarO2() {
   marca.style.display = "none";
   modelo.style.display = "none";
 }
+
+// animaciones 
+
+let texto = "Perfecto, ahora selecciona alguna de estas opciones";
+let i = 0;
+
+function efectoMaquinaDeEscribir() {
+  if (i < texto.length) {
+    document.getElementById("r1a").innerHTML += texto.charAt(i);
+    i++;
+    setTimeout(efectoMaquinaDeEscribir, 50);
+  }
+}
   
 
 // opciones 
@@ -54,8 +62,9 @@ let opcion2
 repuestos.addEventListener("click", () => {
   opcion1 = repuestos.value;
   r1.innerText = opcion1;
-  r1a.innerText = "Perfecto, ahora salecciona alguna de estas opciones"
-  mostrarR1();
+  r1.style.opacity = "1"
+  setTimeout(() => r1a.style.opacity = "1", 750);
+  setTimeout(efectoMaquinaDeEscribir, 900);
   ocultarO1();
   mostrarO2();
 })
