@@ -18,6 +18,7 @@ conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER,
 def chat():
     return render_template('chat.html')
 
+
 @app.route("/")
 def home():
     return render_template('home.html')
@@ -25,11 +26,31 @@ def home():
 
 @app.route("/interface")
 def interface():
+    # cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    # s = 'SELECT * FROM accesorio'
+    # cur.execute(s)
+    # data_acce = cur.fetchall()
+    # return render_template('interface.html', data_acce=data_acce)
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    s = 'SELECT * FROM accesorio'
+
+    # Obtén los cilindrajes
+    cur.execute("SELECT DISTINCT cilindraje FROM cilindraje;")
+    cilindraje = cur.fetchall()
+
+    # Obtén las marcas
+    cur.execute("SELECT DISTINCT marcas FROM marcas;")
+    marcas = cur.fetchall()
+
+    # Obtén los modelos
+    cur.execute("SELECT DISTINCT modelo FROM modelo;")
+    modelo = cur.fetchall()
+
+    # Obtén los productos
+    s = "SELECT repuestos.id_repuestos, repuestos.repuestos, marcas.marcas, modelo.modelo, cilindraje.cilindraje, repuestos.cantidad, repuestos.precio FROM repuestos JOIN marcas ON repuestos.id_marcas = marcas.id_marcas JOIN modelo ON repuestos.id_modelo = modelo.id_modelo JOIN cilindraje ON repuestos.id_cilindraje = cilindraje.id_cilindraje;"
     cur.execute(s)
-    data_acce = cur.fetchall()
-    return render_template('interface.html', data_acce=data_acce)
+    list_products = cur.fetchall()
+
+    return render_template('interface.html', list_products=list_products, cilindraje=cilindraje, marcas=marcas, modelo=modelo)
 
 
 @app.route("/showdata")

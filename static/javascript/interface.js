@@ -12,6 +12,9 @@ const r2 = document.getElementById("r2");
 const r2a = document.getElementById("r2a");
 const catalogo = document.getElementById("catalogo");
 const sobreNosotros = document.getElementById("sobre-nosotros");
+const selectContainer = document.querySelector(".Select__container");
+const select2 = document.querySelector(".select-2");
+const select3 = document.querySelector(".select-3");
 
 // funciones
 
@@ -74,7 +77,7 @@ accesorios.addEventListener("click", () => {
   r1.innerText = opcion1;
   r1.style.opacity = "1"
   setTimeout(() => r1a.style.opacity = "1", 750);
-  setTimeout(function() { efectoMaquinaDeEscribir("muuy bien, estos son nuestros accesorios disponibles", "r1a"); }, 900);  
+  setTimeout(function() { efectoMaquinaDeEscribir("muy bien, estos son nuestros accesorios disponibles", "r1a"); }, 900);  
   ocultarO1();
   setTimeout(() => catalogo.style.opacity = "1", 4000);
 
@@ -101,7 +104,8 @@ cilindraje.addEventListener("click", () => {
   setTimeout(() => r2a.style.opacity = "1", 750);
   setTimeout(function() { efectoMaquinaDeEscribir("Muy buen, aqui están nuestros repuestos por su cilindraje","r2a"); }, 900); 
   ocultarO2();
-  setTimeout(() => catalogo.style.opacity = "1", 4000);  
+  setTimeout(() => catalogo.style.opacity = "1", 4000); 
+  selectContainer.style.display = "flex"; 
 })
 
 marca.addEventListener("click", () => {
@@ -111,7 +115,7 @@ marca.addEventListener("click", () => {
   r2a.innerText = "Muy buen, aqui están nuestros repuestos segun su marca";
   ocultarO2();
   catalogo.style.display = "flex";
-
+  select2.style.display = "flex";
 })
 
 modelo.addEventListener("click", () => {
@@ -121,5 +125,5 @@ modelo.addEventListener("click", () => {
   r2a.innerText = "Muy buen, aqui están nuestros repuestos segun su modelo";
   ocultarO2();
   catalogo.style.display = "flex";
-
+  select3.style.display = "flex";
 })
