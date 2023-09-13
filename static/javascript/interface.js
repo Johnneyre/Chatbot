@@ -12,6 +12,9 @@ const r2 = document.getElementById("r2");
 const r2a = document.getElementById("r2a");
 const catalogo = document.getElementById("catalogo");
 const sobreNosotros = document.getElementById("sobre-nosotros");
+const selectContainer = document.querySelector(".Select__container");
+const select2 = document.querySelector(".select-2");
+const select3 = document.querySelector(".select-3");
 
 // funciones
 
@@ -28,11 +31,11 @@ function mostrarO2() {
 }
 
 function mostrarR2() {
-  r2.style.display="block"
-  r2a.style.display="block"
+  r2.style.display = "block"
+  r2a.style.display = "block"
 }
 
-function ocultarO2() { 
+function ocultarO2() {
   cilindraje.style.display = "none";
   marca.style.display = "none";
   modelo.style.display = "none";
@@ -50,12 +53,12 @@ function efectoMaquinaDeEscribir() {
     setTimeout(efectoMaquinaDeEscribir, 50);
   }
 }
-  
+
 
 // opciones 
 
-let opcion1 
-let opcion2
+let opcion1;
+let opcion2;
 
 // click 
 
@@ -95,6 +98,7 @@ cilindraje.addEventListener("click", () => {
   r2a.innerText = "Muy buen, aqui están nuestros repuestos por su cilindraje";
   ocultarO2();
   catalogo.style.display = "flex";
+  selectContainer.style.display = "flex";
 })
 
 marca.addEventListener("click", () => {
@@ -104,7 +108,7 @@ marca.addEventListener("click", () => {
   r2a.innerText = "Muy buen, aqui están nuestros repuestos segun su marca";
   ocultarO2();
   catalogo.style.display = "flex";
-
+  select2.style.display = "flex";
 })
 
 modelo.addEventListener("click", () => {
@@ -114,5 +118,6 @@ modelo.addEventListener("click", () => {
   r2a.innerText = "Muy buen, aqui están nuestros repuestos segun su modelo";
   ocultarO2();
   catalogo.style.display = "flex";
+  select3.style.display = "flex";
 
 })
