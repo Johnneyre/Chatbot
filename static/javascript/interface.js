@@ -74,7 +74,7 @@ accesorios.addEventListener("click", () => {
   r1.innerText = opcion1;
   r1.style.opacity = "1"
   setTimeout(() => r1a.style.opacity = "1", 750);
-  setTimeout(function() { efectoMaquinaDeEscribir("muy bien, estos son nuestros accesorios disponibles", "r1a"); }, 900);  
+  setTimeout(function() { efectoMaquinaDeEscribir("muuy bien, estos son nuestros accesorios disponibles", "r1a"); }, 900);  
   ocultarO1();
   setTimeout(() => catalogo.style.opacity = "1", 4000);
 
