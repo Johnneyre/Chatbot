@@ -1,184 +1,194 @@
 * {
-    margin: 0;
-    padding: 0;
-    font-family: 'Raleway', sans-serif;
-    color: white;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Raleway", sans-serif;
+  color: white;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: black;
-    overflow: hidden;
+  background-color: black;
+  overflow: hidden;
 }
 
 #header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-    height: 70px;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  height: 70px;
+  width: 100%;
 }
 
-#header > img{
-    height: 60px;
-    width: 60px;
-    object-fit: cover;
-    border-radius: 50%;
+#header > img {
+  height: 60px;
+  width: 60px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
-#header > ul{
-    width: 30%;
-    display: flex;
-    justify-content: space-between;
+#header > ul {
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .nav-bar > a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .nav-bar {
-    display: flex;
-    margin: 0 50px;
-    text-decoration: none;
-    list-style: none;
-    height: 90%;
-    width: 16%;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 18px;
-
+  display: flex;
+  margin: 0 50px;
+  text-decoration: none;
+  list-style: none;
+  height: 90%;
+  width: 16%;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
 }
 
 .nav-bar button {
-    height: 35px;
-    width: 120px;
+  height: 35px;
+  width: 120px;
 }
 
 .logo {
-    margin-left: 60px;
+  margin-left: 60px;
 }
 
 #main {
-    height: 100vh;
-    width: 100vw;
-    
+  height: 100vh;
+  width: 100vw;
 }
 
 .contenedor {
-    margin: 0 auto;
-    height: 80%;
-    width: 90%;
-    background-color: rgb(48, 40, 40);
-    border-radius: 20px;
-    display: flex;
-    padding: 60px;
-    flex-direction: column;
+  margin: 0 auto;
+  height: 80%;
+  width: 90%;
+  background-color: rgb(48, 40, 40);
+  border-radius: 20px;
+  display: flex;
+  padding: 60px;
+  flex-direction: column;
 }
 
 .contenedor-saludo {
-    position: relative;
-    display: flex;
-    margin-bottom: 20px;
-    height: 180px;
-    align-items: center;
-    width: 135%;
+  position: relative;
+  display: flex;
+  margin-bottom: 20px;
+  height: 180px;
+  align-items: center;
+  width: 135%;
 }
 
 #saludo {
-    width: 100%;
+  width: 100%;
 }
 
-
 .contenedor-text {
-    height: 100%;
-    width: 70%;
+  height: 100%;
+  width: 70%;
+}
+
+.container__buton-2 {
+  display: flex;
+  justify-content: end;
+}
+
+.container__buton-2 img {
+  pointer-events: none;
+  width: 1.3em;
+  margin-top: 5px;
 }
 
 .button-main {
-    text-align: center;
-    height: 60px;
-    width: 150px;
-    position: absolute;
-    top: 72%;
-    left: 70%;
-    background-color: brown;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    height: 55px;
-    width: 20%;
-    text-decoration: none;
-    border-radius: 10px;
-    box-shadow: 2px 2px 8px black;
-    justify-content: center;
-    }
+  gap: 12px;
+  text-align: center;
+  font-size: 17px;
+  background-color: #a52a2a;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  height: 55px;
+  width: 19%;
+  max-width: 200px;
+  min-width: 170px;
+  text-decoration: none;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px black;
+  justify-content: center;
+  transition: 0.2s background, color ease-in-out;
+}
 
+.container__buton-2:hover,
+.button-main:hover {
+  cursor: pointer;
+}
+
+.button-main:hover {
+  text-decoration: underline;
+  background-color: #0b1027;
+  border: 2px solid #0b2321;
+}
 
 h1 {
-    font-weight: 700;
-    font-size: 70px;
+  font-weight: 700;
+  font-size: 70px;
 }
 
 p {
-    font-size: 18px;
-    margin: 30px 0 0 0;
+  font-size: 18px;
+  margin: 30px 0 0 0;
 }
 
-@media(max-width: 768px) {
+@media (max-width: 768px) {
+  .contenedor {
+    padding: 35px 35px 15px 35px;
+  }
 
-    .contenedor {
-        padding: 35px;
-    }
+  #header {
+    width: 100%;
+  }
 
-    #header {
-        width: 100%
-    }
+  #header > .nav-bar {
+    width: 55%;
+    margin: 0 20px;
+    font-size: 17px;
+  }
 
-    #header > .nav-bar {
-        width: 55%;
-        margin: 0 20px;
-        font-size: 17px;
-    }
+  .button-main {
+    width: 100%;
+    max-width: 100%;
+  }
 
-    .button-main {
-        display: flex;
-        align-items: center;
-        text-align: center;
-        height: 55px;
-        width: 20%;
-        text-decoration: none;
-        border-radius: 10px;
-        box-shadow: 2px 2px 8px black;
-    }
+  .button-main > a {
+    text-align: center;
+    background-color: burlywood;
+  }
 
-    .button-main > a {
-        text-align: center;
-        background-color: burlywood;
-    }
+  .contenedor-saludo {
+    display: flex;
+    margin-bottom: 20px;
+    height: 125px;
+    align-items: center;
+  }
 
-    .contenedor-saludo {
-        display: flex;
-        margin-bottom: 20px;
-        height: 125px;
-        align-items: center;
-    }
+  #saludo {
+    margin: 0 0 10px 0;
+    font-size: 35px;
+  }
 
-    #saludo {
-        margin: 0 0 10px 0;
-        font-size: 35px;
-    }
+  .contenedor-text {
+    width: 100%;
+  }
 
-    .contenedor-text {
-        width: 100%;
-    }
+  .direccion {
+    margin: 0;
+  }
 
-    .direccion {
-        margin: 0;
-    }
-
-    .informacion-de-nosotros {
-        width: 72%;
-    }
-    
-};
+  .informacion-de-nosotros {
+    width: 72%;
+  }
+}
