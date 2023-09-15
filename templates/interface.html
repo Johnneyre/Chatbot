@@ -66,7 +66,7 @@
 
                 <section id="catalogo" class="catalogo">
                   {% for row in list_products %}
-                  <article class="producto">
+                  <!-- <article class="producto">
                     <div class="img">
                       <img src="/static/img/pngwing.com.png" alt="" />
                     </div>
@@ -93,6 +93,32 @@
                           </tr>
                         </tbody>
                       </table>
+                    </div>
+                  </article> -->
+                  <article class="producto">
+                    <div class="img">
+                      <img src="/static/img/cadena.jpg" alt="" />
+                    </div>
+                    <div class="producto-inf">
+                      <p>Nombre: <span>Cadena(Reforzada)</span></p>
+                      <p>Marca: <span>Aguila</span></p>
+                      <p>Modelo: <span>TX</span></p>
+                      <p>Cilindraje: <span>CC200</span></p>
+                      <p>Cantidad: <span></span></p>
+                      <p>Precio: <span></span></p>
+                    </div>
+                  </article>
+                  <article class="producto">
+                    <div class="img">
+                      <img src="/static/img/pngwing.com.png" alt="" />
+                    </div>
+                    <div class="producto-inf">
+                      <p>Nombre: <span></span></p>
+                      <p>Marca: <span></span></p>
+                      <p>Modelo: <span></span></p>
+                      <p>Cilindraje: <span></span></p>
+                      <p>Cantidad: <span></span></p>
+                      <p>Precio: <span></span></p>
                     </div>
                   </article>
                   {% endfor %}
@@ -161,6 +187,9 @@
           </div>
         </div>
       </div>
+      <button class="boton-reset">
+        Modelos
+      </button>
     </main>
     <script src="../static/javascript/interface.js"></script>
   </body>
