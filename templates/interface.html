@@ -40,33 +40,36 @@
                 <div id="r2a" class="bubblemsg"></div>
 
                 <div class="Select__container select-1">
-                  <span>Filtrar por:</span>
                   <select name="" id="">
                     {% for cilindraje in cilindraje %}
                     <option value="{{ cilindraje[0] }}">{{ cilindraje[0] }}</option>
                     {% endfor %}
                   </select>
+                  <button type="submit" class="btn-select Filtrar">Filtrar</button>
+                  <button type="reset" class="btn-select reset">Limpiar</button>
                 </div>
                 <div class="Select__container select-2">
-                  <span>Filtrar por:</span>
                   <select name="" id="">
                     {% for marcas in marcas %}
                     <option value="{{ marcas[0] }}">{{ marcas[0] }}</option>
                     {% endfor %}
                   </select>
+                  <button type="submit" class="btn-select Filtrar">Filtrar</button>
+                  <button type="reset" class="btn-select reset">Limpiar</button>
                 </div>
                 <div class="Select__container select-3">
-                  <span>Filtrarr por:</span>
                   <select name="" id="">
                     {% for modelo in modelo %}
                     <option value="{{ modelo[0] }}">{{ modelo[0] }}</option>
                     {% endfor %}
                   </select>
+                  <button type="submit" class="btn-select Filtrar">Filtrar</button>
+                  <button type="reset" class="btn-select reset">Limpiar</button>
                 </div>
 
                 <section id="catalogo" class="catalogo">
                   {% for row in list_products %}
-                  <!-- <article class="producto">
+                  <article class="producto">
                     <div class="img">
                       <img src="/static/img/pngwing.com.png" alt="" />
                     </div>
@@ -94,8 +97,9 @@
                         </tbody>
                       </table>
                     </div>
-                  </article> -->
-                  <article class="producto">
+                  </article>
+                  {% endfor %}
+                  <!-- <article class="producto">
                     <div class="img">
                       <img src="/static/img/cadena.jpg" alt="" />
                     </div>
@@ -121,7 +125,6 @@
                       <p>Precio: <span></span></p>
                     </div>
                   </article>
-                  {% endfor %}
                 </section>
 
                 
@@ -142,7 +145,7 @@
                       <p>precio:</p>
                       <p>precio:</p>
                     </div>
-                  </article>
+                  </article> -->
                 </section>
 
               </div>

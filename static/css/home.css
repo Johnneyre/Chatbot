@@ -20,9 +20,26 @@ body {
     width: 100%;
 }
 
+#header > img{
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#header > ul{
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-bar > a {
+    text-decoration: none;
+}
+
 .nav-bar {
     display: flex;
-    margin: 0 80px;
+    margin: 0 50px;
     text-decoration: none;
     list-style: none;
     height: 90%;
@@ -30,6 +47,7 @@ body {
     justify-content: space-between;
     align-items: center;
     font-size: 18px;
+
 }
 
 .nav-bar button {
@@ -58,27 +76,109 @@ body {
     flex-direction: column;
 }
 
+.contenedor-saludo {
+    position: relative;
+    display: flex;
+    margin-bottom: 20px;
+    height: 180px;
+    align-items: center;
+    width: 135%;
+}
+
+#saludo {
+    width: 100%;
+}
+
+
 .contenedor-text {
     height: 100%;
-    width: 60%;
+    width: 70%;
 }
 
 .button-main {
+    text-align: center;
     height: 60px;
     width: 150px;
     position: absolute;
     top: 72%;
     left: 70%;
     background-color: brown;
-}
+    display: flex;
+    align-items: center;
+    text-align: center;
+    height: 55px;
+    width: 20%;
+    text-decoration: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px black;
+    justify-content: center;
+    }
+
 
 h1 {
     font-weight: 700;
-    font-size: 80px;
-    margin-bottom: 60px;
+    font-size: 70px;
 }
 
 p {
     font-size: 18px;
     margin: 30px 0 0 0;
 }
+
+@media(max-width: 768px) {
+
+    .contenedor {
+        padding: 35px;
+    }
+
+    #header {
+        width: 100%
+    }
+
+    #header > .nav-bar {
+        width: 55%;
+        margin: 0 20px;
+        font-size: 17px;
+    }
+
+    .button-main {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        height: 55px;
+        width: 20%;
+        text-decoration: none;
+        border-radius: 10px;
+        box-shadow: 2px 2px 8px black;
+    }
+
+    .button-main > a {
+        text-align: center;
+        background-color: burlywood;
+    }
+
+    .contenedor-saludo {
+        display: flex;
+        margin-bottom: 20px;
+        height: 125px;
+        align-items: center;
+    }
+
+    #saludo {
+        margin: 0 0 10px 0;
+        font-size: 35px;
+    }
+
+    .contenedor-text {
+        width: 100%;
+    }
+
+    .direccion {
+        margin: 0;
+    }
+
+    .informacion-de-nosotros {
+        width: 72%;
+    }
+    
+};

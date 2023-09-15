@@ -55,14 +55,13 @@
 }
 
 .msg_card_body {
-	flex-direction: column;
 	overflow-y: auto;
 }
 
 .msg_card_body > .right {
-	position: relative;
-	right: -84%;
+	margin-left: auto;
 }
+
 
 .bubblemsg {
 	display: block;
@@ -102,23 +101,58 @@
 }
 
 .Select__container {
+	margin-left: 20px;
 	display: none;
+	opacity: 1;
 	color: #fff;
 	align-items: center;
-	justify-content: space-evenly;
-	max-width: 14em;
-	flex: 1;
-	height: 2rem;
 	margin: 20px 0;
-  }
-  
-  .select-1 {
-	max-width: 10em;
   }
   
   .Select__container select {
 	background: transparent;
 	color: #fff;
+	width: 35%;
+	height: 35px;
+	border-radius: 10px;
+	margin-left: 5%;
+	margin-right: 15px;
+	text-align: center;
+  }
+
+  .btn-select {
+	text-align: center;
+	background-color: rgba(71, 41, 41, 0.2);
+	color: white;
+	border-radius: 20px;
+	border: solid rgb(78, 33, 33) 1px;
+	width: 24%;
+	box-shadow: 2px 5px 10px rgba(0,0,0,0.5);
+  }
+
+  option {
+	background: #888;
+  }
+
+  option:focus {
+	background-color: green;
+  }
+
+  .Filtrar {
+	margin-right: 2%;
+  }
+  .Filtrar:hover {
+	background-color: rgba(130, 221, 122, 0.5);
+	border-radius: 20px;
+	border: solid rgb(38, 78, 33) 1px;
+	transition: background-color .2s ease-in-out;
+  }
+
+  .reset:hover {
+	background-color: rgba(247, 69, 69, 0.5);
+	border-radius: 20px;
+	border: solid rgb(78, 33, 33) 1px;
+	transition: background-color .2s ease-in-out;
   }
 
 .catalogo {
@@ -128,7 +162,7 @@
 	padding: 12px;
 	border-radius: 20px;
 	background-color: rgba(38, 51, 61, .2);
-	opacity: 1;
+	opacity: 0;
 	transition: opacity .8s;
 	overflow: initial;
 	box-sizing: border-box;
@@ -252,6 +286,7 @@ table, th, td {
 }
 
 .card-footer {
+	height: 16%;
 	border-radius: 0 0 15px 15px !important;
 	border-top: 0 !important;
 	display: flex;
@@ -265,7 +300,8 @@ table, th, td {
 	color: white;
 	border-radius: 20px;
 	border: solid rgb(78, 33, 33) 1px;
-	width: 30%;
+	height: 100%;
+	width: 24%;
 	transition: width .5s, height .7s;
 	transition-timing-function: ease;
 	box-shadow: 2px 5px 10px rgba(0,0,0,0.5);
@@ -335,10 +371,6 @@ table, th, td {
 	margin-bottom: 15px !important;
 	}
 
-	.msg_card_body > .right {
-		position: relative;
-		right: -64%;
-	}
 }
 
 /* Estilos del modal */
