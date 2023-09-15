@@ -25,39 +25,39 @@ function ocultarO1() {
 }
 
 function mostrarO2() {
-  setTimeout(function() {
-  cilindraje.style.display = "block";
-  marca.style.display = "block";
-  modelo.style.display = "block";
-  cilindraje.style.opacity = "1";
-  marca.style.opacity = "1";
-  modelo.style.opacity = "1";
+  setTimeout(function () {
+    cilindraje.style.display = "block";
+    marca.style.display = "block";
+    modelo.style.display = "block";
+    cilindraje.style.opacity = "1";
+    marca.style.opacity = "1";
+    modelo.style.opacity = "1";
   }, 4000);
 }
 
 function mostrarR2() {
-  r2.style.display="block"
-  r2a.style.display="block"
+  r2.style.display = "block"
+  r2a.style.display = "block"
 }
 
-function ocultarO2() { 
+function ocultarO2() {
   cilindraje.style.display = "none";
   marca.style.display = "none";
   modelo.style.display = "none";
 }
 
 // animaciones 
-function efectoMaquinaDeEscribir(texto,element, i = 0) {
+function efectoMaquinaDeEscribir(texto, element, i = 0) {
   if (i < texto.length) {
     document.getElementById(element).innerHTML += texto.charAt(i);
-    setTimeout(function() { efectoMaquinaDeEscribir(texto,element, i + 1); }, 50);
+    setTimeout(function () { efectoMaquinaDeEscribir(texto, element, i + 1); }, 50);
   }
 }
-  
+
 
 // opciones 
 
-let opcion1 
+let opcion1
 let opcion2
 
 // click 
@@ -67,7 +67,7 @@ repuestos.addEventListener("click", () => {
   r1.innerText = opcion1;
   r1.style.opacity = "1"
   setTimeout(() => r1a.style.opacity = "1", 750);
-  setTimeout(function() { efectoMaquinaDeEscribir("Perfecto, ahora selecciona alguna de estas opciones", "r1a"); }, 900); 
+  setTimeout(function () { efectoMaquinaDeEscribir("Perfecto, ahora selecciona alguna de estas opciones", "r1a"); }, 900);
   ocultarO1();
   mostrarO2();
 })
@@ -77,7 +77,7 @@ accesorios.addEventListener("click", () => {
   r1.innerText = opcion1;
   r1.style.opacity = "1"
   setTimeout(() => r1a.style.opacity = "1", 750);
-  setTimeout(function() { efectoMaquinaDeEscribir("muy bien, estos son nuestros accesorios disponibles", "r1a"); }, 900);  
+  setTimeout(function () { efectoMaquinaDeEscribir("muy bien, estos son nuestros accesorios disponibles", "r1a"); }, 900);
   ocultarO1();
   setTimeout(() => catalogo.style.opacity = "1", 4000);
 
@@ -88,7 +88,7 @@ contactos.addEventListener("click", () => {
   r1.innerText = opcion1;
   r1.style.opacity = "1"
   setTimeout(() => r1a.style.opacity = "1", 750);
-  setTimeout(function() { efectoMaquinaDeEscribir("estos son nuestros datos de contacto", "r1a"); }, 900);  
+  setTimeout(function () { efectoMaquinaDeEscribir("estos son nuestros datos de contacto", "r1a"); }, 900);
   ocultarO1();
   catalogo.style.display = "none";
   setTimeout(() => sobreNosotros.style.opacity = "1", 3000);
@@ -96,18 +96,90 @@ contactos.addEventListener("click", () => {
 
 cilindraje.addEventListener("click", () => {
   opcion2 = cilindraje.value;
-  // mostrarR2();
-  // r2.innerText = opcion2;
-  // r2a.innerText = "Muy buen, aqui están nuestros repuestos por su cilindraje";
   r2.innerText = opcion2;
   r2.style.opacity = "1";
   setTimeout(() => r2a.style.opacity = "1", 750);
-  setTimeout(function() { efectoMaquinaDeEscribir("Muy buen, aqui están nuestros repuestos por su cilindraje","r2a"); }, 900); 
+  setTimeout(function () { efectoMaquinaDeEscribir("Muy buen, aqui están nuestros repuestos por su cilindraje", "r2a"); }, 900);
   ocultarO2();
-  setTimeout(() => catalogo.style.opacity = "1", 4000); 
-  selectContainer.style.display = "flex"; 
+  setTimeout(() => catalogo.style.opacity = "1", 4000);
+  selectContainer.style.display = "flex";
 })
 
+
+// Filtro
+cilindraje.addEventListener("change", function () {
+  // Filtramos la lista de productos
+  var filteredProducts = catalogo.querySelectorAll(".producto");
+  var selectedCylinder = cilindraje.value;
+
+  filteredProducts.forEach(function (producto) {
+    if (producto.querySelector(".producto-inf .cilindraje").innerText != selectedCylinder) {
+      producto.style.display = "none";
+    } else {
+      producto.style.display = "flex";
+    }
+  });
+});
+
+marca.addEventListener("change", function () {
+  // Filtramos la lista de productos
+  var filteredProducts = catalogo.querySelectorAll(".producto");
+  var selectedBrand = marca.value;
+
+  filteredProducts.forEach(function (producto) {
+    if (producto.querySelector(".producto-inf .marca").innerText != selectedBrand) {
+      producto.style.display = "none";
+    } else {
+      producto.style.display = "flex";
+    }
+  });
+});
+
+modelo.addEventListener("change", function () {
+  // Filtramos la lista de productos
+  var filteredProducts = catalogo.querySelectorAll(".producto");
+  var selectedBrand = modelo.value;
+
+  filteredProducts.forEach(function (producto) {
+    if (producto.querySelector(".producto-inf .modelo").innerText != selectedBrand) {
+      producto.style.display = "none";
+    } else {
+      producto.style.display = "flex";
+    }
+  });
+});
+
+function resetFilters() {
+  cilindraje.value = "";
+  marca.value = "";
+  modelo.value = "";
+
+  // Ocultamos las secciones de selección
+  selectContainer.style.display = "none";
+  select2.style.display = "none";
+  select3.style.display = "none";
+
+  // Mostramos la lista de productos sin filtros
+  catalogo.style.opacity = "1";
+}
+
+// resetButton.addEventListener("click", resetFilters);
+
+$(".Select__container").on("change", function() {
+  // Obtenemos el valor del select
+  var cilindraje = $(this).val();
+
+  // Filtramos los datos
+  $("#catalogo").find(".producto").each(function() {
+    if ($(this).find(".producto-inf .cilindraje").text() != cilindraje) {
+      $(this).hide();
+    } else {
+      $(this).show();
+    }
+  });
+});
+
+// Hasta Aqui
 marca.addEventListener("click", () => {
   opcion2 = marca.value;
   mostrarR2();
