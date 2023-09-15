@@ -13,43 +13,59 @@
     <title>Asistente virtual</title>
   </head>
   <body onload="typeWriter()">
-    <header id="header">
-      <img src="/static/img/mb.jpg" alt="Logo de Moto Betel" class="logo" />
-      <ul class="nav-bar">
-        <li><a href="#"></a>Contactanos</li>
-        <a href="interface">Entra al chat </a>
-      </ul>
-    </header>
-    <main id="main">
-      <div class="contenedor">
-        <div class="contenedor-text">
-          <div class="contenedor-saludo">
-            <h1 id="saludo"></h1>
+    <div class="app__container">
+      <header id="header">
+        <img src="/static/img/mb.jpg" alt="Logo de Moto Betel" class="logo" />
+        <ul class="nav-bar">
+          <li>
+            <a href="#">
+              <img
+                src="../static/img/telephone-white.svg"
+                alt="Contactanos"
+              />Contactanos</a
+            >
+          </li>
+          <li>
+            <a href="interface">
+              Entra al chat
+              <img
+                src="../static/img/arrow-right-short-white.svg"
+                alt="Ir al chat"
+              />
+            </a>
+          </li>
+        </ul>
+      </header>
+      <main id="main">
+        <div class="contenedor">
+          <div class="contenedor-text">
+            <div class="contenedor-saludo">
+              <h1 id="saludo"></h1>
+            </div>
+            <p class="direccion">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Assumenda, maxime dignissimos ut ex itaque animi aliquam expedita
+              nostrum facilis architecto harum cupiditate voluptates rem quos
+              vero excepturi id? Ipsa, modi.
+            </p>
+            <p class="informacion-de-nosotros">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
+              eos neque optio, labore in eaque, saepe repudiandae commodi nobis
+            </p>
           </div>
-          <p class="direccion">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda,
-            maxime dignissimos ut ex itaque animi aliquam expedita nostrum
-            facilis architecto harum cupiditate voluptates rem quos vero
-            excepturi id? Ipsa, modi.
-          </p>
-          <p class="informacion-de-nosotros">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
-            eos neque optio, labore in eaque, saepe repudiandae commodi nobis
-          </p>
+          <div class="container__buton-2">
+            <a class="button-main" href="interface">
+              <img
+                src="../static/img/chat-left-text-white.svg"
+                alt="Entra al Chat"
+              />
+              Entra al chat
+            </a>
+          </div>
         </div>
-        <!-- <div class="container__buton-2">
-          <img src="../static/img/chat-left-text-white.svg" alt="Entra al Chat">
-          <a class="button-main" href="interface">Entra al chat</a>
-        </div> -->
-        <div class="container__buton-2">
-          <a class="button-main" href="interface">
-            <img src="../static/img/chat-left-text-white.svg" alt="Entra al Chat">
-            Entra al chat
-          </a>
-        </div>
-      </div>
-    </main>
-    <footer></footer>
+      </main>
+      <footer></footer>
+    </div>
     <script src="/static/javascript/type.js"></script>
   </body>
 </html>
