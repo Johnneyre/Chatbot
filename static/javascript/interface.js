@@ -6,6 +6,7 @@ const cilindraje = document.getElementById("4");
 const marca = document.getElementById("5");
 const modelo = document.getElementById("6");
 const chat = document.getElementById("chat");
+const reload = document.getElementById("reload");
 const r1 = document.getElementById("r1")
 const r1a = document.getElementById("r1a");
 const r2 = document.getElementById("r2");
@@ -17,6 +18,11 @@ const select2 = document.querySelector(".select-2");
 const select3 = document.querySelector(".select-3");
 
 // funciones
+
+function mostrarReload() {
+  reload.style.display = "block"
+  setTimeout(function () { reload.style.opacity = "1"}, 100);
+}
 
 function ocultarO1() {
   repuestos.style.display = "none";
@@ -65,17 +71,20 @@ let opcion2
 repuestos.addEventListener("click", () => {
   opcion1 = repuestos.value;
   r1.innerText = opcion1;
-  r1.style.opacity = "1"
+  r1.style.display = "block"
+  setTimeout(function () { r1.style.opacity = "1"}, 100);
   setTimeout(() => r1a.style.opacity = "1", 750);
   setTimeout(function () { efectoMaquinaDeEscribir("Perfecto, ahora selecciona alguna de estas opciones", "r1a"); }, 900);
   ocultarO1();
   mostrarO2();
+  mostrarReload()
 })
 
 accesorios.addEventListener("click", () => {
   opcion1 = accesorios.value;
   r1.innerText = opcion1;
-  r1.style.opacity = "1"
+  r1.style.display = "block"
+  setTimeout(function () { r1.style.opacity = "1"}, 100);
   setTimeout(() => r1a.style.opacity = "1", 750);
   setTimeout(function () { efectoMaquinaDeEscribir("muy bien, estos son nuestros accesorios disponibles", "r1a"); }, 900);
   ocultarO1();
@@ -86,7 +95,8 @@ accesorios.addEventListener("click", () => {
 contactos.addEventListener("click", () => {
   opcion1 = contactos.value;
   r1.innerText = opcion1;
-  r1.style.opacity = "1"
+  r1.style.display = "block"
+  setTimeout(function () { r1.style.opacity = "1"}, 100);s
   setTimeout(() => r1a.style.opacity = "1", 750);
   setTimeout(function () { efectoMaquinaDeEscribir("estos son nuestros datos de contacto", "r1a"); }, 900);
   ocultarO1();

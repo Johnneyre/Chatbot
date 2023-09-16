@@ -17,14 +17,22 @@
             <div class="card">
               <div class="card-header msg_head">
                 <div class="card-header--flex">
-                  <div class="img_cont">
-                    <img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="user_img">
-                    <span class="online_icon"></span>
+                  <div class="header-info">
+                    <div class="img_cont">
+                      <img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="user_img">
+                      <span class="online_icon"></span>
+                    </div>
+                    <div class="user_info">
+                      <span>Soft-IA</span>
+                      <p>ChatBot de Moto Betel</p>
+                    </div>
                   </div>
-                  <div class="user_info">
-                    <span>Soft-IA</span>
-                    <p>ChatBot de Moto Betel</p>
-                  </div>
+                  <button class="boton-reset" id="reload" onclick="location.reload()">
+                    <img src="/static/img/reload.svg" class="reload" alt="reload">
+                    <div class="boton-reset--text">
+                      <span>Empezar de nuevo</span>
+                    </div>
+                  </button>
                 </div>
               </div>
 
@@ -190,9 +198,6 @@
           </div>
         </div>
       </div>
-      <button class="boton-reset">
-        Modelos
-      </button>
     </main>
     <script src="../static/javascript/interface.js"></script>
   </body>
