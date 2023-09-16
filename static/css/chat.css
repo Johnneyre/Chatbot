@@ -52,6 +52,8 @@
 
 .card-header--flex {
 	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .msg_card_body {
@@ -285,6 +287,12 @@ table, th, td {
 	background-color: rgba(38, 51, 61, .2);
 }
 
+.header-info {
+	display: flex;
+	flex-direction: row;
+	width: 42%;
+}
+
 .card-footer {
 	height: 16%;
 	border-radius: 0 0 15px 15px !important;
@@ -364,12 +372,66 @@ table, th, td {
 	position: relative;
 }
 
+.boton-reset {
+	display: flex;
+	justify-content: center;
+	max-width: 250px;
+	align-items: center;
+	margin-right: 15px;
+	width: 42%;
+	font-size: 15px;
+	font-weight: 600;
+	background-color: #a52a2a;
+	padding: 10px;
+	text-decoration: none;
+	border-radius: 10px;
+	transition: 0.2s background, color ease-in-out;
+	border: none;
+	color: white;
+	opacity: 0;
+	transition: opacity 5s;
+	display: none;
+  }
+
+  .boton-reset--text {
+	height: 80%;
+	width: 70%;
+	display: inline-block;
+  }
+  
+  .boton-reset:hover {
+	cursor: pointer;
+  }
+  
+  .boton-reset:hover {
+	background-color: #0b1027;
+	color: white;
+  }
+
+  .reload {
+	width: 10%;
+	max-width: 30px;
+  }
+
 /* Responsive */
 
 @media(max-width: 576px) {
 	.contacts_card{
 	margin-bottom: 15px !important;
 	}
+
+	.boton-reset {
+		min-width: 45px;
+		height: 55px;
+		width: 30%;
+		flex-direction: row;
+		font-size: 12px;
+	  }
+
+	  .reload {
+		width: 20%;
+		margin-bottom: 20px;
+	  }
 
 }
 
