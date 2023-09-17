@@ -17,14 +17,22 @@
             <div class="card">
               <div class="card-header msg_head">
                 <div class="card-header--flex">
-                  <div class="img_cont">
-                    <img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="user_img">
-                    <span class="online_icon"></span>
+                  <div class="header-info">
+                    <div class="img_cont">
+                      <img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="user_img">
+                      <span class="online_icon"></span>
+                    </div>
+                    <div class="user_info">
+                      <span>Soft-IA</span>
+                      <p>ChatBot de Moto Betel</p>
+                    </div>
                   </div>
-                  <div class="user_info">
-                    <span>Soft-IA</span>
-                    <p>ChatBot de Moto Betel</p>
-                  </div>
+                  <button class="boton-reset" id="reload" onclick="location.reload()">
+                    <img src="/static/img/reload.svg" class="reload" alt="reload">
+                    <div class="boton-reset--text">
+                      <span>Empezar de nuevo</span>
+                    </div>
+                  </button>
                 </div>
               </div>
 
@@ -45,8 +53,8 @@
                     <option value="{{ cilindraje[0] }}">{{ cilindraje[0] }}</option>
                     {% endfor %}
                   </select>
-                  <button type="submit"  class="boton-filtrar">Filtrar</button>
-                  <button type="reset">Limpiar</button>
+                  <button type="submit" class="btn-select Filtrar">Filtrar</button>
+                  <button type="reset" class="btn-select reset">Limpiar</button>
                 </div>
                 <div class="Select__container select-2">
                   <select name="" id="">
@@ -54,8 +62,8 @@
                     <option value="{{ marcas[0] }}">{{ marcas[0] }}</option>
                     {% endfor %}
                   </select>
-                  <button type="submit">Filtrar</button>
-                  <button type="reset">Limpiar</button>
+                  <button type="submit" class="btn-select Filtrar">Filtrar</button>
+                  <button type="reset" class="btn-select reset">Limpiar</button>
                 </div>
                 <div class="Select__container select-3">
                   <select name="" id="">
@@ -63,12 +71,12 @@
                     <option value="{{ modelo[0] }}">{{ modelo[0] }}</option>
                     {% endfor %}
                   </select>
-                  <button type="submit">Filtrar</button>
-                  <button type="reset">Limpiar</button>
+                  <button type="submit" class="btn-select Filtrar">Filtrar</button>
+                  <button type="reset" class="btn-select reset">Limpiar</button>
                 </div>
 
                 <section id="catalogo" class="catalogo">
-                  {% for row in list_products %}
+                  <!-- {% for row in list_products %}
                   <article class="producto">
                     <div class="img">
                       <img src="/static/img/pngwing.com.png" alt="" />
@@ -98,8 +106,8 @@
                       </table>
                     </div>
                   </article>
-                  {% endfor %}
-                  <!-- <article class="producto">
+                  {% endfor %} -->
+                  <article class="producto">
                     <div class="img">
                       <img src="/static/img/cadena.jpg" alt="" />
                     </div>
@@ -108,21 +116,21 @@
                       <p>Marca: <span>Aguila</span></p>
                       <p>Modelo: <span>TX</span></p>
                       <p>Cilindraje: <span>CC200</span></p>
-                      <p>Cantidad: <span></span></p>
-                      <p>Precio: <span></span></p>
+                      <p>Cantidad: <span>12</span></p>
+                      <p>Precio: <span>50.000</span></p>
                     </div>
                   </article>
                   <article class="producto">
                     <div class="img">
-                      <img src="/static/img/pngwing.com.png" alt="" />
+                      <img src="/static/img/images.jpeg" alt="" />
                     </div>
                     <div class="producto-inf">
-                      <p>Nombre: <span></span></p>
-                      <p>Marca: <span></span></p>
-                      <p>Modelo: <span></span></p>
-                      <p>Cilindraje: <span></span></p>
-                      <p>Cantidad: <span></span></p>
-                      <p>Precio: <span></span></p>
+                      <p>Nombre: <span>Cilindro</span></p>
+                      <p>Marca: <span>seepweed</span></p>
+                      <p>Modelo: <span>s/n</span></p>
+                      <p>Cilindraje: <span>200cc</span></p>
+                      <p>Cantidad: <span>4</span></p>
+                      <p>Precio: <span>170.000</span></p>
                     </div>
                   </article>
                 </section>
@@ -131,21 +139,32 @@
                 <section id="sobre-nosotros" class="sobre-nosotros">
                     <div class="sobre-nosotros--header">
                       <div class="img">
-                        <img src="/static/img/pngwing.com.png" alt="">
+                        <img src="/static/img/mb.jpg" alt="">
                       </div>
                       <div class="mb">
                         <h1>Moto <p>Betel</p> <span>inck</span></h1>
                       </div>
                     </div>
                     <div class="sobre-nosotros--text">
-                      <p>precio:</p>
-                      <p>cantidad:</p>
-                      <p>precio:</p>
-                      <p>precio:</p>
-                      <p>precio:</p>
-                      <p>precio:</p>
+                      <div class="sobre-nosotros--left">
+                        <p>Horarios de atención:</p>
+                        <p>Lunes a Vierner <br> 8:00 am / 12:00 pm <br> 2:00 pm / 6:00 pm</p>
+                      </div>
+                      <div class="sobre-nosotros--right">
+                        <p>Numero de Contacto:</p>
+                        <p>+58 416-9752291</p>
+                      </div>
+                      <div class="sobre-nosotros--ubicacion">
+                        <p>Ubicación:</p>
+                        <img src="/static/img/motobetel.jpg" alt="Moto Betel">
+                        <button class="boton-ubi" style="display: block; opacity: 1;">
+                          <div class="boton-ubi--text">
+                            <span><a href="">click para ir a Google Map</a></span>
+                          </div>
+                        </button>
+                      </div>
                     </div>
-                  </article> -->
+                  </article>
                 </section>
 
               </div>
@@ -190,9 +209,6 @@
           </div>
         </div>
       </div>
-      <button class="boton-reset">
-        Modelos
-      </button>
     </main>
     <script src="../static/javascript/interface.js"></script>
   </body>
