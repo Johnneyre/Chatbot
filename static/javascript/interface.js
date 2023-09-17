@@ -24,6 +24,14 @@ function mostrarReload() {
   setTimeout(function () { reload.style.opacity = "1"}, 100);
 }
 
+function mostrarR1() {
+  r1.innerText = opcion1;
+  r1.style.display = "block"
+  r1a.style.display = "block"
+  setTimeout(function () { r1.style.opacity = "1"}, 100);
+  setTimeout(() => r1a.style.opacity = "1", 750);
+}
+
 function ocultarO1() {
   repuestos.style.display = "none";
   accesorios.style.display = "none";
@@ -42,14 +50,27 @@ function mostrarO2() {
 }
 
 function mostrarR2() {
-  r2.style.display = "block"
-  r2a.style.display = "block"
+  r2.innerText = opcion2;
+  r2.style.display = "block";
+  r2a.style.display = "block";
+  setTimeout(function () { r2.style.opacity = "1"}, 100);
+  setTimeout(() => r2a.style.opacity = "1", 750);
 }
 
 function ocultarO2() {
   cilindraje.style.display = "none";
   marca.style.display = "none";
   modelo.style.display = "none";
+}
+
+function mostrarCatalogo() {
+  catalogo.style.display = "flex"
+  setTimeout(() => catalogo.style.opacity = "1", 4500);
+}
+
+function mostrarsobreNosotros() {
+  sobreNosotros.style.display = "block"
+  setTimeout(() => sobreNosotros.style.opacity = "1", 3000);
 }
 
 // animaciones 
@@ -60,7 +81,6 @@ function efectoMaquinaDeEscribir(texto, element, i = 0) {
   }
 }
 
-
 // opciones 
 
 let opcion1
@@ -70,51 +90,30 @@ let opcion2
 
 repuestos.addEventListener("click", () => {
   opcion1 = repuestos.value;
-  r1.innerText = opcion1;
-  r1.style.display = "block"
-  setTimeout(function () { r1.style.opacity = "1"}, 100);
-  setTimeout(() => r1a.style.opacity = "1", 750);
+  mostrarR1()
   setTimeout(function () { efectoMaquinaDeEscribir("Perfecto, ahora selecciona alguna de estas opciones", "r1a"); }, 900);
   ocultarO1();
   mostrarO2();
-  mostrarReload()
+  mostrarReload();
 })
 
 accesorios.addEventListener("click", () => {
   opcion1 = accesorios.value;
-  r1.innerText = opcion1;
-  r1.style.display = "block"
-  setTimeout(function () { r1.style.opacity = "1"}, 100);
-  setTimeout(() => r1a.style.opacity = "1", 750);
+  mostrarR1()
   setTimeout(function () { efectoMaquinaDeEscribir("muy bien, estos son nuestros accesorios disponibles", "r1a"); }, 900);
   ocultarO1();
-  setTimeout(() => catalogo.style.opacity = "1", 4000);
-
+  mostrarCatalogo();
+  mostrarReload();
 })
 
 contactos.addEventListener("click", () => {
   opcion1 = contactos.value;
-  r1.innerText = opcion1;
-  r1.style.display = "block"
-  setTimeout(function () { r1.style.opacity = "1"}, 100);s
-  setTimeout(() => r1a.style.opacity = "1", 750);
+  mostrarR1();
   setTimeout(function () { efectoMaquinaDeEscribir("estos son nuestros datos de contacto", "r1a"); }, 900);
   ocultarO1();
-  catalogo.style.display = "none";
-  setTimeout(() => sobreNosotros.style.opacity = "1", 3000);
+  mostrarsobreNosotros()
+  mostrarReload();
 })
-
-cilindraje.addEventListener("click", () => {
-  opcion2 = cilindraje.value;
-  r2.innerText = opcion2;
-  r2.style.opacity = "1";
-  setTimeout(() => r2a.style.opacity = "1", 750);
-  setTimeout(function () { efectoMaquinaDeEscribir("Muy buen, aqui están nuestros repuestos por su cilindraje", "r2a"); }, 900);
-  ocultarO2();
-  setTimeout(() => catalogo.style.opacity = "1", 4000);
-  selectContainer.style.display = "flex";
-})
-
 
 // Filtro
 cilindraje.addEventListener("change", function () {
@@ -190,22 +189,39 @@ $(".Select__container").on("change", function() {
 });
 
 // Hasta Aqui
+
+// r2.innerText = opcion1;
+// r2.style.display = "block";
+// r2a.style.display = "block";
+// setTimeout(function () { r2.style.opacity = "1"}, 100);
+// setTimeout(() => r2a.style.opacity = "1", 750);
+
+cilindraje.addEventListener("click", () => {
+  opcion2 = cilindraje.value;
+  mostrarR2();
+  setTimeout(function () { efectoMaquinaDeEscribir("Muy buen, aqui están nuestros repuestos por su cilindraje", "r2a"); }, 900);
+  ocultarO2();
+  mostrarCatalogo()
+  selectContainer.style.display = "flex";
+  setTimeout(function () { selectContainer.style.opacity = "1"}, 4000);
+})
+
 marca.addEventListener("click", () => {
   opcion2 = marca.value;
   mostrarR2();
-  r2.innerText = opcion2;
-  r2a.innerText = "Muy buen, aqui están nuestros repuestos segun su marca";
+  setTimeout(function () { efectoMaquinaDeEscribir("Muy buen, aqui están nuestros repuestos segun su marca", "r2a"); }, 900);
   ocultarO2();
-  catalogo.style.display = "flex";
+  mostrarCatalogo()
   select2.style.display = "flex";
+  setTimeout(function () { select2.style.opacity = "1"}, 4000);
 })
 
 modelo.addEventListener("click", () => {
   opcion2 = modelo.value;
   mostrarR2();
-  r2.innerText = opcion2;
-  r2a.innerText = "Muy buen, aqui están nuestros repuestos segun su modelo";
+  setTimeout(function () { efectoMaquinaDeEscribir("Muy buen, aqui están nuestros repuestos segun su modelo", "r2a"); }, 900);
   ocultarO2();
-  catalogo.style.display = "flex";
+  mostrarCatalogo()
   select3.style.display = "flex";
+  setTimeout(function () { select3.style.opacity = "1"}, 4000);
 })
