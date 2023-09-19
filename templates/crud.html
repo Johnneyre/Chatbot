@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/crud.css">
+    <title>Crud</title>
+</head>
+
+<body>
+    <header></header>
+    <main>
+        <div class="cont">
+            <div class="create">
+                <div class="create-h1">
+                    <h1>Agrega un producto</h1>
+                </div>
+                <form action="create">
+                    <div class="create-input">
+                        <span>nombre:</span>
+                        <input type="text" name="name" id="name" placeholder="ingresa acá el nombre del producto">
+                    </div>
+                    <div class="create-input">
+                        <span>Cilindraje:</span>
+                        <select name="cilindraje" id="cilindraje">
+                            <option value="0">selecciona una Cilindraje</option>
+                        </select>
+                    </div>
+                    <div class="create-input">
+                        <span>Marca:</span>
+                        <select name="marca" id="marca">
+                            <option value="0">selecciona una Marca</option>
+                        </select>
+                    </div>
+                    <div class="create-input">
+                        <span>Modelo:</span>
+                        <select name="marca" id="marca">
+                            <option value="0">selecciona una Modelo</option>
+                        </select>
+                    </div>
+                    <div class="create-input">
+                        <span>Cantidad:</span>
+                        <input type="number" name="cantidad" id="cantidad" placeholder="ingresa acá la cantidad del producto">
+                    </div>
+                    <div class="create-input">
+                        <span>precio:</span>
+                        <input type="number" name="precio" id="precio" placeholder="ingresa acá el precio del producto">
+                    </div>
+                    <div class="cont-guardar">
+                        <input type="submit" name="guardar" id="guardar" class="btn guardar">
+                    </div>
+                </form>
+            </div>
+            <div class="read">
+                <table>
+                    <thead>
+                        <th>Repuesto</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Cilindraje</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th> </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pistón</td>
+                            <td>Aguila</td>
+                            <td>Universal</td>
+                            <td>150cc</td>
+                            <td>8</td>
+                            <td>50.000</td>
+                            <td class="editar-eliminar">
+                                <input type="submit" value="editar" class="btn editar">
+                                <input type="submit" value="eliminar" class="btn eliminar">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pistón</td>
+                            <td>Aguila</td>
+                            <td>Universal</td>
+                            <td>150cc</td>
+                            <td>8</td>
+                            <td>50.000</td>
+                            <td class="editar-eliminar">
+                                <input type="submit" value="editar" class="btn editar">
+                                <input type="submit" value="eliminar" class="btn eliminar">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pistón</td>
+                            <td>Aguila</td>
+                            <td>Universal</td>
+                            <td>150cc</td>
+                            <td>8</td>
+                            <td>50.000</td>
+                            <td class="editar-eliminar">
+                                <input type="submit" value="editar" class="btn editar">
+                                <input type="submit" value="eliminar" class="btn eliminar">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pistón</td>
+                            <td>Aguila</td>
+                            <td>Universal</td>
+                            <td>150cc</td>
+                            <td>8</td>
+                            <td>50.000</td>
+                            <td class="editar-eliminar">
+                                <input type="submit" value="editar" class="btn editar">
+                                <input type="submit" value="eliminar" class="btn eliminar">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pistón</td>
+                            <td>Aguila</td>
+                            <td>Universal</td>
+                            <td>150cc</td>
+                            <td>8</td>
+                            <td>50.000</td>
+                            <td class="editar-eliminar">
+                                <input type="submit" value="editar" class="btn editar">
+                                <input type="submit" value="eliminar" class="btn eliminar">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pistón</td>
+                            <td>Aguila</td>
+                            <td>Universal</td>
+                            <td>150cc</td>
+                            <td>8</td>
+                            <td>50.000</td>
+                            <td class="editar-eliminar">
+                                <input type="submit" value="editar" class="btn editar">
+                                <input type="submit" value="eliminar" class="btn eliminar">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <footer></footer>
+</body>
+
+</html>
