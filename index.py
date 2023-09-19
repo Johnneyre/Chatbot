@@ -73,11 +73,6 @@ def home():
 
 @app.route("/interface")
 def interface():
-    # cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    # s = 'SELECT * FROM accesorio'
-    # cur.execute(s)
-    # data_acce = cur.fetchall()
-    # return render_template('interface.html', data_acce=data_acce)
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
     # Obtén los cilindrajes
@@ -103,6 +98,16 @@ def interface():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html"), 404
+
+
+@app.route("/admin/accesorios")
+@login_required_custom
+def accesorios():
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    s = 'SELECT * FROM accesorio'
+    cur.execute(s)
+    data_acce = cur.fetchall()
+    return render_template('Accesorios.html', data_acce=data_acce)
 
 
 @app.route("/admin")
@@ -185,6 +190,26 @@ def add_product():
     return redirect(url_for('admin'))
 
 
+@app.route("/admin/accesorios/add__acces", methods=['POST'])
+def add_acces():
+    # Esta ruta se encargará de agregar un nuevo accesorio
+    name = request.form['accesorio']
+    cantidad = request.form['cantidad']
+    precio = request.form['precio']
+    imagen = request.files['image'].read()
+
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+    # Inserta el nuevo accesorio
+    cur.execute(
+        "INSERT INTO accesorio (accesorio, cantidad, precio, image) VALUES (%s, %s, %s, %s)",
+        (name, cantidad, precio, imagen))
+
+    conn.commit()
+
+    return redirect(url_for('accesorios'))
+
+
 @app.route("/admin/delete/<int:id>")
 def delete_product(id):
     # Esta ruta se encargará de eliminar un repuesto
@@ -193,6 +218,16 @@ def delete_product(id):
     conn.commit()
 
     return redirect(url_for('admin'))
+
+
+@app.route("/admin/accesorios/delete/<int:id>")
+def delete_acces(id):
+    # Esta ruta se encargará de eliminar un repuesto
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    cur.execute("DELETE FROM accesorio WHERE id_accesorio = %s", (id,))
+    conn.commit()
+
+    return redirect(url_for('accesorios'))
 
 
 # @app.route("/edit_product/<int:id>", methods=['GET', 'POST'])
@@ -288,6 +323,31 @@ def show_image(id):
     else:
         print("No se encontró la imagen para el id: " + str(id))
         return redirect(url_for('admin'))
+
+
+@app.route("/show_image2/<int:id>")
+def show_image2(id):
+    # Esta ruta se encargará de mostrar una imagen
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+    # Busca la imagen en la base de datos
+    cur.execute("SELECT image FROM accesorio WHERE id_accesorio = %s", (id,))
+    fetch_result = cur.fetchone()
+    if fetch_result is not None:
+        image_data = fetch_result[0].tobytes()
+
+        # Determina el formato de la imagen
+        image_format = imghdr.what(None, image_data)
+        if image_format is not None:
+            response = make_response(image_data)
+            response.headers.set('Content-Type', 'image/' + image_format)
+            return response
+        else:
+            print("Formato de imagen desconocido")
+            return redirect(url_for('admin'))
+    else:
+        print("No se encontró la imagen para el id: " + str(id))
+        return redirect(url_for('accesorios'))
 
 
 if __name__ == '__main__':
