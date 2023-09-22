@@ -109,8 +109,8 @@
                   <article class="producto">
                     <div class="img">
                       <img
-                        src="/static/img/cadena.jpg"
-                        alt="imagen de los productos"
+                        src="{{ url_for('show_image', id=row['id_repuestos']) }}"
+                        alt="Imagen del repuesto"
                       />
                     </div>
                     <div class="producto-inf">
