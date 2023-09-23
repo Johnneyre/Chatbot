@@ -100,14 +100,7 @@ def page_not_found(e):
     return render_template("404.html"), 404
 
 
-@app.route("/admin/accesorios")
-@login_required_custom
-def accesorios():
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    s = 'SELECT * FROM accesorio'
-    cur.execute(s)
-    data_acce = cur.fetchall()
-    return render_template('Accesorios.html', data_acce=data_acce)
+# ! Consultas READ
 
 
 @app.route("/admin")
@@ -127,108 +120,96 @@ def admin():
     cur.execute("SELECT DISTINCT modelo FROM modelo;")
     modelo = cur.fetchall()
 
+    # Consulta para traer accesorios de la BD
+    s = 'SELECT * FROM accesorio'
+    cur.execute(s)
+    accesorios = cur.fetchall()
+
+    # Consulta para traer repuestos de la BD
+
     s = "SELECT repuestos.id_repuestos, repuestos.repuestos, marcas.marcas, modelo.modelo, cilindraje.cilindraje, repuestos.cantidad, repuestos.precio, repuestos.imagen FROM repuestos JOIN marcas ON repuestos.id_marcas = marcas.id_marcas JOIN modelo ON repuestos.id_modelo = modelo.id_modelo JOIN cilindraje ON repuestos.id_cilindraje = cilindraje.id_cilindraje;"
     cur.execute(s)
     list_products = cur.fetchall()
 
     # Esta es la página principal del panel de administrador
-    return render_template('Admin.html', cilindraje=cilindraje, marcas=marcas, modelo=modelo, list_products=list_products)
+    return render_template('Admin.html', accesorios=accesorios, cilindraje=cilindraje, marcas=marcas, modelo=modelo, list_products=list_products)
+
+
+# ! Consultas CREATE
 
 
 @app.route("/admin/add", methods=['POST'])
 def add_product():
-    # Esta ruta se encargará de agregar un nuevo repuesto
+    # Esta ruta se encargará de agregar un nuevo repuesto o accesorio
+    tipo = request.form['tipo']
     name = request.form['name']
-    marcas = request.form['marca']
-    modelo = request.form['modelo']
-    cilindraje = request.form['cilindraje']
     cantidad = request.form['cantidad']
     precio = request.form['precio']
     imagen = request.files['imagen'].read()
 
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-    id_marcas = id_modelo = id_cilindraje = None
+    if tipo == 'repuesto':
+        marcas = request.form['marca']
+        modelo = request.form['modelo']
+        cilindraje = request.form['cilindraje']
 
-    # Busca el ID de la marca
-    cur.execute("SELECT id_marcas FROM marcas WHERE marcas = %s", (marcas,))
+        id_marcas = id_modelo = id_cilindraje = None
 
-    fetch_result = cur.fetchone()
-    if fetch_result is not None:
-        id_marcas = fetch_result[0]
-    else:
-        print("No se encontró el cilindraje: " + marcas)
+        # Busca el ID de la marca
+        cur.execute("SELECT id_marcas FROM marcas WHERE marcas = %s", (marcas,))
+        fetch_result = cur.fetchone()
+        if fetch_result is not None:
+            id_marcas = fetch_result[0]
+        else:
+            print("No se encontró el cilindraje: " + marcas)
 
-    # Busca el ID del modelo
-    cur.execute("SELECT id_modelo FROM modelo WHERE modelo = %s", (modelo,))
+        # Busca el ID del modelo
+        cur.execute("SELECT id_modelo FROM modelo WHERE modelo = %s", (modelo,))
+        fetch_result = cur.fetchone()
+        if fetch_result is not None:
+            id_modelo = fetch_result[0]
+        else:
+            print("No se encontró el cilindraje: " + modelo)
 
-    fetch_result = cur.fetchone()
-    if fetch_result is not None:
-        id_modelo = fetch_result[0]
-    else:
-        # Maneja el caso en que no se encontró el cilindraje
-        print("No se encontró el cilindraje: " + modelo)
+        # Busca el ID del cilindraje
+        cur.execute(
+            "SELECT id_cilindraje FROM cilindraje WHERE cilindraje = %s", (cilindraje,))
+        fetch_result = cur.fetchone()
+        if fetch_result is not None:
+            id_cilindraje = fetch_result[0]
+        else:
+            print("No se encontró el cilindraje: " + cilindraje)
 
-    # Busca el ID del cilindraje
-    cur.execute(
-        "SELECT id_cilindraje FROM cilindraje WHERE cilindraje = %s", (cilindraje,))
-
-    fetch_result = cur.fetchone()
-    if fetch_result is not None:
-        id_cilindraje = fetch_result[0]
-    else:
-        # Maneja el caso en que no se encontró el cilindraje
-        print("No se encontró el cilindraje: " + cilindraje)
-
-    # Inserta el nuevo repuesto
-    cur.execute(
-        "INSERT INTO repuestos (repuestos, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-        (name, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen))
+        # Inserta el nuevo repuesto
+        cur.execute(
+            "INSERT INTO repuestos (repuestos, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+            (name, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen))
+    elif tipo == 'accesorio':
+        # Inserta el nuevo accesorio
+        cur.execute(
+            "INSERT INTO accesorio (accesorio, cantidad, precio, image) VALUES (%s, %s, %s, %s)",
+            (name, cantidad, precio, imagen))
 
     conn.commit()
 
     return redirect(url_for('admin'))
 
 
-@app.route("/admin/accesorios/add__acces", methods=['POST'])
-def add_acces():
-    # Esta ruta se encargará de agregar un nuevo accesorio
-    name = request.form['accesorio']
-    cantidad = request.form['cantidad']
-    precio = request.form['precio']
-    imagen = request.files['image'].read()
+# ! Consultas DELETE
 
+
+@app.route("/admin/delete/<string:tipo>/<int:id>")
+def delete(tipo, id):
+    # Esta ruta se encargará de eliminar un repuesto o accesorio
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-
-    # Inserta el nuevo accesorio
-    cur.execute(
-        "INSERT INTO accesorio (accesorio, cantidad, precio, image) VALUES (%s, %s, %s, %s)",
-        (name, cantidad, precio, imagen))
-
-    conn.commit()
-
-    return redirect(url_for('accesorios'))
-
-
-@app.route("/admin/delete/<int:id>")
-def delete_product(id):
-    # Esta ruta se encargará de eliminar un repuesto
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cur.execute("DELETE FROM repuestos WHERE id_repuestos = %s", (id,))
+    if tipo == 'repuesto':
+        cur.execute("DELETE FROM repuestos WHERE id_repuestos = %s", (id,))
+    elif tipo == 'accesorio':
+        cur.execute("DELETE FROM accesorio WHERE id_accesorio = %s", (id,))
     conn.commit()
 
     return redirect(url_for('admin'))
-
-
-@app.route("/admin/accesorios/delete/<int:id>")
-def delete_acces(id):
-    # Esta ruta se encargará de eliminar un repuesto
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cur.execute("DELETE FROM accesorio WHERE id_accesorio = %s", (id,))
-    conn.commit()
-
-    return redirect(url_for('accesorios'))
-
 
 # @app.route("/edit_product/<int:id>", methods=['GET', 'POST'])
 # def edit_product(id):
@@ -260,6 +241,7 @@ def delete_acces(id):
 
 #         # Renderiza el formulario de edición
 #         return render_template('edit_product.html', product=product)
+
 
 @app.route("/admin/edit_product/<int:id>", methods=['GET', 'POST'])
 @login_required_custom

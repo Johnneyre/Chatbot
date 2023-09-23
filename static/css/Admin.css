@@ -4,6 +4,136 @@
   box-sizing: border-box;
 }
 
+:root{
+  --width: 250px
+}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  padding-left: 52px;
+}
+
+header {
+  min-height: 15rem;
+}
+
+nav{
+  position: absolute;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 52px;
+  background-color: #222;
+  overflow: hidden;
+  left: 0;
+  top: 0;
+  transition: width .3s ease-in-out;
+}
+
+nav:hover{
+  width: var(--width);
+}
+
+nav .bar{
+  background-color: #000000;
+  color: antiquewhite;
+  display: flex;
+  justify-content: end;
+}
+
+nav .user{
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+  height: 180px;
+  transform: translateX(-300px);
+  opacity: 0;
+  width: var(--width);
+  transition: transform .3s ease, opacity .3s ease;
+}
+
+nav .user img{
+  width: 100px;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+
+nav:hover .user{
+  transform: translateX(0);
+  opacity: 1; 
+}
+
+nav .links a{
+  color: aliceblue;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  width: var(--width);
+  overflow: hidden;
+}
+
+nav .links button{
+  color: aliceblue;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  width: var(--width);
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+nav .links .icon img{
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  top: 10px;
+}
+
+nav .links .icon{
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+nav .links button:hover{
+  background-color: rgb(55, 124, 184);
+  color: #ffffff;
+}
+
+nav .links a:first-child{
+  position: absolute;
+  top: 20px;
+  background: transparent;
+  cursor: default;
+  transition: opacity .3s ease;
+}
+
+nav:hover .links a:first-child{
+  opacity: 0;
+}
+
+
+nav .links a:last-child{
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  bottom: 10px;
+}
+
+nav .links a:last-child:hover{
+  background-color: rgb(173, 20, 20);
+}
+
+.container-accesorios {
+  display: none;
+}
+
 img {
   width: 20%;
 }

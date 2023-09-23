@@ -7,93 +7,188 @@
     <title>Document</title>
   </head>
   <body>
-    <form action="/logout" method="post">
-      <input type="submit" value="Cerrar sesión" />
-    </form>
-    <form action="/admin/add" method="post" enctype="multipart/form-data">
-      <label for="">Ingresa el nombre del repuesto</label>
-      <input type="text" name="name" id="" />
-      <label for="">Ingresa la marca</label>
-      <select name="marca" id="">
-        <option value="">
-            Selecciona una Marca
-        </option>
-        {% for marcas in marcas %}
-        <option value="{{ marcas[0] }}">{{ marcas[0] }}</option>
-        {% endfor %}
-      </select>
-      <label for="">Ingresa el modelo</label>
-      <select name="modelo" id="">
-        <option value="">
-            Selecciona un Modelo
-        </option>
-        {% for modelo in modelo %}
-        <option value="{{ modelo[0] }}">{{ modelo[0] }}</option>
-        {% endfor %}
-      </select>
-      <label for="">Ingresa el Cilindraje</label>
-      <select name="cilindraje" id="">
-        <option value="">
-            Selecciona un Cilindraje
-        </option>
-        {% for cilindraje in cilindraje %}
-        <option value="{{ cilindraje[0] }}">{{ cilindraje[0] }}</option>
-        {% endfor %}
-      </select>
-      <label for="">Ingresa la cantidad</label>
-      <input type="number" name="cantidad" />
-      <label for="">Ingresa el precio</label>
-      <input type="number" name="precio" />
-      <label for="">Ingresa la imagen</label>
-      <input type="file" name="imagen" id="" />
-      <input type="submit" value="Enviar" />
-    </form>
-    <div class="table">
-      <table>
-        <thead>
-          <tr>
-            <td>ID</td>
-            <td>Nombre</td>
-            <td>Marca</td>
-            <td>Modelo</td>
-            <td>Cilindraje</td>
-            <td>Cantidad</td>
-            <td>Precio</td>
-            <td>Imagen</td>
-          </tr>
-        </thead>
-        <tbody>
-          {% for row in list_products %}
-          <tr>
-            <td>{{row["id_repuestos"]}}</td>
-            <td>{{row["repuestos"]}}</td>
-            <td>{{row["marcas"]}}</td>
-            <td>{{row["modelo"]}}</td>
-            <td>{{row["cilindraje"]}}</td>
-            <td>{{row["cantidad"]}}</td>
-            <td>{{row["precio"]}}</td>
-            <td>
-              <img
-                src="{{ url_for('show_image', id=row['id_repuestos']) }}"
-                alt="Imagen del repuesto"
-              />
-            </td>
-            <td>
-              <a
-                href="{{ url_for('edit_product', id=row['id_repuestos']) }}"
-                class="button__edit"
-                >Editar</a
-              >
-              <a
-                href="{{ url_for('delete_product', id=row['id_repuestos']) }}"
-                class="button__delete"
-                >Eliminar</a
-              >
-            </td>
-          </tr>
+    <nav>
+      <header>
+        <div class="bar"></div>
+        <div class="user">
+          <img src="../static/img/mb.jpg" alt="" width="40" />
+          <div class="name">Administrador</div>
+        </div>
+      </header>
+      <div class="links">
+        <a href="#">
+          <div class="icon">
+            <img src="../static/img/mb.jpg" alt="" />
+          </div>
+        </a>
+        <button href="#" id="repuestosButton">
+          <div class="icon">
+            <span
+              class="iconify-inline"
+              data-icon="flat-color-icons:assistant"
+              data-width="32"
+              data-height="32"
+            ></span>
+          </div>
+          <div class="title">Repuestos</div>
+        </button>
+        <button href="#" id="accesoriosButton">
+          <div class="icon">
+            <span
+              class="iconify-inline"
+              data-icon="flat-color-icons:assistant"
+              data-width="32"
+              data-height="32"
+            ></span>
+          </div>
+          <div class="title">Accesorios</div>
+        </button>
+        <a href="/logout">
+          <div class="icon">
+            <span
+              class="iconify-inline"
+              data-icon="flat-color-icons:high-priority"
+              data-width="32"
+              data-height="32"
+            ></span>
+          </div>
+          <div class="title">Cerrar Sesion</div>
+        </a>
+      </div>
+    </nav>
+    <div class="container-repuestos">
+      <form action="/admin/add" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="tipo" value="repuesto" />
+        <label for="">Ingresa el nombre del repuesto</label>
+        <input type="text" name="name" id="" />
+        <label for="">Ingresa la marca</label>
+        <select name="marca" id="">
+          <option value="">Selecciona una Marca</option>
+          {% for marcas in marcas %}
+          <option value="{{ marcas[0] }}">{{ marcas[0] }}</option>
           {% endfor %}
-        </tbody>
-      </table>
+        </select>
+        <label for="">Ingresa el modelo</label>
+        <select name="modelo" id="">
+          <option value="">Selecciona un Modelo</option>
+          {% for modelo in modelo %}
+          <option value="{{ modelo[0] }}">{{ modelo[0] }}</option>
+          {% endfor %}
+        </select>
+        <label for="">Ingresa el Cilindraje</label>
+        <select name="cilindraje" id="">
+          <option value="">Selecciona un Cilindraje</option>
+          {% for cilindraje in cilindraje %}
+          <option value="{{ cilindraje[0] }}">{{ cilindraje[0] }}</option>
+          {% endfor %}
+        </select>
+        <label for="">Ingresa la cantidad</label>
+        <input type="number" name="cantidad" />
+        <label for="">Ingresa el precio</label>
+        <input type="number" name="precio" />
+        <label for="">Ingresa la imagen</label>
+        <input type="file" name="imagen" id="" />
+        <input type="submit" value="Enviar" />
+      </form>
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <td>ID</td>
+              <td>Nombre</td>
+              <td>Marca</td>
+              <td>Modelo</td>
+              <td>Cilindraje</td>
+              <td>Cantidad</td>
+              <td>Precio</td>
+              <td>Imagen</td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in list_products %}
+            <tr>
+              <td>{{row["id_repuestos"]}}</td>
+              <td>{{row["repuestos"]}}</td>
+              <td>{{row["marcas"]}}</td>
+              <td>{{row["modelo"]}}</td>
+              <td>{{row["cilindraje"]}}</td>
+              <td>{{row["cantidad"]}}</td>
+              <td>{{row["precio"]}}</td>
+              <td>
+                <img
+                  src="{{ url_for('show_image', id=row['id_repuestos']) }}"
+                  alt="Imagen del repuesto"
+                />
+              </td>
+              <td>
+                <a
+                  href="{{ url_for('edit_product', id=row['id_repuestos']) }}"
+                  class="button__edit"
+                  >Editar</a
+                >
+                <a
+                  href="{{ url_for('delete', tipo='repuesto', id=row['id_repuestos']) }}"
+                  class="button__delete"
+                  >Eliminar</a
+                >
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
+    <div class="container-accesorios">
+      <form action="/admin/add" method="post" enctype="multipart/form-data">
+        <label for="">Ingresa el nombre del accesorio</label>
+        <input type="hidden" name="tipo" value="accesorio" />
+        <input type="text" name="name" id="" />
+        <label for="">Ingresa la cantidad</label>
+        <input type="number" name="cantidad" />
+        <label for="">Ingresa el precio</label>
+        <input type="number" name="precio" />
+        <label for="">Ingresa la imagen</label>
+        <input type="file" name="imagen" id="" />
+        <input type="submit" value="Enviar" />
+      </form>
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <td>ID</td>
+              <td>Nombre</td>
+              <td>Cantidad</td>
+              <td>Precio</td>
+              <td>Imagen</td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in accesorios %}
+            <tr>
+              <td>{{row["id_accesorio"]}}</td>
+              <td>{{row["accesorio"]}}</td>
+              <td>{{row["cantidad"]}}</td>
+              <td>{{row["precio"]}}</td>
+              <td>
+                <img
+                  src="{{ url_for('show_image2', id=row['id_accesorio']) }}"
+                  alt="Imagen del accesorio"
+                />
+              </td>
+              <td>
+                <a
+                  href="{{ url_for('delete', tipo='accesorio', id=row['id_accesorio']) }}"
+                  class="button__delete"
+                  >Eliminar</a
+                >
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <script src="../static/js/Admin.js"></script>
   </body>
 </html>
