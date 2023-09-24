@@ -43,10 +43,6 @@ body {
   border-radius: 50%;
 }
 
-#header ul {
-  min-width: 360px;
-}
-
 .nav-bar {
   display: flex;
   margin: 0 50px;
