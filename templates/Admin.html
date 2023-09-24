@@ -87,14 +87,26 @@
         <label for="">Ingresa el precio</label>
         <input type="number" name="precio" />
         <label for="">Ingresa la imagen</label>
-        <input type="file" name="imagen" id="" />
+        <label for="imagen">Imagen:</label>
+        <img
+          id="output_image"
+          src="#"
+          alt="Imagen del producto"
+          style="display: none"
+        />
+        <input
+          type="file"
+          id="imagen"
+          name="imagen"
+          accept="image/*"
+          onchange="previewImage(event)"
+        />
         <input type="submit" value="Enviar" />
       </form>
       <div class="table">
         <table>
           <thead>
             <tr>
-              <td>ID</td>
               <td>Nombre</td>
               <td>Marca</td>
               <td>Modelo</td>
@@ -107,7 +119,6 @@
           <tbody>
             {% for row in list_products %}
             <tr>
-              <td>{{row["id_repuestos"]}}</td>
               <td>{{row["repuestos"]}}</td>
               <td>{{row["marcas"]}}</td>
               <td>{{row["modelo"]}}</td>
@@ -116,16 +127,12 @@
               <td>{{row["precio"]}}</td>
               <td>
                 <img
-                  src="{{ url_for('show_image', id=row['id_repuestos']) }}"
+                  src="{{ url_for('show_image', tipo='repuesto', id=row['id_repuestos']) }}"
                   alt="Imagen del repuesto"
                 />
               </td>
               <td>
-                <a
-                  href="{{ url_for('edit_product', id=row['id_repuestos']) }}"
-                  class="button__edit"
-                  >Editar</a
-                >
+                <a href="/admin/edit/{{row['id_repuestos']}}">Editar</a>
                 <a
                   href="{{ url_for('delete', tipo='repuesto', id=row['id_repuestos']) }}"
                   class="button__delete"
@@ -155,7 +162,6 @@
         <table>
           <thead>
             <tr>
-              <td>ID</td>
               <td>Nombre</td>
               <td>Cantidad</td>
               <td>Precio</td>
@@ -165,17 +171,17 @@
           <tbody>
             {% for row in accesorios %}
             <tr>
-              <td>{{row["id_accesorio"]}}</td>
               <td>{{row["accesorio"]}}</td>
               <td>{{row["cantidad"]}}</td>
               <td>{{row["precio"]}}</td>
               <td>
                 <img
-                  src="{{ url_for('show_image2', id=row['id_accesorio']) }}"
+                  src="{{ url_for('show_image', tipo='accesorio', id=row['id_accesorio']) }}"
                   alt="Imagen del accesorio"
                 />
               </td>
               <td>
+                <a href="/admin/editA/{{row['id_accesorio']}}">Editar</a>
                 <a
                   href="{{ url_for('delete', tipo='accesorio', id=row['id_accesorio']) }}"
                   class="button__delete"
