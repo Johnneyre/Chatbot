@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editar Accesorio</title>
+  </head>
+  <body>
+    <h1>Editar Accesorio</h1>
+    <form
+      action="{{ url_for('edit_accesorio', id=product['id_accesorio']) }}"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <label for="name">Nombre:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value="{{ product['accesorio'] }}"
+      />
+
+      <label for="cantidad">Cantidad:</label>
+      <input
+        type="number"
+        id="cantidad"
+        name="cantidad"
+        value="{{ product['cantidad'] }}"
+      />
+
+      <label for="precio">Precio:</label>
+      <input
+        type="number"
+        id="precio"
+        name="precio"
+        value="{{ product['precio'] }}"
+      />
+
+      <label for="imagen">Imagen actual:</label>
+      <img
+        id="output_image"
+        src="{{ url_for('show_image', tipo='accesorio', id=product['id_accesorio']) }}"
+        alt="Imagen del accesorio"
+      />
+
+      <label for="imagen">Actualizar imagen:</label>
+      <input
+        type="file"
+        id="imagen"
+        name="imagen"
+        accept="image/*"
+        onchange="previewImage(event)"
+      />
+
+      <a href="/admin">Cancelar</a>
+      <input type="submit" value="Actualizar" />
+    </form>
+    <script>
+      function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+          var output = document.getElementById("output_image");
+          output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    </script>
+  </body>
+</html>
