@@ -109,7 +109,7 @@
                   <article class="producto">
                     <div class="img">
                       <img
-                        src="{{ url_for('show_image', id=row['id_repuestos']) }}"
+                        src="{{ url_for('show_image', tipo='repuesto', id=row['id_repuestos']) }}"
                         alt="Imagen del repuesto"
                       />
                     </div>
@@ -126,19 +126,16 @@
                 </section>
 
                 <section id="catalogo-acc" class="catalogoacc">
-                  {% for row in list_products %}
+                  {% for row in accesorios %}
                   <article class="producto">
                     <div class="img">
                       <img
-                        src="{{ url_for('show_image', id=row['id_repuestos']) }}"
-                        alt="Imagen del repuesto"
+                        src="{{ url_for('show_image', tipo='accesorio', id=row['id_accesorio']) }}"
+                        alt="Imagen del accesorio"
                       />
                     </div>
                     <div class="producto-inf">
-                      <p>Nombre: <span>{{row["repuestos"]}}</span></p>
-                      <p>Marca: <span>{{row["marcas"]}}</span></p>
-                      <p>Modelo: <span>{{row["modelo"]}}</span></p>
-                      <p>Cilindraje: <span>{{row["cilindraje"]}}</span></p>
+                      <p>Nombre: <span>{{row["accesorio"]}}</span></p>
                       <p>Cantidad: <span>{{row["cantidad"]}}</span></p>
                       <p>Precio: <span>{{row["precio"]}}</span></p>
                     </div>
