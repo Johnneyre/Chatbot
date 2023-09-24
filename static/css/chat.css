@@ -185,6 +185,18 @@ option:focus {
   overflow: initial;
   box-sizing: border-box;
 }
+.catalogoacc {
+  display: none;
+  flex-direction: column;
+  margin: 0 auto 15px auto;
+  padding: 12px;
+  border-radius: 20px;
+  background-color: rgba(38, 51, 61, 0.2);
+  opacity: 0;
+  transition: opacity 0.8s;
+  overflow: initial;
+  box-sizing: border-box;
+}
 
 .producto {
   background-color: #aaaaaa10;
