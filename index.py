@@ -74,6 +74,11 @@ def home():
 @app.route("/interface")
 def interface():
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    
+    # Consulta para traer accesorios de la BD
+    s = 'SELECT * FROM accesorio'
+    cur.execute(s)
+    accesorios = cur.fetchall()
 
     # Obtén los cilindrajes
     cur.execute("SELECT DISTINCT cilindraje FROM cilindraje;")
@@ -92,7 +97,7 @@ def interface():
     cur.execute(s)
     list_products = cur.fetchall()
 
-    return render_template('interface.html', list_products=list_products, cilindraje=cilindraje, marcas=marcas, modelo=modelo)
+    return render_template('interface.html', list_products=list_products, cilindraje=cilindraje, marcas=marcas, modelo=modelo, accesorios= accesorios)
 
 
 @app.errorhandler(404)
