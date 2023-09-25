@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, make_response, abort, jsonify
+from flask import Flask, render_template, request, redirect, url_for, make_response, abort
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import psycopg2
 import psycopg2.extras
@@ -74,6 +74,11 @@ def home():
 @app.route("/interface")
 def interface():
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    
+    # Consulta para traer accesorios de la BD
+    s = 'SELECT * FROM accesorio'
+    cur.execute(s)
+    accesorios = cur.fetchall()
 
     # Obtén los cilindrajes
     cur.execute("SELECT DISTINCT cilindraje FROM cilindraje;")
@@ -92,7 +97,7 @@ def interface():
     cur.execute(s)
     list_products = cur.fetchall()
 
-    return render_template('interface.html', list_products=list_products, cilindraje=cilindraje, marcas=marcas, modelo=modelo)
+    return render_template('interface.html', list_products=list_products, cilindraje=cilindraje, marcas=marcas, modelo=modelo, accesorios= accesorios)
 
 
 @app.errorhandler(404)
@@ -100,14 +105,7 @@ def page_not_found(e):
     return render_template("404.html"), 404
 
 
-@app.route("/admin/accesorios")
-@login_required_custom
-def accesorios():
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    s = 'SELECT * FROM accesorio'
-    cur.execute(s)
-    data_acce = cur.fetchall()
-    return render_template('Accesorios.html', data_acce=data_acce)
+# ! Consultas READ
 
 
 @app.route("/admin")
@@ -127,186 +125,228 @@ def admin():
     cur.execute("SELECT DISTINCT modelo FROM modelo;")
     modelo = cur.fetchall()
 
+    # Consulta para traer accesorios de la BD
+    s = 'SELECT * FROM accesorio'
+    cur.execute(s)
+    accesorios = cur.fetchall()
+
+    # Consulta para traer repuestos de la BD
     s = "SELECT repuestos.id_repuestos, repuestos.repuestos, marcas.marcas, modelo.modelo, cilindraje.cilindraje, repuestos.cantidad, repuestos.precio, repuestos.imagen FROM repuestos JOIN marcas ON repuestos.id_marcas = marcas.id_marcas JOIN modelo ON repuestos.id_modelo = modelo.id_modelo JOIN cilindraje ON repuestos.id_cilindraje = cilindraje.id_cilindraje;"
     cur.execute(s)
     list_products = cur.fetchall()
+    return render_template('Admin.html', accesorios=accesorios, cilindraje=cilindraje, marcas=marcas, modelo=modelo, list_products=list_products)
 
-    # Esta es la página principal del panel de administrador
-    return render_template('Admin.html', cilindraje=cilindraje, marcas=marcas, modelo=modelo, list_products=list_products)
+
+# ! Consultas CREATE
 
 
 @app.route("/admin/add", methods=['POST'])
 def add_product():
-    # Esta ruta se encargará de agregar un nuevo repuesto
+
+    # Esta ruta se encargará de agregar un nuevo repuesto o accesorio
+    tipo = request.form['tipo']
     name = request.form['name']
-    marcas = request.form['marca']
-    modelo = request.form['modelo']
-    cilindraje = request.form['cilindraje']
     cantidad = request.form['cantidad']
     precio = request.form['precio']
     imagen = request.files['imagen'].read()
-
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-    id_marcas = id_modelo = id_cilindraje = None
+    if tipo == 'repuesto':
+        marcas = request.form['marca']
+        modelo = request.form['modelo']
+        cilindraje = request.form['cilindraje']
+        id_marcas = id_modelo = id_cilindraje = None
 
-    # Busca el ID de la marca
-    cur.execute("SELECT id_marcas FROM marcas WHERE marcas = %s", (marcas,))
+        # Busca el ID de la marca
+        cur.execute("SELECT id_marcas FROM marcas WHERE marcas = %s", (marcas,))
+        fetch_result = cur.fetchone()
+        if fetch_result is not None:
+            id_marcas = fetch_result[0]
+        else:
+            print("No se encontró el cilindraje: " + marcas)
 
-    fetch_result = cur.fetchone()
-    if fetch_result is not None:
-        id_marcas = fetch_result[0]
-    else:
-        print("No se encontró el cilindraje: " + marcas)
+        # Busca el ID del modelo
+        cur.execute("SELECT id_modelo FROM modelo WHERE modelo = %s", (modelo,))
+        fetch_result = cur.fetchone()
+        if fetch_result is not None:
+            id_modelo = fetch_result[0]
+        else:
+            print("No se encontró el cilindraje: " + modelo)
 
-    # Busca el ID del modelo
-    cur.execute("SELECT id_modelo FROM modelo WHERE modelo = %s", (modelo,))
+        # Busca el ID del cilindraje
+        cur.execute(
+            "SELECT id_cilindraje FROM cilindraje WHERE cilindraje = %s", (cilindraje,))
+        fetch_result = cur.fetchone()
+        if fetch_result is not None:
+            id_cilindraje = fetch_result[0]
+        else:
+            print("No se encontró el cilindraje: " + cilindraje)
 
-    fetch_result = cur.fetchone()
-    if fetch_result is not None:
-        id_modelo = fetch_result[0]
-    else:
-        # Maneja el caso en que no se encontró el cilindraje
-        print("No se encontró el cilindraje: " + modelo)
+        # Inserta el nuevo repuesto
+        cur.execute(
+            "INSERT INTO repuestos (repuestos, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+            (name, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen))
+    elif tipo == 'accesorio':
 
-    # Busca el ID del cilindraje
-    cur.execute(
-        "SELECT id_cilindraje FROM cilindraje WHERE cilindraje = %s", (cilindraje,))
-
-    fetch_result = cur.fetchone()
-    if fetch_result is not None:
-        id_cilindraje = fetch_result[0]
-    else:
-        # Maneja el caso en que no se encontró el cilindraje
-        print("No se encontró el cilindraje: " + cilindraje)
-
-    # Inserta el nuevo repuesto
-    cur.execute(
-        "INSERT INTO repuestos (repuestos, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-        (name, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen))
-
+        # Inserta el nuevo accesorio
+        cur.execute(
+            "INSERT INTO accesorio (accesorio, cantidad, precio, image) VALUES (%s, %s, %s, %s)",
+            (name, cantidad, precio, imagen))
     conn.commit()
-
     return redirect(url_for('admin'))
 
 
-@app.route("/admin/accesorios/add__acces", methods=['POST'])
-def add_acces():
-    # Esta ruta se encargará de agregar un nuevo accesorio
-    name = request.form['accesorio']
-    cantidad = request.form['cantidad']
-    precio = request.form['precio']
-    imagen = request.files['image'].read()
+# ! Consultas UPDATE
 
+@app.route("/admin/editA/<int:id>", methods=['GET', 'POST'])
+def edit_accesorio(id):
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-    # Inserta el nuevo accesorio
-    cur.execute(
-        "INSERT INTO accesorio (accesorio, cantidad, precio, image) VALUES (%s, %s, %s, %s)",
-        (name, cantidad, precio, imagen))
+    if request.method == 'POST':
+        # Aquí es donde se manejaría la lógica de actualización del accesorio
+        name = request.form['name']
+        cantidad = request.form['cantidad']
+        precio = request.form['precio']
 
-    conn.commit()
+        # Comprueba si se ha subido un nuevo archivo de imagen
+        imagen = None
+        if 'imagen' in request.files:
+            imagen = request.files['imagen'].read()
 
-    return redirect(url_for('accesorios'))
+       # Actualiza el accesorio en la base de datos
+        if imagen is not None:
+            # Si se ha subido una nueva imagen, actualiza todos los campos, incluyendo la imagen
+            cur.execute(
+                "UPDATE accesorio SET accesorio = %s, cantidad = %s, precio = %s, image = %s WHERE id_accesorio = %s",
+                (name, cantidad, precio, imagen, id))
+        else:
+            # Si no se ha subido una nueva imagen, actualiza todos los campos excepto la imagen
+            cur.execute(
+                "UPDATE accesorio SET accesorio = %s, cantidad = %s, precio = %s WHERE id_accesorio = %s",
+                (name, cantidad, precio, id))
+
+        conn.commit()
+
+        return redirect(url_for('admin'))
+    else:
+        # Aquí es donde se manejaría la lógica para mostrar el formulario de edición
+        # Consulta para obtener los detalles del accesorio
+        cur.execute("SELECT * FROM accesorio WHERE id_accesorio = %s", (id,))
+        product = cur.fetchone()
+
+    return render_template('editA.html', product=product)
 
 
-@app.route("/admin/delete/<int:id>")
-def delete_product(id):
-    # Esta ruta se encargará de eliminar un repuesto
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cur.execute("DELETE FROM repuestos WHERE id_repuestos = %s", (id,))
-    conn.commit()
-
-    return redirect(url_for('admin'))
-
-
-@app.route("/admin/accesorios/delete/<int:id>")
-def delete_acces(id):
-    # Esta ruta se encargará de eliminar un repuesto
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cur.execute("DELETE FROM accesorio WHERE id_accesorio = %s", (id,))
-    conn.commit()
-
-    return redirect(url_for('accesorios'))
-
-
-# @app.route("/edit_product/<int:id>", methods=['GET', 'POST'])
-# def edit_product(id):
-#     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-
-#     if request.method == 'POST':
-#         # Obtén los nuevos valores del formulario
-#         name = request.form['name']
-#         marcas = request.form['marca']
-#         modelo = request.form['modelo']
-#         cilindraje = request.form['cilindraje']
-#         cantidad = request.form['cantidad']
-#         precio = request.form['precio']
-#         imagen = request.files['imagen'].read()
-
-#         # Actualiza el producto en la base de datos
-#         cur.execute(
-#             "UPDATE repuestos SET repuestos = %s, id_marcas = %s, id_modelo = %s, id_cilindraje = %s, cantidad = %s, precio = %s, imagen = %s WHERE id_repuestos = %s",
-#             (name, marcas, modelo, cilindraje, cantidad, precio, imagen, id))
-
-#         conn.commit()
-
-#         # Redirige al usuario a la página de administración
-#         return redirect(url_for('admin'))
-#     else:
-#         # Obtén el producto actual de la base de datos
-#         cur.execute("SELECT * FROM repuestos WHERE id_repuestos = %s", (id,))
-#         product = cur.fetchone()
-
-#         # Renderiza el formulario de edición
-#         return render_template('edit_product.html', product=product)
-
-@app.route("/admin/edit_product/<int:id>", methods=['GET', 'POST'])
-@login_required_custom
+@app.route("/admin/edit/<int:id>", methods=['GET', 'POST'])
 def edit_product(id):
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
     if request.method == 'POST':
-        # Obtén los nuevos valores del formulario
+        # Aquí es donde se manejaría la lógica de actualización del producto
         name = request.form['name']
-        marcas = request.form['marca']
-        modelo = request.form['modelo']
-        cilindraje = request.form['cilindraje']
         cantidad = request.form['cantidad']
         precio = request.form['precio']
-        imagen = request.files['imagen'].read()
+        marca = request.form['marca']
+        modelo = request.form['modelo']
+        cilindraje = request.form['cilindraje']
 
-        # Actualiza el producto en la base de datos
+        # Comprueba si se ha subido un nuevo archivo de imagen
+        imagen = None
+        if 'imagen' in request.files:
+            imagen = request.files['imagen'].read()
+
+        id_marcas = id_modelo = id_cilindraje = None
+
+        # Busca el ID de la marca
+        cur.execute("SELECT id_marcas FROM marcas WHERE marcas = %s", (marca,))
+        fetch_result = cur.fetchone()
+        if fetch_result is not None:
+            id_marcas = fetch_result[0]
+        else:
+            print("No se encontró la marca: " + marca)
+
+        # Busca el ID del modelo
+        cur.execute("SELECT id_modelo FROM modelo WHERE modelo = %s", (modelo,))
+        fetch_result = cur.fetchone()
+        if fetch_result is not None:
+            id_modelo = fetch_result[0]
+        else:
+            print("No se encontró el modelo: " + modelo)
+
+        # Busca el ID del cilindraje
         cur.execute(
-            "UPDATE repuestos SET repuestos = %s, id_marcas = %s, id_modelo = %s, id_cilindraje = %s, cantidad = %s, precio = %s, imagen = %s WHERE id_repuestos = %s",
-            (name, marcas, modelo, cilindraje, cantidad, precio, imagen, id))
+            "SELECT id_cilindraje FROM cilindraje WHERE cilindraje = %s", (cilindraje,))
+        fetch_result = cur.fetchone()
+        if fetch_result is not None:
+            id_cilindraje = fetch_result[0]
+        else:
+            print("No se encontró el cilindraje: " + cilindraje)
+
+       # Actualiza el producto en la base de datos
+        if imagen is not None:
+            # Si se ha subido una nueva imagen, actualiza todos los campos, incluyendo la imagen
+            cur.execute(
+                "UPDATE repuestos SET repuestos = %s, id_marcas = %s, id_modelo = %s, id_cilindraje = %s, cantidad = %s, precio = %s, imagen = %s WHERE id_repuestos = %s",
+                (name, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen, id))
+        else:
+            # Si no se ha subido una nueva imagen, actualiza todos los campos excepto la imagen
+            cur.execute(
+                "UPDATE repuestos SET repuestos = %s, id_marcas = %s, id_modelo = %s, id_cilindraje = %s, cantidad = %s, precio = %s WHERE id_repuestos = %s",
+                (name, id_marcas, id_modelo, id_cilindraje, cantidad, precio, id))
 
         conn.commit()
 
-        # Redirige al usuario a la página de administración
         return redirect(url_for('admin'))
     else:
-        # Obtén el producto actual de la base de datos
-        cur.execute("SELECT * FROM repuestos WHERE id_repuestos = %s", (id,))
+        # Aquí es donde se manejaría la lógica para mostrar el formulario de edición
+        # Consulta para obtener los detalles del producto
+        cur.execute("SELECT repuestos.*, marcas.marcas, modelo.modelo, cilindraje.cilindraje FROM repuestos JOIN marcas ON repuestos.id_marcas = marcas.id_marcas JOIN modelo ON repuestos.id_modelo = modelo.id_modelo JOIN cilindraje ON repuestos.id_cilindraje = cilindraje.id_cilindraje WHERE id_repuestos = %s", (id,))
         product = cur.fetchone()
+
+        # Obtén los cilindrajes
+        cur.execute("SELECT DISTINCT cilindraje FROM cilindraje;")
+        cilindraje = cur.fetchall()
+
+        # Obtén las marcas
+        cur.execute("SELECT DISTINCT marcas FROM marcas;")
+        marcas = cur.fetchall()
+
+        # Obtén los modelos
+        cur.execute("SELECT DISTINCT modelo FROM modelo;")
+        modelo = cur.fetchall()
+
+    return render_template('edit.html', product=product, cilindraje=cilindraje, marcas=marcas, modelo=modelo)
+
+
+# ! Consultas DELETE
+
+
+@app.route("/admin/delete/<string:tipo>/<int:id>")
+def delete(tipo, id):
+    # Esta ruta se encargará de eliminar un repuesto o accesorio
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    if tipo == 'repuesto':
+        cur.execute("DELETE FROM repuestos WHERE id_repuestos = %s", (id,))
+    elif tipo == 'accesorio':
+        cur.execute("DELETE FROM accesorio WHERE id_accesorio = %s", (id,))
+    conn.commit()
     return redirect(url_for('admin'))
 
 
-@app.route('/get_product/<int:id>')
-def get_product(id):
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cur.execute("SELECT * FROM repuestos WHERE id_repuestos = %s", (id,))
-    product = cur.fetchone()
-    return jsonify(product)
+# ! Mostrar Imagenes
 
 
-@app.route("/show_image/<int:id>")
-def show_image(id):
-    # Esta ruta se encargará de mostrar una imagen
+@app.route("/show_image/<string:tipo>/<int:id>")
+def show_image(tipo, id):
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-    # Busca la imagen en la base de datos
-    cur.execute("SELECT imagen FROM repuestos WHERE id_repuestos = %s", (id,))
+    if tipo == 'repuesto':
+        cur.execute(
+            "SELECT imagen FROM repuestos WHERE id_repuestos = %s", (id,))
+    elif tipo == 'accesorio':
+        cur.execute(
+            "SELECT image FROM accesorio WHERE id_accesorio = %s", (id,))
+
     fetch_result = cur.fetchone()
     if fetch_result is not None:
         image_data = fetch_result[0].tobytes()
@@ -323,31 +363,6 @@ def show_image(id):
     else:
         print("No se encontró la imagen para el id: " + str(id))
         return redirect(url_for('admin'))
-
-
-@app.route("/show_image2/<int:id>")
-def show_image2(id):
-    # Esta ruta se encargará de mostrar una imagen
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-
-    # Busca la imagen en la base de datos
-    cur.execute("SELECT image FROM accesorio WHERE id_accesorio = %s", (id,))
-    fetch_result = cur.fetchone()
-    if fetch_result is not None:
-        image_data = fetch_result[0].tobytes()
-
-        # Determina el formato de la imagen
-        image_format = imghdr.what(None, image_data)
-        if image_format is not None:
-            response = make_response(image_data)
-            response.headers.set('Content-Type', 'image/' + image_format)
-            return response
-        else:
-            print("Formato de imagen desconocido")
-            return redirect(url_for('admin'))
-    else:
-        print("No se encontró la imagen para el id: " + str(id))
-        return redirect(url_for('accesorios'))
 
 
 if __name__ == '__main__':

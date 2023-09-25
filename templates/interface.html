@@ -109,7 +109,7 @@
                   <article class="producto">
                     <div class="img">
                       <img
-                        src="{{ url_for('show_image', id=row['id_repuestos']) }}"
+                        src="{{ url_for('show_image', tipo='repuesto', id=row['id_repuestos']) }}"
                         alt="Imagen del repuesto"
                       />
                     </div>
@@ -118,6 +118,24 @@
                       <p>Marca: <span>{{row["marcas"]}}</span></p>
                       <p>Modelo: <span>{{row["modelo"]}}</span></p>
                       <p>Cilindraje: <span>{{row["cilindraje"]}}</span></p>
+                      <p>Cantidad: <span>{{row["cantidad"]}}</span></p>
+                      <p>Precio: <span>{{row["precio"]}}</span></p>
+                    </div>
+                  </article>
+                  {% endfor %}
+                </section>
+
+                <section id="catalogo-acc" class="catalogoacc">
+                  {% for row in accesorios %}
+                  <article class="producto">
+                    <div class="img">
+                      <img
+                        src="{{ url_for('show_image', tipo='accesorio', id=row['id_accesorio']) }}"
+                        alt="Imagen del accesorio"
+                      />
+                    </div>
+                    <div class="producto-inf">
+                      <p>Nombre: <span>{{row["accesorio"]}}</span></p>
                       <p>Cantidad: <span>{{row["cantidad"]}}</span></p>
                       <p>Precio: <span>{{row["precio"]}}</span></p>
                     </div>
@@ -159,7 +177,7 @@
                         style="display: block; opacity: 1"
                       >
                         <div class="boton-ubi--text">
-                          <span><a href="">click para ir a Google Map</a></span>
+                          <a href="https://www.google.com/maps/place/Moto+Betel/@8.0307406,-72.2563954,15z/data=!4m6!3m5!1s0x8e6661a2585f9d41:0x4da6aef2e21831d9!8m2!3d8.0307406!4d-72.2563954!16s%2Fg%2F11jh6mtzs0?entry=ttu" target="_blank">click para ir a Google Map</a>
                         </div>
                       </button>
                     </div>

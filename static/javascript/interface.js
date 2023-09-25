@@ -12,6 +12,7 @@ const r1a = document.getElementById("r1a");
 const r2 = document.getElementById("r2");
 const r2a = document.getElementById("r2a");
 const catalogo = document.getElementById("catalogo");
+const catalogoAcc = document.getElementById("catalogo-acc");
 const sobreNosotros = document.getElementById("sobre-nosotros");
 const selectContainer = document.querySelector(".Select__container");
 const select2 = document.querySelector(".select-2");
@@ -68,6 +69,11 @@ function mostrarCatalogo() {
   setTimeout(() => catalogo.style.opacity = "1", 4500);
 }
 
+function mostrarCatalogoAcc() {
+  catalogoAcc.style.display = "flex"
+  setTimeout(() => catalogoAcc.style.opacity = "1", 4500);
+}
+
 function mostrarsobreNosotros() {
   sobreNosotros.style.display = "block"
   setTimeout(() => sobreNosotros.style.opacity = "1", 3000);
@@ -102,7 +108,7 @@ accesorios.addEventListener("click", () => {
   mostrarR1()
   setTimeout(function () { efectoMaquinaDeEscribir("muy bien, estos son nuestros accesorios disponibles", "r1a"); }, 900);
   ocultarO1();
-  mostrarCatalogo();
+  mostrarCatalogoAcc();
   mostrarReload();
 })
 
