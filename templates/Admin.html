@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/css/Admin.css" />
-    <title>Admin</title>
-  </head>
-  <body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../static/css/Admin.css" />
+  <title>Admin</title>
+</head>
+
+<body>
+  <main>
     <nav>
       <header>
         <div class="bar"></div>
@@ -23,87 +26,80 @@
         </a>
         <button href="#" id="repuestosButton">
           <div class="icon">
-            <span
-              class="iconify-inline"
-              data-icon="flat-color-icons:assistant"
-              data-width="32"
-              data-height="32"
-            ></span>
+            <img src="/static/img/options.svg" class="iconify-inline">
           </div>
           <div class="title">Repuestos</div>
         </button>
         <button href="#" id="accesoriosButton">
           <div class="icon">
-            <span
-              class="iconify-inline"
-              data-icon="flat-color-icons:assistant"
-              data-width="32"
-              data-height="32"
-            ></span>
+            <img src="/static/img/shapes.svg" class="iconify-inline">
           </div>
           <div class="title">Accesorios</div>
         </button>
         <a href="/logout">
           <div class="icon">
-            <span
-              class="iconify-inline"
-              data-icon="flat-color-icons:high-priority"
-              data-width="32"
-              data-height="32"
-            ></span>
+            <img src="/static/img/alert.svg" class="iconify-inline">
           </div>
           <div class="title">Cerrar Sesion</div>
         </a>
       </div>
     </nav>
-    <div class="container-repuestos">
-      <form action="/admin/add" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="tipo" value="repuesto" />
-        <label for="">Ingresa el nombre del repuesto</label>
-        <input type="text" name="name" id="" />
-        <label for="">Ingresa la marca</label>
-        <select name="marca" id="">
-          <option value="">Selecciona una Marca</option>
-          {% for marcas in marcas %}
-          <option value="{{ marcas[0] }}">{{ marcas[0] }}</option>
-          {% endfor %}
-        </select>
-        <label for="">Ingresa el modelo</label>
-        <select name="modelo" id="">
-          <option value="">Selecciona un Modelo</option>
-          {% for modelo in modelo %}
-          <option value="{{ modelo[0] }}">{{ modelo[0] }}</option>
-          {% endfor %}
-        </select>
-        <label for="">Ingresa el Cilindraje</label>
-        <select name="cilindraje" id="">
-          <option value="">Selecciona un Cilindraje</option>
-          {% for cilindraje in cilindraje %}
-          <option value="{{ cilindraje[0] }}">{{ cilindraje[0] }}</option>
-          {% endfor %}
-        </select>
-        <label for="">Ingresa la cantidad</label>
-        <input type="number" name="cantidad" />
-        <label for="">Ingresa el precio</label>
-        <input type="number" name="precio" />
-        <label for="">Ingresa la imagen</label>
-        <label for="imagen">Imagen:</label>
-        <img
-          id="output_image"
-          src="#"
-          alt="Imagen del producto"
-          style="display: none"
-        />
-        <input
-          type="file"
-          id="imagen"
-          name="imagen"
-          accept="image/*"
-          onchange="previewImage(event)"
-        />
-        <input type="submit" value="Enviar" />
-      </form>
-      <div class="table">
+    <div class="cont" id="repuestos">
+      <div class="create">
+        <div class="create-h1">
+          <h1>Agrega un producto</h1>
+        </div>
+        <form action="/admin/add" method="post" enctype="multipart/form-data">
+          <div class="create-input">
+            <span>nombre:</span>
+            <input type="text" name="tipo" placeholder="Ingresa el nombre del repuesto" />
+          </div>
+          <div class="create-input">
+            <span>Marca:</span>
+            <select name="marca" id="">
+              <option value="">Selecciona una Marca</option>
+              {% for marcas in marcas %}
+              <option value="{{ marcas[0] }}">{{ marcas[0] }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="create-input">
+            <span>Modelo: </span>
+            <select name="modelo" id="">
+              <option value="">Selecciona un Modelo</option>
+              {% for modelo in modelo %}
+              <option value="{{ modelo[0] }}">{{ modelo[0] }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="create-input">
+            <span>Cilindraje: </span>
+            <select name="cilindraje" id="">
+              <option value="">Selecciona un Cilindraje</option>
+              {% for cilindraje in cilindraje %}
+              <option value="{{ cilindraje[0] }}">{{ cilindraje[0] }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="create-input">
+            <span>Cantidad: </span>
+            <input type="number" name="cantidad" placeholder="Ingresa acá la cantidad del producto"/>
+          </div>
+          <div class="create-input">
+            <span>Precio: </span>
+            <input type="number" name="precio" placeholder="Ingresa acá el precio" />
+          </div>
+          <div class="create-input">
+            <span>Ingresa la imagen: </span>
+            <img id="output_image" src="#" alt="Imagen del producto" style="display: none" />
+            <input type="file" id="imagen" name="imagen" accept="image/*" onchange="previewImage(event)" />
+          </div>
+          <div class="cont-guardar">
+            <input type="submit" value="Enviar" class="btn guardar" />
+          </div>
+        </form>
+      </div>
+      <div class="read">
         <table>
           <thead>
             <tr>
@@ -126,18 +122,13 @@
               <td>{{row["cantidad"]}}</td>
               <td>{{row["precio"]}}</td>
               <td>
-                <img
-                  src="{{ url_for('show_image', tipo='repuesto', id=row['id_repuestos']) }}"
-                  alt="Imagen del repuesto"
-                />
+                <img src="{{ url_for('show_image', tipo='repuesto', id=row['id_repuestos']) }}"
+                  alt="Imagen del repuesto" />
               </td>
-              <td>
-                <a href="/admin/edit/{{row['id_repuestos']}}">Editar</a>
-                <a
-                  href="{{ url_for('delete', tipo='repuesto', id=row['id_repuestos']) }}"
-                  class="button__delete"
-                  >Eliminar</a
-                >
+              <td class="editar-eliminar">
+                <a href="/admin/edit/{{row['id_repuestos']}}" class="btn editar">Editar</a>
+                <a href="{{ url_for('delete', tipo='repuesto', id=row['id_repuestos']) }}"
+                  class="btn eliminar">Eliminar</a>
               </td>
             </tr>
             {% endfor %}
@@ -145,20 +136,34 @@
         </table>
       </div>
     </div>
-    <div class="container-accesorios">
-      <form action="/admin/add" method="post" enctype="multipart/form-data">
-        <label for="">Ingresa el nombre del accesorio</label>
-        <input type="hidden" name="tipo" value="accesorio" />
-        <input type="text" name="name" id="" />
-        <label for="">Ingresa la cantidad</label>
-        <input type="number" name="cantidad" />
-        <label for="">Ingresa el precio</label>
-        <input type="number" name="precio" />
-        <label for="">Ingresa la imagen</label>
-        <input type="file" name="imagen" id="" />
-        <input type="submit" value="Enviar" />
-      </form>
-      <div class="table">
+    <div class="cont-acc" id="acc">
+      <div class="create">
+        <div class="create-h1">
+          <h1>Agrega un accesorio</h1>
+        </div>
+        <form action="/admin/add" method="post" enctype="multipart/form-data">
+          <div class="create-input">
+            <span>Nombre: </span>
+            <input type="text" name="tipo" value="accesorio" />
+          </div>
+          <div class="create-input">
+            <span>Cantidad: </span>
+            <input type="number" name="cantidad" />
+          </div>
+          <div class="create-input">
+            <span>Precio: </span>
+            <input type="number" name="precio" />
+          </div>
+          <div class="create-input">
+            <span>Imagen: </span>
+            <input type="file" name="imagen" id="" />
+          </div>
+          <div class="cont-guardar">
+            <input type="submit" value="Enviar" class="btn guardar" />
+          </div>
+        </form>
+      </div>
+      <div class="read">
         <table>
           <thead>
             <tr>
@@ -175,18 +180,13 @@
               <td>{{row["cantidad"]}}</td>
               <td>{{row["precio"]}}</td>
               <td>
-                <img
-                  src="{{ url_for('show_image', tipo='accesorio', id=row['id_accesorio']) }}"
-                  alt="Imagen del accesorio"
-                />
+                <img src="{{ url_for('show_image', tipo='accesorio', id=row['id_accesorio']) }}"
+                  alt="Imagen del accesorio" />
               </td>
-              <td>
-                <a href="/admin/editA/{{row['id_accesorio']}}">Editar</a>
-                <a
-                  href="{{ url_for('delete', tipo='accesorio', id=row['id_accesorio']) }}"
-                  class="button__delete"
-                  >Eliminar</a
-                >
+              <td class="editar-eliminar">
+                <a href="/admin/editA/{{row['id_accesorio']}}" class="btn editar">Editar</a>
+                <a href="{{ url_for('delete', tipo='accesorio', id=row['id_accesorio']) }}"
+                class="btn eliminar">Eliminar</a>
               </td>
             </tr>
             {% endfor %}
@@ -194,7 +194,9 @@
         </table>
       </div>
     </div>
-    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
-    <script src="../static/js/Admin.js"></script>
-  </body>
+  </main>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <script src="../static/js/Admin.js"></script>
+</body>
+
 </html>

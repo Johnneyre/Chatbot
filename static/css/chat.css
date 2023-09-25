@@ -490,6 +490,10 @@ td {
   max-width: 30px;
 }
 
+.sobre-nosotros--ubicacion > img {
+  height: 110px;
+}
+
 /* Responsive */
 
 @media (max-width: 576px) {
@@ -513,7 +517,7 @@ td {
   .sobre-nosotros {
     height: 400px;
     display: block;
-    opacity: 1;
+    /* opacity: 1; */
   }
 
   .sobre-nosotros--text {
@@ -534,7 +538,6 @@ td {
     flex-wrap: wrap;
     justify-content: space-around;
     text-align: center;
-    background-color: #4cd137;
     width: 100%;
   }
 

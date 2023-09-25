@@ -1,3 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+  }
+  
+  html {
+    min-height: 100vh;
+    margin: 0;
+    background: rgb(44, 47, 59);
+    background: -webkit-linear-gradient(
+      to right,
+      rgb(59, 34, 34),
+      rgb(70, 54, 54),
+      rgb(43, 32, 32)
+    );
+    background: linear-gradient(
+      to right,
+      rgb(61, 41, 38),
+      rgb(65, 50, 50),
+      rgb(78, 33, 33)
+    );
+  }
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+main {
+  margin: auto;
+  width: 95%;
+  height: 95vh;
+  background: rgba(56, 52, 52, 0.479);
+  border: 1px solid rgba(43, 10, 10, 0.7);
+  border-radius: 20px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -130,7 +174,14 @@ nav .links a:last-child:hover{
   background-color: rgb(173, 20, 20);
 }
 
-.container-accesorios {
+.cont-acc {
+  display: flex;
+  flex-direction: row;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0;
   display: none;
 }
 
@@ -161,4 +212,203 @@ table {
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+}
+
+.cont {
+  display: flex;
+  flex-direction: row;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.8s;
+}
+
+.cont-acc {
+  display: none;
+  flex-direction: row;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+
+.create {
+  width: 100%;
+  height: 50%;
+  padding: 20px;
+  overflow: auto;
+  overflow: hidden;
+}
+
+.create-h1 {
+  text-align: center;
+  color: white;
+}
+
+form {
+  margin: 20px 0;
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background: rgba(48, 46, 46, 0.8);
+  border-radius: 20px;
+  padding-top: 20px;
+}
+
+.create-input {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 45%;
+  max-height: 25px;
+  margin: 5px;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.466);
+}
+
+.create-input > span {
+  color: white;
+  font-weight: 600;
+}
+
+.create-input > input, select{
+  border-radius: 10px;
+  width: 50%;
+  padding: 0 8px;
+}
+
+.cont-guardar {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+
+.read {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+table {
+  width: 90%;
+  background: rgba(48, 46, 46, 0.8);
+  color: white;
+  border-radius: 20px;
+  table-layout: fixed;
+  border-collapse: collapse;
+  display: block;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+
+}
+
+thead {
+  display: block;
+  padding: 0 22px;
+  background: rgba(27, 27, 27, 0.7);
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+
+}
+
+th ,td {
+  width: 10%;
+  padding: 20px 10px;
+}
+
+td {
+  border-bottom: solid 1px rgba(80, 59, 59, 0.8);;
+}
+
+td > img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+tbody > tr:hover {
+  background-color: #4d2222;
+
+}
+
+
+tbody {
+  display: flex;
+  flex-direction: column;
+  height: 230px;
+  overflow-y: auto;
+  padding: 10px;
+  text-align: center;
+}
+
+tbody::-webkit-scrollbar {
+  width: 7px;
+  background: rgba(80, 59, 59, .5);
+}
+
+tbody::-webkit-scrollbar-thumb {
+  background-color: rgb(34, 33, 33);
+}
+
+.btn {
+  width: 80%;
+  height: 35px;
+  margin: 5px 0;
+  background-color: rgba(71, 41, 41, 0.2);
+  color: white;
+  border-radius: 20px;
+  border: solid rgb(78, 33, 33) 1px;
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.guardar {
+  width: 50%;
+}
+
+.guardar:hover {
+  background-color: rgba(130, 221, 122, 0.5);
+  border-radius: 20px;
+  border: solid rgb(38, 78, 33) 1px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.editar, .eliminar {
+  width: 100%;
+}
+
+.editar:hover {
+  background-color: rgba(130, 221, 122, 0.5);
+  border-radius: 20px;
+  border: solid rgb(38, 78, 33) 1px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.eliminar:hover {
+  width: 100%;
+}
+
+.eliminar:hover {
+  background-color: rgba(247, 69, 69, 0.5);
+  border-radius: 20px;
+  border: solid rgb(78, 33, 33) 1px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+
+.editar-eliminar {
+  width: 18%;
+}
+
+.editar-eliminar > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  text-decoration: none;
 }
