@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+html {
+    min-height: 100vh;
+    margin: 0;
+    background: rgb(44, 47, 59);
+    background: -webkit-linear-gradient(to right,
+            rgb(59, 34, 34),
+            rgb(70, 54, 54),
+            rgb(43, 32, 32));
+    background: linear-gradient(to right,
+            rgb(61, 41, 38),
+            rgb(65, 50, 50),
+            rgb(78, 33, 33));
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+main {
+    margin: auto;
+    width: 95%;
+    height: 95vh;
+    background: rgba(56, 52, 52, 0.479);
+    border: 1px solid rgba(43, 10, 10, 0.7);
+    border-radius: 20px;
+}
+
+.create-h1 {
+    text-align: center;
+    color: white;
+}
+
+form {
+    margin: 20px 0;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background: rgba(48, 46, 46, 0.8);
+    border-radius: 20px;
+    padding-top: 20px;
+}
+
+.edit {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    overflow: auto;
+    overflow: hidden;
+}
+
+.edit-input {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 45%;
+    max-height: 40px;
+    margin: 5px;
+    border-bottom: solid 1px rgba(0, 0, 0, 0.466);
+}
+
+.edit-input>span {
+    color: white;
+    font-weight: 600;
+}
+
+.edit-input>input,
+select {
+    border-radius: 10px;
+    width: 50%;
+    padding: 0 8px;
+}
+
+.cont-edit {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+
+.btn {
+    width: 40%;
+    height: 35px;
+    margin: 5px 0;
+    background-color: rgba(71, 41, 41, 0.2);
+    color: white;
+    border-radius: 20px;
+    border: solid rgb(78, 33, 33) 1px;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    text-decoration: none;
+}
+
+a {
+    height: 100px;
+    line-height: 35px;
+    text-align: center;
+    font-size: 14px;
+}
+
+
+.editar {
+    width: 40%;
+}
+
+
+.editar:hover {
+    background-color: rgba(130, 221, 122, 0.5);
+    border-radius: 20px;
+    border: solid rgb(38, 78, 33) 1px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.cancelar {
+    width: 40%;
+}
+
+.cancelar:hover {
+    background-color: rgba(247, 69, 69, 0.5);
+    border-radius: 20px;
+    border: solid rgb(78, 33, 33) 1px;
+    transition: background-color 0.2s ease-in-out;
+}
