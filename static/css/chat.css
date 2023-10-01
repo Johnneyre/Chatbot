@@ -284,17 +284,47 @@ td {
 
 .sobre-nosotros--header {
   padding: 0 5px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
 }
 
 .sobre-nosotros--text {
   display: flex;
-  flex-wrap: wrap;
-  padding: 20px;
+  justify-content: space-around;
+  padding: 30px 30px;
   background-color: #41414170;
-  border-radius: 20px;
+  border-radius: 15px;
+}
+
+.t {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.sobre-nosotros--1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* flex: 1; */
+}
+
+.sobre-nosotros--2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* background-color: #4cd137; */
+  margin: 0 0 45px 0;
+  /* flex: 1; */
+}
+
+.sobre-nosotros--ubicacion {
+  /* flex: 2;  */
+  justify-content: center;
+  text-align: center;
 }
 
 .mb {
@@ -452,28 +482,41 @@ td {
 .boton-ubi {
   display: flex;
   justify-content: center;
-  max-width: 250px;
-  align-items: center;
-  margin-right: 15px;
-  width: 42%;
+  margin: 10px auto;
+  height: 20%;
+  width: 70%;
   font-size: 15px;
   font-weight: 600;
   background-color: #a52a2a;
   padding: 10px;
-  text-decoration: none;
   border-radius: 10px;
-  transition: 0.2s background, color ease-in-out;
   border: none;
   color: white;
-  opacity: 0;
-  transition: opacity 5s;
-  display: none;
+  transition: 0.2s background, color ease-in-out;
 }
 
 .boton-ubi--text {
-  height: 80%;
-  width: 70%;
-  display: inline-block;
+  height: 100%;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.boton-ubi--icon {
+  display: flex;
+  height: 20px;
+  height: 100%;
+  align-items: center;
+}
+
+.boton-ubi--icon > img {
+  height: 25px;
+}
+
+.boton-ubi--text > a {
+  text-decoration: none;
+  color: white;
 }
 
 .boton-ubi:hover {
@@ -481,7 +524,7 @@ td {
 }
 
 .boton-ubi:hover {
-  background-color: #0b1027;
+  background-color: rgba(231, 26, 26, 0.8);
   color: white;
 }
 
@@ -491,7 +534,12 @@ td {
 }
 
 .sobre-nosotros--ubicacion > img {
-  height: 110px;
+  height: 180px;
+  border-radius: 20px;
+}
+
+.sobre-nosotros--header > .img > img {
+  border-radius: 50%;
 }
 
 /* Responsive */
@@ -516,20 +564,19 @@ td {
 
   .sobre-nosotros {
     height: 400px;
-    display: block;
-    /* opacity: 1; */
   }
 
   .sobre-nosotros--text {
+    display: flex;
     margin-top: 10px;
     height: 80%;
     text-align: center;
     font-size: 12px;
   }
-  .sobre-nosotros--left {
+  .sobre-nosotros--1 {
     width: 50%;
   }
-  .sobre-nosotros--right {
+  .sobre-nosotros--2 {
     width: 50%;
   }
 
@@ -539,6 +586,7 @@ td {
     justify-content: space-around;
     text-align: center;
     width: 100%;
+    background-color: azure;
   }
 
   .sobre-nosotros--ubicacion > p {
