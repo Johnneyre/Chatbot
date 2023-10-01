@@ -82,12 +82,12 @@
                   <button type="reset" class="btn-select reset">Limpiar</button>
                 </div>
                 <div class="Select__container select-2">
-                  <select name="" id="">
+                  <select name="marca" id="">
                     {% for marcas in marcas %}
                     <option value="{{ marcas[0] }}">{{ marcas[0] }}</option>
                     {% endfor %}
                   </select>
-                  <button type="submit" class="btn-select Filtrar">
+                  <button type="submit" class="btnmarca-select Filtrar">
                     Filtrar
                   </button>
                   <button type="reset" class="btn-select reset">Limpiar</button>
@@ -177,7 +177,11 @@
                         style="display: block; opacity: 1"
                       >
                         <div class="boton-ubi--text">
-                          <a href="https://www.google.com/maps/place/Moto+Betel/@8.0307406,-72.2563954,15z/data=!4m6!3m5!1s0x8e6661a2585f9d41:0x4da6aef2e21831d9!8m2!3d8.0307406!4d-72.2563954!16s%2Fg%2F11jh6mtzs0?entry=ttu" target="_blank">click para ir a Google Map</a>
+                          <a
+                            href="https://www.google.com/maps/place/Moto+Betel/@8.0307406,-72.2563954,15z/data=!4m6!3m5!1s0x8e6661a2585f9d41:0x4da6aef2e21831d9!8m2!3d8.0307406!4d-72.2563954!16s%2Fg%2F11jh6mtzs0?entry=ttu"
+                            target="_blank"
+                            >click para ir a Google Map</a
+                          >
                         </div>
                       </button>
                     </div>
@@ -236,5 +240,68 @@
       </div>
     </main>
     <script src="../static/javascript/interface.js"></script>
+    <script>
+      // Variable para almacenar los productos filtrados
+      var filteredProducts = [];
+
+      // Evento de escucha para el botón "Filtrar" de la marca
+      document
+        .querySelector(".btnmarca-select.Filtrar")
+        .addEventListener("click", function () {
+          // Obtener la marca seleccionada
+          var brand = document.querySelector('select[name="marca"]').value;
+
+          // Filtrar los productos
+          filteredProducts = list_products.filter(function (product) {
+            return product.marcas === brand;
+          });
+
+          // Actualizar el catálogo con los productos filtrados
+          updateCatalogo(filteredProducts);
+        });
+
+      // Evento de escucha para el botón "Limpiar"
+      document
+        .querySelector(".btn-select.reset")
+        .addEventListener("click", function () {
+          // Vaciar la variable de productos filtrados
+          filteredProducts = [];
+
+          // Actualizar el catálogo con todos los productos
+          updateCatalogo(list_products);
+        });
+
+      // Función para actualizar el catálogo
+      function updateCatalogo(products) {
+        // Vaciar el catálogo
+        var catalogo = document.getElementById("catalogo");
+        catalogo.innerHTML = "";
+
+        // Añadir los productos al catálogo
+        if (products.length === 0) {
+          // Si no hay productos filtrados, mostrar el catálogo original
+          products = list_products;
+        }
+
+        products.forEach(function (product) {
+          // Añade cada producto al catálogo
+          var article = document.createElement("article");
+          article.className = "producto";
+          article.innerHTML = `
+      <div class="img">
+        <img src="/show_image/repuesto/${product["id_repuestos"]}" alt="Imagen del repuesto" />
+      </div>
+      <div class="producto-inf">
+        <p>Nombre: <span>${product["repuestos"]}</span></p>
+        <p>Marca: <span>${product["marcas"]}</span></p>
+        <p>Modelo: <span>${product["modelo"]}</span></p>
+        <p>Cilindraje: <span>${product["cilindraje"]}</span></p>
+        <p>Cantidad: <span>${product["cantidad"]}</span></p>
+        <p>Precio: <span>${product["precio"]}</span></p>
+      </div>`;
+          catalogo.appendChild(article);
+        });
+      }
+    </script>
   </body>
 </html>
