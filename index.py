@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, make_response, abort
+from flask import Flask, render_template, request, redirect, url_for, make_response, abort, jsonify
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import psycopg2
 import psycopg2.extras
@@ -74,7 +74,7 @@ def home():
 @app.route("/interface")
 def interface():
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    
+
     # Consulta para traer accesorios de la BD
     s = 'SELECT * FROM accesorio'
     cur.execute(s)
@@ -97,12 +97,26 @@ def interface():
     cur.execute(s)
     list_products = cur.fetchall()
 
-    return render_template('interface.html', list_products=list_products, cilindraje=cilindraje, marcas=marcas, modelo=modelo, accesorios= accesorios)
+    return render_template('interface.html', list_products=list_products, cilindraje=cilindraje, marcas=marcas, modelo=modelo, accesorios=accesorios)
 
 
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html"), 404
+
+
+# ! Endpoint para filtrado
+
+@app.route("/get_products_by_filters", methods=['POST'])
+def get_products_by_filters():
+    brand = request.form.get('brand')
+    model = request.form.get('model')
+    cilindraje = request.form.get('cilindraje')
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    s = "SELECT repuestos.id_repuestos, repuestos.repuestos, marcas.marcas, modelo.modelo, cilindraje.cilindraje, repuestos.cantidad, repuestos.precio FROM repuestos JOIN marcas ON repuestos.id_marcas = marcas.id_marcas JOIN modelo ON repuestos.id_modelo = modelo.id_modelo JOIN cilindraje ON repuestos.id_cilindraje = cilindraje.id_cilindraje WHERE marcas.marcas = %s AND modelo.modelo = %s AND cilindraje.cilindraje = %s;"
+    cur.execute(s, (brand, model, cilindraje))
+    list_products = cur.fetchall()
+    return jsonify(list_products)
 
 
 # ! Consultas READ

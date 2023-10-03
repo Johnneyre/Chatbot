@@ -203,7 +203,7 @@ option:focus {
   width: 100%;
   height: 61%;
   margin-bottom: 10px;
-  padding: 2px;
+  padding: 5px 40px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -233,20 +233,23 @@ td {
   width: 38%;
   box-sizing: border-box;
   overflow: auto;
+  border-radius: 20px;
 }
 
 .img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 20px;
+  max-width: 220px;
 }
 
 .producto-inf {
   border-radius: 25px;
-  width: 45%;
+  width: 60%;
   height: 95%;
   margin-top: 15px;
-  padding: 5px;
+  padding: 5px 30px;
   justify-content: center;
   display: flex;
   flex-direction: column;
@@ -284,17 +287,47 @@ td {
 
 .sobre-nosotros--header {
   padding: 0 5px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
 }
 
 .sobre-nosotros--text {
   display: flex;
-  flex-wrap: wrap;
-  padding: 20px;
+  justify-content: space-around;
+  padding: 30px 30px;
   background-color: #41414170;
-  border-radius: 20px;
+  border-radius: 15px;
+}
+
+.t {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.sobre-nosotros--1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* flex: 1; */
+}
+
+.sobre-nosotros--2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* background-color: #4cd137; */
+  margin: 0 0 45px 0;
+  /* flex: 1; */
+}
+
+.sobre-nosotros--ubicacion {
+  /* flex: 2;  */
+  justify-content: center;
+  text-align: center;
 }
 
 .mb {
@@ -452,28 +485,41 @@ td {
 .boton-ubi {
   display: flex;
   justify-content: center;
-  max-width: 250px;
-  align-items: center;
-  margin-right: 15px;
-  width: 42%;
+  margin: 10px auto;
+  height: 20%;
+  width: 70%;
   font-size: 15px;
   font-weight: 600;
   background-color: #a52a2a;
   padding: 10px;
-  text-decoration: none;
   border-radius: 10px;
-  transition: 0.2s background, color ease-in-out;
   border: none;
   color: white;
-  opacity: 0;
-  transition: opacity 5s;
-  display: none;
+  transition: 0.2s background, color ease-in-out;
 }
 
 .boton-ubi--text {
-  height: 80%;
-  width: 70%;
-  display: inline-block;
+  height: 100%;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.boton-ubi--icon {
+  display: flex;
+  height: 20px;
+  height: 100%;
+  align-items: center;
+}
+
+.boton-ubi--icon > img {
+  height: 25px;
+}
+
+.boton-ubi--text > a {
+  text-decoration: none;
+  color: white;
 }
 
 .boton-ubi:hover {
@@ -481,13 +527,76 @@ td {
 }
 
 .boton-ubi:hover {
-  background-color: #0b1027;
+  background-color: rgba(231, 26, 26, 0.8);
   color: white;
 }
 
-.reload {
+.product-btn {
+  height: 100%;
+  width: 60%;
+}
+
+.boton-whatsapp {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  height: 20%;
+  width: 70%;
+  font-size: 15px;
+  font-weight: 600;
+  background-color: #a52a2a;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  transition: 0.2s background, color ease-in-out;
+}
+
+.boton-whatsapp--text {
+  height: 100%;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.boton-whatsapp--icon {
+  display: flex;
+  height: 20px;
+  height: 100%;
+  align-items: center;
+}
+
+.boton-whatsapp--icon > img {
+  height: 25px;
+}
+
+.boton-whatsapp--text > a {
+  text-decoration: none;
+  color: white;
+}
+
+.boton-whatsapp:hover {
+  cursor: pointer;
+}
+
+.boton-whatsapp:hover {
+  background-color: rgba(231, 26, 26, 0.8);
+  color: white;
+}
+
+.reload { 
   width: 10%;
   max-width: 30px;
+}
+
+.sobre-nosotros--ubicacion > img {
+  height: 180px;
+  border-radius: 20px;
+}
+
+.sobre-nosotros--header > .img > img {
+  border-radius: 50%;
 }
 
 /* Responsive */
@@ -512,20 +621,19 @@ td {
 
   .sobre-nosotros {
     height: 400px;
-    display: block;
-    opacity: 1;
   }
 
   .sobre-nosotros--text {
+    display: flex;
     margin-top: 10px;
     height: 80%;
     text-align: center;
     font-size: 12px;
   }
-  .sobre-nosotros--left {
+  .sobre-nosotros--1 {
     width: 50%;
   }
-  .sobre-nosotros--right {
+  .sobre-nosotros--2 {
     width: 50%;
   }
 
@@ -534,8 +642,8 @@ td {
     flex-wrap: wrap;
     justify-content: space-around;
     text-align: center;
-    background-color: #4cd137;
     width: 100%;
+    background-color: azure;
   }
 
   .sobre-nosotros--ubicacion > p {
