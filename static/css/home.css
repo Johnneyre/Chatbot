@@ -7,7 +7,7 @@
 }
 
 .app__container {
-  min-height: 100vh;
+  min-height: 95.9vh;
   background-color: #000000;
 }
 
@@ -110,9 +110,9 @@
   position: relative;
   display: flex;
   margin-bottom: 20px;
-  height: 180px;
+  height: 150px;
   align-items: center;
-  width: 100%;
+  width: 130%;
 }
 
 #saludo {
@@ -127,7 +127,7 @@
 .container__buton-2 {
   display: flex;
   justify-content: end;
-  margin-top: 46px;
+  margin-top: 16px;
   cursor: auto !important;
 }
 
@@ -168,7 +168,7 @@
 
 h1 {
   font-weight: 700;
-  font-size: 70px;
+  font-size: 68px;
 }
 
 p {
@@ -176,7 +176,24 @@ p {
   margin: 30px 0 0 0;
 }
 
-@media (max-width: 807px) {
+footer {
+  background-color: #000000;
+  padding: 0 0 8px 20px;
+}
+
+footer > a {
+  color: #000000;
+  transition: 2s color;
+}
+
+footer > a:hover {
+  color: white;
+}
+
+
+
+@media (max-width: 770px) {
+
   .contenedor {
     padding: 35px 35px 15px 35px;
   }
@@ -202,6 +219,7 @@ p {
     margin-bottom: 20px;
     height: 125px;
     align-items: center;
+    width: 100%;
   }
 
   #saludo {
