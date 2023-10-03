@@ -1,30 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    font-family: "Roboto", sans-serif;
-    box-sizing: border-box;
-    font-family: "Roboto", sans-serif;
-  }
-  
-  html {
-    min-height: 100vh;
-    margin: 0;
-    background: rgb(44, 47, 59);
-    background: -webkit-linear-gradient(
-      to right,
-      rgb(59, 34, 34),
-      rgb(70, 54, 54),
-      rgb(43, 32, 32)
-    );
-    background: linear-gradient(
-      to right,
-      rgb(61, 41, 38),
-      rgb(65, 50, 50),
-      rgb(78, 33, 33)
-    );
-  }
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+html {
+  min-height: 100vh;
+  margin: 0;
+  background: rgb(44, 47, 59);
+  background: -webkit-linear-gradient(
+    to right,
+    rgb(59, 34, 34),
+    rgb(70, 54, 54),
+    rgb(43, 32, 32)
+  );
+  background: linear-gradient(
+    to right,
+    rgb(61, 41, 38),
+    rgb(65, 50, 50),
+    rgb(78, 33, 33)
+  );
+}
 
 body {
   width: 100vw;
@@ -48,11 +48,11 @@ main {
   box-sizing: border-box;
 }
 
-:root{
-  --width: 250px
+:root {
+  --width: 250px;
 }
 
-body{
+body {
   font-family: Arial, Helvetica, sans-serif;
   padding: 0;
   padding-left: 52px;
@@ -62,7 +62,7 @@ header {
   min-height: 15rem;
 }
 
-nav{
+nav {
   position: absolute;
   height: 100vh;
   display: flex;
@@ -72,21 +72,21 @@ nav{
   overflow: hidden;
   left: 0;
   top: 0;
-  transition: width .3s ease-in-out;
+  transition: width 0.3s ease-in-out;
 }
 
-nav:hover{
+nav:hover {
   width: var(--width);
 }
 
-nav .bar{
+nav .bar {
   background-color: #000000;
   color: antiquewhite;
   display: flex;
   justify-content: end;
 }
 
-nav .user{
+nav .user {
   color: rgb(255, 255, 255);
   text-align: center;
   padding: 20px 0;
@@ -95,21 +95,21 @@ nav .user{
   transform: translateX(-300px);
   opacity: 0;
   width: var(--width);
-  transition: transform .3s ease, opacity .3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-nav .user img{
+nav .user img {
   width: 100px;
   margin: 0 auto;
   border-radius: 50%;
 }
 
-nav:hover .user{
+nav:hover .user {
   transform: translateX(0);
-  opacity: 1; 
+  opacity: 1;
 }
 
-nav .links a{
+nav .links a {
   color: aliceblue;
   text-decoration: none;
   display: flex;
@@ -118,7 +118,7 @@ nav .links a{
   overflow: hidden;
 }
 
-nav .links button{
+nav .links button {
   color: aliceblue;
   text-decoration: none;
   display: flex;
@@ -131,46 +131,45 @@ nav .links button{
   font-size: 16px;
 }
 
-nav .links .icon img{
+nav .links .icon img {
   width: 32px;
   height: 32px;
   border-radius: 50%;
   top: 10px;
 }
 
-nav .links .icon{
+nav .links .icon {
   padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-nav .links button:hover{
+nav .links button:hover {
   background-color: rgb(55, 124, 184);
   color: #ffffff;
 }
 
-nav .links a:first-child{
+nav .links a:first-child {
   position: absolute;
   top: 20px;
   background: transparent;
   cursor: default;
-  transition: opacity .3s ease;
+  transition: opacity 0.3s ease;
 }
 
-nav:hover .links a:first-child{
+nav:hover .links a:first-child {
   opacity: 0;
 }
 
-
-nav .links a:last-child{
+nav .links a:last-child {
   display: flex;
   flex-direction: row;
   position: absolute;
   bottom: 10px;
 }
 
-nav .links a:last-child:hover{
+nav .links a:last-child:hover {
   background-color: rgb(173, 20, 20);
 }
 
@@ -265,10 +264,10 @@ form {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  align-items: center;
   width: 45%;
   max-height: 25px;
   margin: 5px;
-  border-bottom: solid 1px rgba(0, 0, 0, 0.466);
 }
 
 .create-input > span {
@@ -276,10 +275,16 @@ form {
   font-weight: 600;
 }
 
-.create-input > input, select{
+.create-input > input,
+select {
   border-radius: 10px;
   width: 50%;
-  padding: 0 8px;
+  padding: 9px 8px;
+  border: none;
+}
+
+.create-input > input:focus {
+  outline: red 2px solid;
 }
 
 .cont-guardar {
@@ -294,7 +299,6 @@ form {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 table {
@@ -306,7 +310,6 @@ table {
   border-collapse: collapse;
   display: block;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-
 }
 
 thead {
@@ -315,16 +318,16 @@ thead {
   background: rgba(27, 27, 27, 0.7);
   border-radius: 10px 10px 0 0;
   overflow: hidden;
-
 }
 
-th ,td {
+th,
+td {
   width: 10%;
   padding: 20px 10px;
 }
 
 td {
-  border-bottom: solid 1px rgba(80, 59, 59, 0.8);;
+  border-bottom: solid 1px rgba(80, 59, 59, 0.8);
 }
 
 td > img {
@@ -334,9 +337,7 @@ td > img {
 
 tbody > tr:hover {
   background-color: #4d2222;
-
 }
-
 
 tbody {
   display: flex;
@@ -349,7 +350,7 @@ tbody {
 
 tbody::-webkit-scrollbar {
   width: 7px;
-  background: rgba(80, 59, 59, .5);
+  background: rgba(80, 59, 59, 0.5);
 }
 
 tbody::-webkit-scrollbar-thumb {
@@ -368,7 +369,7 @@ tbody::-webkit-scrollbar-thumb {
 }
 
 .guardar {
-  width: 50%;
+  max-width: 30%;
 }
 
 .guardar:hover {
@@ -376,21 +377,19 @@ tbody::-webkit-scrollbar-thumb {
   border-radius: 20px;
   border: solid rgb(38, 78, 33) 1px;
   transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
 }
 
-.editar, .eliminar {
+.editar,
+.eliminar {
   width: 100%;
 }
 
 .editar:hover {
-  background-color: rgba(130, 221, 122, 0.5);
+  background-color: rgba(255, 255, 0, 0.84);
   border-radius: 20px;
   border: solid rgb(38, 78, 33) 1px;
   transition: background-color 0.2s ease-in-out;
-}
-
-.eliminar:hover {
-  width: 100%;
 }
 
 .eliminar:hover {
@@ -400,15 +399,14 @@ tbody::-webkit-scrollbar-thumb {
   transition: background-color 0.2s ease-in-out;
 }
 
-
 .editar-eliminar {
-  width: 18%;
+  width: 12%;
 }
 
 .editar-eliminar > a {
   display: flex;
   justify-content: center;
   align-items: center;
-  vertical-align: middle;
   text-decoration: none;
+  margin-bottom: 15px;
 }

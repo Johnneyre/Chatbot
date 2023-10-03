@@ -59,9 +59,9 @@
           <input type="number" id="precio" name="precio" value="{{ product['precio'] }}" />
         </div>
 
-        <div class="edit-input"> 
+        <div class="edit-input img-act"> 
           <span>Imagen actual:</span>
-          <img id="output_image" src="{{ url_for('show_image', tipo='repuesto', id=product['id_repuestos']) }}"
+          <img id="output_image" class="img-actual" src="{{ url_for('show_image', tipo='repuesto', id=product['id_repuestos']) }}"
           alt="Imagen del repuesto" />
         </div>
 
