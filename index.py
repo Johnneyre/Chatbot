@@ -107,12 +107,14 @@ def page_not_found(e):
 
 # ! Endpoint para filtrado
 
-@app.route("/get_products_by_brand", methods=['POST'])
-def get_products_by_brand():
+@app.route("/get_products_by_filters", methods=['POST'])
+def get_products_by_filters():
     brand = request.form.get('brand')
+    model = request.form.get('model')
+    cilindraje = request.form.get('cilindraje')
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    s = "SELECT repuestos.id_repuestos, repuestos.repuestos, marcas.marcas, modelo.modelo, cilindraje.cilindraje, repuestos.cantidad, repuestos.precio FROM repuestos JOIN marcas ON repuestos.id_marcas = marcas.id_marcas JOIN modelo ON repuestos.id_modelo = modelo.id_modelo JOIN cilindraje ON repuestos.id_cilindraje = cilindraje.id_cilindraje WHERE marcas.marcas = %s;"
-    cur.execute(s, (brand,))
+    s = "SELECT repuestos.id_repuestos, repuestos.repuestos, marcas.marcas, modelo.modelo, cilindraje.cilindraje, repuestos.cantidad, repuestos.precio FROM repuestos JOIN marcas ON repuestos.id_marcas = marcas.id_marcas JOIN modelo ON repuestos.id_modelo = modelo.id_modelo JOIN cilindraje ON repuestos.id_cilindraje = cilindraje.id_cilindraje WHERE marcas.marcas = %s AND modelo.modelo = %s AND cilindraje.cilindraje = %s;"
+    cur.execute(s, (brand, model, cilindraje))
     list_products = cur.fetchall()
     return jsonify(list_products)
 
