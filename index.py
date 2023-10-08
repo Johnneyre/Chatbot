@@ -36,6 +36,7 @@ def load_user(user_id):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    error = None
     if request.method == 'POST':
         usuario = request.form['usuario']
         contrasena = request.form['contrasena']
@@ -48,8 +49,10 @@ def login():
         if user is not None:
             login_user(User(user[0]))
             return redirect(url_for('admin'))
+        else:
+            error = 'Usuario o Contraseña Incorrecto'
 
-    return render_template('login.html')
+    return render_template('login.html', error=error)
 
 
 @app.route('/logout', methods=['GET', 'POST'])
@@ -165,57 +168,62 @@ def admin():
 
 @app.route("/admin/add", methods=['POST'])
 def add_product():
+    try:
+        # Esta ruta se encargará de agregar un nuevo repuesto o accesorio
+        tipo = request.form['tipo']
+        name = request.form['name']
+        cantidad = request.form['cantidad']
+        precio = request.form['precio']
+        imagen = request.files['imagen'].read()
+        cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-    # Esta ruta se encargará de agregar un nuevo repuesto o accesorio
-    tipo = request.form['tipo']
-    name = request.form['name']
-    cantidad = request.form['cantidad']
-    precio = request.form['precio']
-    imagen = request.files['imagen'].read()
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        if tipo == 'repuesto':
+            marcas = request.form['marca']
+            modelo = request.form['modelo']
+            cilindraje = request.form['cilindraje']
+            id_marcas = id_modelo = id_cilindraje = None
 
-    if tipo == 'repuesto':
-        marcas = request.form['marca']
-        modelo = request.form['modelo']
-        cilindraje = request.form['cilindraje']
-        id_marcas = id_modelo = id_cilindraje = None
+            # Busca el ID de la marca
+            cur.execute(
+                "SELECT id_marcas FROM marcas WHERE marcas = %s", (marcas,))
+            fetch_result = cur.fetchone()
+            if fetch_result is not None:
+                id_marcas = fetch_result[0]
+            else:
+                print("No se encontró el cilindraje: " + marcas)
 
-        # Busca el ID de la marca
-        cur.execute("SELECT id_marcas FROM marcas WHERE marcas = %s", (marcas,))
-        fetch_result = cur.fetchone()
-        if fetch_result is not None:
-            id_marcas = fetch_result[0]
-        else:
-            print("No se encontró el cilindraje: " + marcas)
+            # Busca el ID del modelo
+            cur.execute(
+                "SELECT id_modelo FROM modelo WHERE modelo = %s", (modelo,))
+            fetch_result = cur.fetchone()
+            if fetch_result is not None:
+                id_modelo = fetch_result[0]
+            else:
+                print("No se encontró el cilindraje: " + modelo)
 
-        # Busca el ID del modelo
-        cur.execute("SELECT id_modelo FROM modelo WHERE modelo = %s", (modelo,))
-        fetch_result = cur.fetchone()
-        if fetch_result is not None:
-            id_modelo = fetch_result[0]
-        else:
-            print("No se encontró el cilindraje: " + modelo)
+            # Busca el ID del cilindraje
+            cur.execute(
+                "SELECT id_cilindraje FROM cilindraje WHERE cilindraje = %s", (cilindraje,))
+            fetch_result = cur.fetchone()
+            if fetch_result is not None:
+                id_cilindraje = fetch_result[0]
+            else:
+                print("No se encontró el cilindraje: " + cilindraje)
 
-        # Busca el ID del cilindraje
-        cur.execute(
-            "SELECT id_cilindraje FROM cilindraje WHERE cilindraje = %s", (cilindraje,))
-        fetch_result = cur.fetchone()
-        if fetch_result is not None:
-            id_cilindraje = fetch_result[0]
-        else:
-            print("No se encontró el cilindraje: " + cilindraje)
+            # Inserta el nuevo repuesto
+            cur.execute(
+                "INSERT INTO repuestos (repuestos, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                (name, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen))
+        elif tipo == 'accesorio':
 
-        # Inserta el nuevo repuesto
-        cur.execute(
-            "INSERT INTO repuestos (repuestos, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-            (name, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen))
-    elif tipo == 'accesorio':
-
-        # Inserta el nuevo accesorio
-        cur.execute(
-            "INSERT INTO accesorio (accesorio, cantidad, precio, image) VALUES (%s, %s, %s, %s)",
-            (name, cantidad, precio, imagen))
-    conn.commit()
+            # Inserta el nuevo accesorio
+            cur.execute(
+                "INSERT INTO accesorio (accesorio, cantidad, precio, image) VALUES (%s, %s, %s, %s)",
+                (name, cantidad, precio, imagen))
+        conn.commit()
+    except Exception as e:
+        conn.rollback()  # Rollback the transaction in case of error
+        print(f"An error occurred: {e}")
     return redirect(url_for('admin'))
 
 

@@ -36,7 +36,7 @@ body {
   height: 80px;
 }
 
-#header > img {
+#header img {
   height: 60px;
   width: 60px;
   object-fit: cover;
@@ -122,6 +122,7 @@ main {
   box-shadow: 5px 5px 50px;
   border: solid 2px rgba(43, 10, 10, 0.5);
   border-radius: 15px;
+  position: relative;
 }
 
 .titulo {
@@ -182,4 +183,13 @@ form {
   height: 2px;
   width: 80%;
   border-radius: 20px;
+}
+
+.error-container {
+  position: absolute;
+  top: 22rem;
+}
+
+.error {
+  color: #ff0000;
 }
