@@ -31,6 +31,7 @@ body {
   height: 100vh;
   display: flex;
   align-items: center;
+  padding-left: 52px;
 }
 
 main {
@@ -42,24 +43,12 @@ main {
   border-radius: 20px;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 :root {
   --width: 250px;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 0;
-  padding-left: 52px;
-}
-
 header {
-  min-height: 15rem;
+  min-height: 39%;
 }
 
 nav {
@@ -79,13 +68,6 @@ nav:hover {
   width: var(--width);
 }
 
-nav .bar {
-  background-color: #000000;
-  color: antiquewhite;
-  display: flex;
-  justify-content: end;
-}
-
 nav .user {
   color: rgb(255, 255, 255);
   text-align: center;
@@ -94,7 +76,6 @@ nav .user {
   height: 180px;
   transform: translateX(-300px);
   opacity: 0;
-  width: var(--width);
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 

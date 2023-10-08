@@ -1,43 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/login.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/login.css" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header id="header">
+      <a href="/">
         <img src="/static/img/mb.jpg" alt="Logo de Moto Betel" class="logo" />
-        <ul class="nav-bar">
-          <li>
-            <a href="interface">
-              Entra al chat
-              <img
-                src="../static/img/arrow-right-short-white.svg"
-                alt="Ir al chat"
-              />
-            </a>
-          </li>
-        </ul>
-      </header>
-      
-    <main>
-        <div class="cont-login">
-            <div class="titulo">
-                <h1>¡Bienvenido!</h1>
-            </div>
-            <div class="divisor"></div>
-            <form action="/login" method="post">
-                <input class="usuario" type="text" name="usuario" placeholder="Ingresa tu usuario" required>
-                <input class="contraseña" type="password" name="contrasena" id="" placeholder="Ingresa tu usuario" required>
-                <input class="btn" type="submit" value="Iniciar sesión">
-            </form>
-            <div class="divisor"></div>
-        </div>
-    </main>
-</body>
+      </a>
+      <ul class="nav-bar">
+        <li>
+          <a href="interface">
+            Entra al chat
+            <img
+              src="../static/img/arrow-right-short-white.svg"
+              alt="Ir al chat"
+            />
+          </a>
+        </li>
+      </ul>
+    </header>
 
+    <main>
+      <div class="cont-login">
+        <div class="titulo">
+          <h1>¡Bienvenido!</h1>
+        </div>
+        <div class="divisor"></div>
+        <form action="/login" method="post">
+          <input
+            class="usuario"
+            type="text"
+            name="usuario"
+            placeholder="Ingresa tu usuario"
+            required
+          />
+          <input
+            class="contraseña"
+            type="password"
+            name="contrasena"
+            id=""
+            placeholder="Ingresa tu contraseña"
+            required
+          />
+          <input class="btn" type="submit" value="Iniciar sesión" />
+        </form>
+        <div class="divisor"></div>
+        <div class="error-container">
+          {% if error %}
+          <p class="error">{{ error }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </main>
+  </body>
 </html>
