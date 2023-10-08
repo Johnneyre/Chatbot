@@ -1,93 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/edit.css" />
+    <title>Editar Producto</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/static/css/edit.css">
-  <title>Editar Producto</title>
-</head>
+  <body>
+    <main>
+      <div class="create-h1">
+        <h1>Editar Producto</h1>
+      </div>
+      <div class="edit">
+        <form
+          action="{{ url_for('edit_product', id=product['id_repuestos']) }}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div class="edit-input">
+            <span>Nombre:</span>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value="{{ product['repuestos'] }}"
+            />
+          </div>
 
-<body>
-  <main>
-    <div class="create-h1">
-      <h1>Editar Producto</h1>
-    </div>
-    <div class="edit">
-      <form action="{{ url_for('edit_product', id=product['id_repuestos']) }}" method="post"
-        enctype="multipart/form-data">
-        <div class="edit-input">
-          <span>Nombre:</span>
-          <input type="text" id="name" name="name" value="{{ product['repuestos'] }}" />
-        </div>
+          <div class="edit-input">
+            <span>Marca:</span>
+            <select id="marca" name="marca">
+              {% for marca in marcas %}
+              <option value="{{ marca[0] }}" {% if marca[0]==product['marcas'] %} selected {% endif %}>{{ marca[0] }}</option>
+              {% endfor %}
+            </select>
+          </div>
 
-        <div class="edit-input">
-          <span>Marca:</span>
-          <select id="marca" name="marca">
-            {% for marca in marcas %}
-            <option value="{{ marca[0] }}" {% if marca[0]==product['marcas'] %} selected {% endif %}>{{ marca[0] }}
-            </option>
-            {% endfor %}
-          </select>
-        </div>
+          <div class="edit-input">
+            <span>Modelo:</span>
+            <select id="modelo" name="modelo">
+              {% for mod in modelo %}
+              <option value="{{ mod[0] }}" {% if mod[0]==product['modelo'] %} selected {% endif %}>{{ mod[0] }}</option>
+              {% endfor %}
+            </select>
+          </div>
 
-        <div class="edit-input">
-          <span>Modelo:</span>
-          <select id="modelo" name="modelo">
-            {% for mod in modelo %}
-            <option value="{{ mod[0] }}" {% if mod[0]==product['modelo'] %} selected {% endif %}>{{ mod[0] }}</option>
-            {% endfor %}
-          </select>
-        </div>
+          <div class="edit-input">
+            <span>Cilindraje:</span>
+            <select id="cilindraje" name="cilindraje">
+              {% for cil in cilindraje %}
+              <option value="{{ cil[0] }}" {% if cil[0]==product['cilindraje'] %} selected {% endif %}>{{ cil[0] }}</option>
+              {% endfor %}
+            </select>
+          </div>
 
-        <div class="edit-input">
-          <span>Cilindraje:</span>
-          <select id="cilindraje" name="cilindraje">
-          {% for cil in cilindraje %}
-          <option value="{{ cil[0] }}" {% if cil[0]==product['cilindraje'] %} selected {% endif %}>{{ cil[0] }}</option>
-          {% endfor %}
-          </select>
-        </div>
+          <div class="edit-input">
+            <span>Cantidad:</span>
+            <input
+              type="number"
+              id="cantidad"
+              name="cantidad"
+              value="{{ product['cantidad'] }}"
+            />
+          </div>
 
-        <div class="edit-input">
-          <span>Cantidad:</span>
-          <input type="number" id="cantidad" name="cantidad" value="{{ product['cantidad'] }}" />
-        </div>
+          <div class="edit-input">
+            <span>Precio:</span>
+            <input
+              type="number"
+              id="precio"
+              name="precio"
+              value="{{ product['precio'] }}"
+            />
+          </div>
 
-        <div class="edit-input">
-          <span>Precio:</span>
-          <input type="number" id="precio" name="precio" value="{{ product['precio'] }}" />
-        </div>
+          <div class="edit-input img-act">
+            <span>Imagen actual:</span>
+            <img
+              id="output_image"
+              class="img-actual"
+              src="{{ url_for('show_image', tipo='repuesto', id=product['id_repuestos']) }}"
+              alt="Imagen del repuesto"
+            />
+          </div>
 
-        <div class="edit-input img-act"> 
-          <span>Imagen actual:</span>
-          <img id="output_image" class="img-actual" src="{{ url_for('show_image', tipo='repuesto', id=product['id_repuestos']) }}"
-          alt="Imagen del repuesto" />
-        </div>
+          <div class="edit-input">
+            <span>Imagen actual:</span>
+            <input
+              type="file"
+              id="imagen"
+              name="imagen"
+              accept="image/*"
+              onchange="previewImage(event)"
+            />
+          </div>
 
-        <div class="edit-input">
-          <span>Imagen actual:</span>
-          <input type="file" id="imagen" name="imagen" accept="image/*" onchange="previewImage(event)" />
-        </div>
+          <div class="cont-edit">
+            <a href="/admin" class="btn cancelar"><span>Cancelar</span></a>
+            <input type="submit" value="Actualizar" class="btn cancelar" />
+          </div>
+        </form>
+        <script>
+          function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+              var output = document.getElementById("output_image");
+              output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+          }
 
-        <div class="cont-edit">
-          <a href="/admin" class="btn cancelar"><span>Cancelar</span></a>
-          <input type="submit" value="Actualizar" class="btn cancelar"/>
-        </div>
+          document
+            .querySelector("form")
+            .addEventListener("submit", function (event) {
+              var inputs = this.querySelectorAll(
+                'input[type="text"], input[type="number"], input[type="file"], select'
+              );
 
-      </form>
-      <script>
-        function previewImage(event) {
-          var reader = new FileReader();
-          reader.onload = function () {
-            var output = document.getElementById("output_image");
-            output.src = reader.result;
-          };
-          reader.readAsDataURL(event.target.files[0]);
-        }
-      </script>
-    </div>
-  </main>
-</body>
-
+              for (var i = 0; i < inputs.length; i++) {
+                if (!inputs[i].value) {
+                  alert(
+                    "No se puede editar, ningún campo puede estar en blanco"
+                  );
+                  event.preventDefault();
+                  return;
+                }
+              }
+            });
+        </script>
+      </div>
+    </main>
+  </body>
 </html>
