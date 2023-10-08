@@ -136,13 +136,13 @@
             <tbody>
               {% for row in list_products %}
               <tr>
-                <td>{{row["repuestos"]}}</td>
-                <td>{{row["marcas"]}}</td>
-                <td>{{row["modelo"]}}</td>
-                <td>{{row["cilindraje"]}}</td>
-                <td>{{row["cantidad"]}}</td>
-                <td>{{row["precio"]}}</td>
-                <td>
+                <td data-label="Nombre">{{row["repuestos"]}}</td>
+                <td data-label="Marca">{{row["marcas"]}}</td>
+                <td data-label="Modelo">{{row["modelo"]}}</td>
+                <td data-label="Cilindraje">{{row["cilindraje"]}}</td>
+                <td data-label="Cantidad">{{row["cantidad"]}}</td>
+                <td data-label="Precio">{{row["precio"]}}</td>
+                <td data-label="Imagen">
                   <img
                     src="{{ url_for('show_image', tipo='repuesto', id=row['id_repuestos']) }}"
                     alt="Imagen del repuesto"
