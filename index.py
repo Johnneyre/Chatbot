@@ -1,9 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, make_response, abort, jsonify
+import imghdr
+from flask import Flask, make_response, render_template, request, redirect, url_for, jsonify
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import psycopg2
 import psycopg2.extras
-import imghdr
-import functools
 
 app = Flask(__name__)
 app.secret_key = "administra"
@@ -18,12 +17,16 @@ conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER,
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'login'  # type: ignore
 
 
 class User(UserMixin):
     def __init__(self, id):
         self.id = id
+
+    @property
+    def is_authenticated(self):
+        return True
 
 
 @login_manager.user_loader
@@ -47,16 +50,6 @@ def login():
             return redirect(url_for('admin'))
 
     return render_template('login.html')
-
-
-def login_required_custom(view):
-    @functools.wraps(view)
-    def wrapped_view(**kwargs):
-        if current_user.is_authenticated:
-            return view(**kwargs)
-        else:
-            abort(404)
-    return wrapped_view
 
 
 @app.route('/logout', methods=['GET', 'POST'])
@@ -107,15 +100,31 @@ def page_not_found(e):
 
 # ! Endpoint para filtrado
 
+
 @app.route("/get_products_by_filters", methods=['POST'])
 def get_products_by_filters():
-    brand = request.form.get('brand')
-    model = request.form.get('model')
+    marcas = request.form.get('marca')
+    modelos = request.form.get('modelo')
     cilindraje = request.form.get('cilindraje')
+
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    s = "SELECT repuestos.id_repuestos, repuestos.repuestos, marcas.marcas, modelo.modelo, cilindraje.cilindraje, repuestos.cantidad, repuestos.precio FROM repuestos JOIN marcas ON repuestos.id_marcas = marcas.id_marcas JOIN modelo ON repuestos.id_modelo = modelo.id_modelo JOIN cilindraje ON repuestos.id_cilindraje = cilindraje.id_cilindraje WHERE marcas.marcas = %s AND modelo.modelo = %s AND cilindraje.cilindraje = %s;"
-    cur.execute(s, (brand, model, cilindraje))
+
+    # Construct query string with only the parameters that are not None
+    query = "SELECT repuestos.id_repuestos, repuestos.repuestos, marcas.marcas, modelo.modelo, cilindraje.cilindraje, repuestos.cantidad, repuestos.precio FROM repuestos JOIN marcas ON repuestos.id_marcas = marcas.id_marcas JOIN modelo ON repuestos.id_modelo = modelo.id_modelo JOIN cilindraje ON repuestos.id_cilindraje = cilindraje.id_cilindraje"
+    params = []
+    if marcas is not None:
+        query += " WHERE marcas.marcas = %s"
+        params.append(marcas)
+    if modelos is not None:
+        query += " AND modelo.modelo = %s"
+        params.append(modelos)
+    if cilindraje is not None:
+        query += " AND cilindraje.cilindraje = %s"
+        params.append(cilindraje)
+
+    cur.execute(query, params)
     list_products = cur.fetchall()
+
     return jsonify(list_products)
 
 
@@ -123,7 +132,7 @@ def get_products_by_filters():
 
 
 @app.route("/admin")
-@login_required_custom
+@login_required
 def admin():
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
@@ -212,6 +221,8 @@ def add_product():
 
 # ! Consultas UPDATE
 
+# ! Accesorios
+
 @app.route("/admin/editA/<int:id>", methods=['GET', 'POST'])
 def edit_accesorio(id):
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
@@ -250,6 +261,8 @@ def edit_accesorio(id):
 
     return render_template('editA.html', product=product)
 
+
+# ! Repuestos
 
 @app.route("/admin/edit/<int:id>", methods=['GET', 'POST'])
 def edit_product(id):
