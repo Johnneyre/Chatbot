@@ -37,7 +37,8 @@
             <span>Marca:</span>
             <select id="marca" name="marca">
               {% for marca in marcas %}
-              <option value="{{ marca[0] }}" {% if marca[0]==product['marcas'] %} selected {% endif %}>{{ marca[0] }}</option>
+              <option value="{{ marca[0] }}" {% if marca[0]==product['marcas'] %} selected {% endif %}>{{ marca[0] }}
+              </option>
               {% endfor %}
             </select>
           </div>
@@ -55,7 +56,8 @@
             <span>Cilindraje:</span>
             <select id="cilindraje" name="cilindraje">
               {% for cil in cilindraje %}
-              <option value="{{ cil[0] }}" {% if cil[0]==product['cilindraje'] %} selected {% endif %}>{{ cil[0] }}</option>
+              <option value="{{ cil[0] }}" {% if cil[0]==product['cilindraje'] %} selected {% endif %}>{{ cil[0] }}
+              </option>
               {% endfor %}
             </select>
           </div>
@@ -81,17 +83,19 @@
           </div>
 
           <div class="edit-input img-act">
-            <span>Imagen Actual:</span>
-            <img
-              id="output_image"
-              class="img-actual"
-              src="{{ url_for('show_image', tipo='repuesto', id=product['id_repuestos']) }}"
-              alt="Imagen del repuesto"
-            />
+            <span>Imagen actual:</span>
+            <div class="img-cont">
+              <img
+                id="output_image"
+                class="img-actual"
+                src="{{ url_for('show_image', tipo='repuesto', id=product['id_repuestos']) }}"
+                alt="Imagen del repuesto"
+              />
+            </div>
           </div>
 
           <div class="edit-input">
-            <span>Actualizar Imagen:</span>
+            <span>Imagen nueva:</span>
             <input
               type="file"
               id="imagen"

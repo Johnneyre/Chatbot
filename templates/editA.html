@@ -12,6 +12,13 @@
     <title>Editar Accesorio</title>
   </head>
 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/edit.css" />
+    <title>Editar Accesorio</title>
+  </head>
+
   <body>
     <main>
       <div class="create-h1">
@@ -53,13 +60,15 @@
             />
           </div>
 
-          <div class="edit-input">
-            <span>Imagen actual:</span>
-            <img
-              id="output_image"
-              src="{{ url_for('show_image', tipo='accesorio', id=product['id_accesorio']) }}"
-              alt="Imagen del accesorio"
-            />
+          <div class="edit-input img-act">
+            <span>Imagen Actual:</span>
+            <div class="img-cont">
+              <img
+                id="output_image"
+                src="{{ url_for('show_image', tipo='accesorio', id=product['id_accesorio']) }}"
+                alt="Imagen del accesorio"
+              />
+            </div>
           </div>
 
           <div class="edit-input">
