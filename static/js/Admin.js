@@ -46,36 +46,68 @@ function previewImage(event) {
     var output = document.getElementById("output_image");
     output.src = reader.result;
   };
+  reader.onerror = function (error) {
+    console.log("An error occurred while reading the file: ", error);
+  };
   reader.readAsDataURL(event.target.files[0]);
 }
 
 // ! Validaciones
 
-document.querySelector("form").addEventListener("submit", function (event) {
-  let inputs = this.querySelectorAll(
-    'input[type="text"], input[type="number"], input[type="file"], select'
-  );
+document
+  .querySelector(".form-repuestos")
+  .addEventListener("submit", function (event) {
+    let inputs = this.querySelectorAll(
+      'input[type="text"], input[type="number"], input[type="file"], select'
+    );
 
-  for (var i = 0; i < inputs.length; i++) {
-    if (!inputs[i].value) {
-      alert("No se puede agregar, ningún campo puede estar en blanco");
-      event.preventDefault();
-      return;
+    for (let i = 0; i < inputs.length; i++) {
+      if (!inputs[i].value) {
+        alert("No se puede agregar, ningún campo puede estar en blanco");
+        event.preventDefault();
+        return;
+      }
     }
-  }
-});
+  });
 
 document
-  .querySelector('.guardar-acce')
-  .addEventListener("click", function (event) {
-    var form = document.querySelector("form");
-    var inputs = form.querySelectorAll(
+  .querySelector(".form-accesorios")
+  .addEventListener("submit", function (event) {
+    let inputss = this.querySelectorAll(
       'input[type="text"], input[type="number"], input[type="file"]'
     );
 
-    for (var i = 0; i < inputs.length; i++) {
-      if (!inputs[i].value) {
+    for (let i = 0; i < inputss.length; i++) {
+      if (!inputss[i].value) {
         alert("Ningún campo puede estar en blanco");
+        event.preventDefault();
+        return;
+      }
+    }
+  });
+
+document
+  .querySelector(".form-repuestos")
+  .addEventListener("submit", function (event) {
+    let inputs = this.querySelectorAll('input[type="number"]');
+
+    for (let i = 0; i < inputs.length; i++) {
+      if (inputs[i].value < 0) {
+        alert("No se puede agregar, la cantidad no puede ser negativa");
+        event.preventDefault();
+        return;
+      }
+    }
+  });
+
+document
+  .querySelector(".form-accesorios")
+  .addEventListener("submit", function (event) {
+    let inputs = this.querySelectorAll('input[type="number"]');
+
+    for (let i = 0; i < inputs.length; i++) {
+      if (inputs[i].value < 0) {
+        alert("La cantidad no puede ser negativa");
         event.preventDefault();
         return;
       }

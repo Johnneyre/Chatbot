@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/static/css/edit.css" />
+    <link
+      rel="shortcut icon"
+      href="../static/img/favicon.ico"
+      type="image/x-icon"
+    />
     <title>Editar Producto</title>
   </head>
 
@@ -76,7 +81,7 @@
           </div>
 
           <div class="edit-input img-act">
-            <span>Imagen actual:</span>
+            <span>Imagen Actual:</span>
             <img
               id="output_image"
               class="img-actual"
@@ -86,7 +91,7 @@
           </div>
 
           <div class="edit-input">
-            <span>Imagen actual:</span>
+            <span>Actualizar Imagen:</span>
             <input
               type="file"
               id="imagen"
@@ -103,25 +108,45 @@
         </form>
         <script>
           function previewImage(event) {
-            var reader = new FileReader();
-            reader.onload = function () {
-              var output = document.getElementById("output_image");
-              output.src = reader.result;
-            };
-            reader.readAsDataURL(event.target.files[0]);
+            if (event.target.files.length > 0) {
+              var reader = new FileReader();
+              reader.onload = function () {
+                var output = document.getElementById("output_image");
+                output.src = reader.result;
+              };
+              reader.readAsDataURL(event.target.files[0]);
+            }
           }
+
+          // ! Validaciones
 
           document
             .querySelector("form")
             .addEventListener("submit", function (event) {
               var inputs = this.querySelectorAll(
-                'input[type="text"], input[type="number"], input[type="file"], select'
+                'input[type="text"], input[type="number"], select'
               );
 
               for (var i = 0; i < inputs.length; i++) {
                 if (!inputs[i].value) {
                   alert(
                     "No se puede editar, ningún campo puede estar en blanco"
+                  );
+                  event.preventDefault();
+                  return;
+                }
+              }
+            });
+
+          document
+            .querySelector(".form")
+            .addEventListener("submit", function (event) {
+              let inputs = this.querySelectorAll('input[type="number"]');
+
+              for (let i = 0; i < inputs.length; i++) {
+                if (inputs[i].value < 0) {
+                  alert(
+                    "No se puede editar, la cantidad no puede ser negativa"
                   );
                   event.preventDefault();
                   return;

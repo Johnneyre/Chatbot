@@ -1,6 +1,6 @@
 import imghdr
 from flask import Flask, make_response, render_template, request, redirect, url_for, jsonify
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
 import psycopg2
 import psycopg2.extras
 
@@ -71,24 +71,19 @@ def home():
 def interface():
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-    # Consulta para traer accesorios de la BD
     s = 'SELECT * FROM accesorio'
     cur.execute(s)
     accesorios = cur.fetchall()
 
-    # Obtén los cilindrajes
     cur.execute("SELECT DISTINCT cilindraje FROM cilindraje;")
     cilindraje = cur.fetchall()
 
-    # Obtén las marcas
     cur.execute("SELECT DISTINCT marcas FROM marcas;")
     marcas = cur.fetchall()
 
-    # Obtén los modelos
     cur.execute("SELECT DISTINCT modelo FROM modelo;")
     modelo = cur.fetchall()
 
-    # Obtén los productos
     s = "SELECT repuestos.id_repuestos, repuestos.repuestos, marcas.marcas, modelo.modelo, cilindraje.cilindraje, repuestos.cantidad, repuestos.precio FROM repuestos JOIN marcas ON repuestos.id_marcas = marcas.id_marcas JOIN modelo ON repuestos.id_modelo = modelo.id_modelo JOIN cilindraje ON repuestos.id_cilindraje = cilindraje.id_cilindraje;"
     cur.execute(s)
     list_products = cur.fetchall()
@@ -112,7 +107,6 @@ def get_products_by_filters():
 
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-    # Construct query string with only the parameters that are not None
     query = "SELECT repuestos.id_repuestos, repuestos.repuestos, marcas.marcas, modelo.modelo, cilindraje.cilindraje, repuestos.cantidad, repuestos.precio FROM repuestos JOIN marcas ON repuestos.id_marcas = marcas.id_marcas JOIN modelo ON repuestos.id_modelo = modelo.id_modelo JOIN cilindraje ON repuestos.id_cilindraje = cilindraje.id_cilindraje"
     params = []
     if marcas is not None:
@@ -139,19 +133,15 @@ def get_products_by_filters():
 def admin():
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-    # Obtén los cilindrajes
     cur.execute("SELECT DISTINCT cilindraje FROM cilindraje;")
     cilindraje = cur.fetchall()
 
-    # Obtén las marcas
     cur.execute("SELECT DISTINCT marcas FROM marcas;")
     marcas = cur.fetchall()
 
-    # Obtén los modelos
     cur.execute("SELECT DISTINCT modelo FROM modelo;")
     modelo = cur.fetchall()
 
-    # Consulta para traer accesorios de la BD
     s = 'SELECT * FROM accesorio'
     cur.execute(s)
     accesorios = cur.fetchall()
@@ -183,7 +173,6 @@ def add_product():
             cilindraje = request.form['cilindraje']
             id_marcas = id_modelo = id_cilindraje = None
 
-            # Busca el ID de la marca
             cur.execute(
                 "SELECT id_marcas FROM marcas WHERE marcas = %s", (marcas,))
             fetch_result = cur.fetchone()
@@ -192,7 +181,6 @@ def add_product():
             else:
                 print("No se encontró el cilindraje: " + marcas)
 
-            # Busca el ID del modelo
             cur.execute(
                 "SELECT id_modelo FROM modelo WHERE modelo = %s", (modelo,))
             fetch_result = cur.fetchone()
@@ -201,7 +189,6 @@ def add_product():
             else:
                 print("No se encontró el cilindraje: " + modelo)
 
-            # Busca el ID del cilindraje
             cur.execute(
                 "SELECT id_cilindraje FROM cilindraje WHERE cilindraje = %s", (cilindraje,))
             fetch_result = cur.fetchone()
@@ -210,13 +197,11 @@ def add_product():
             else:
                 print("No se encontró el cilindraje: " + cilindraje)
 
-            # Inserta el nuevo repuesto
             cur.execute(
                 "INSERT INTO repuestos (repuestos, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen) VALUES (%s, %s, %s, %s, %s, %s, %s)",
                 (name, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen))
         elif tipo == 'accesorio':
 
-            # Inserta el nuevo accesorio
             cur.execute(
                 "INSERT INTO accesorio (accesorio, cantidad, precio, image) VALUES (%s, %s, %s, %s)",
                 (name, cantidad, precio, imagen))
@@ -242,16 +227,16 @@ def edit_accesorio(id):
         precio = request.form['precio']
 
         # Comprueba si se ha subido un nuevo archivo de imagen
-        imagen = None
-        if 'imagen' in request.files:
-            imagen = request.files['imagen'].read()
+        new_image = None
+        if 'imagen' in request.files and request.files['imagen'].filename != '':
+            new_image = request.files['imagen'].read()
 
        # Actualiza el accesorio en la base de datos
-        if imagen is not None:
+        if new_image is not None:
             # Si se ha subido una nueva imagen, actualiza todos los campos, incluyendo la imagen
             cur.execute(
                 "UPDATE accesorio SET accesorio = %s, cantidad = %s, precio = %s, image = %s WHERE id_accesorio = %s",
-                (name, cantidad, precio, imagen, id))
+                (name, cantidad, precio, new_image, id))
         else:
             # Si no se ha subido una nueva imagen, actualiza todos los campos excepto la imagen
             cur.execute(
@@ -263,7 +248,6 @@ def edit_accesorio(id):
         return redirect(url_for('admin'))
     else:
         # Aquí es donde se manejaría la lógica para mostrar el formulario de edición
-        # Consulta para obtener los detalles del accesorio
         cur.execute("SELECT * FROM accesorio WHERE id_accesorio = %s", (id,))
         product = cur.fetchone()
 
@@ -277,7 +261,6 @@ def edit_product(id):
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
     if request.method == 'POST':
-        # Aquí es donde se manejaría la lógica de actualización del producto
         name = request.form['name']
         cantidad = request.form['cantidad']
         precio = request.form['precio']
@@ -285,14 +268,12 @@ def edit_product(id):
         modelo = request.form['modelo']
         cilindraje = request.form['cilindraje']
 
-        # Comprueba si se ha subido un nuevo archivo de imagen
-        imagen = None
-        if 'imagen' in request.files:
-            imagen = request.files['imagen'].read()
+        new_image = None
+        if 'imagen' in request.files and request.files['imagen'].filename != '':
+            new_image = request.files['imagen'].read()
 
         id_marcas = id_modelo = id_cilindraje = None
 
-        # Busca el ID de la marca
         cur.execute("SELECT id_marcas FROM marcas WHERE marcas = %s", (marca,))
         fetch_result = cur.fetchone()
         if fetch_result is not None:
@@ -300,7 +281,6 @@ def edit_product(id):
         else:
             print("No se encontró la marca: " + marca)
 
-        # Busca el ID del modelo
         cur.execute("SELECT id_modelo FROM modelo WHERE modelo = %s", (modelo,))
         fetch_result = cur.fetchone()
         if fetch_result is not None:
@@ -308,7 +288,6 @@ def edit_product(id):
         else:
             print("No se encontró el modelo: " + modelo)
 
-        # Busca el ID del cilindraje
         cur.execute(
             "SELECT id_cilindraje FROM cilindraje WHERE cilindraje = %s", (cilindraje,))
         fetch_result = cur.fetchone()
@@ -317,14 +296,13 @@ def edit_product(id):
         else:
             print("No se encontró el cilindraje: " + cilindraje)
 
-       # Actualiza el producto en la base de datos
-        if imagen is not None:
-            # Si se ha subido una nueva imagen, actualiza todos los campos, incluyendo la imagen
+        if new_image is not None:
+            # Si se ha subido una nueva imagen, actualizar el campo de la imagen
             cur.execute(
                 "UPDATE repuestos SET repuestos = %s, id_marcas = %s, id_modelo = %s, id_cilindraje = %s, cantidad = %s, precio = %s, imagen = %s WHERE id_repuestos = %s",
-                (name, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen, id))
+                (name, id_marcas, id_modelo, id_cilindraje, cantidad, precio, new_image, id))
         else:
-            # Si no se ha subido una nueva imagen, actualiza todos los campos excepto la imagen
+            # Si no se ha subido una nueva imagen, no actualizar el campo de la imagen
             cur.execute(
                 "UPDATE repuestos SET repuestos = %s, id_marcas = %s, id_modelo = %s, id_cilindraje = %s, cantidad = %s, precio = %s WHERE id_repuestos = %s",
                 (name, id_marcas, id_modelo, id_cilindraje, cantidad, precio, id))
@@ -338,15 +316,12 @@ def edit_product(id):
         cur.execute("SELECT repuestos.*, marcas.marcas, modelo.modelo, cilindraje.cilindraje FROM repuestos JOIN marcas ON repuestos.id_marcas = marcas.id_marcas JOIN modelo ON repuestos.id_modelo = modelo.id_modelo JOIN cilindraje ON repuestos.id_cilindraje = cilindraje.id_cilindraje WHERE id_repuestos = %s", (id,))
         product = cur.fetchone()
 
-        # Obtén los cilindrajes
         cur.execute("SELECT DISTINCT cilindraje FROM cilindraje;")
         cilindraje = cur.fetchall()
 
-        # Obtén las marcas
         cur.execute("SELECT DISTINCT marcas FROM marcas;")
         marcas = cur.fetchall()
 
-        # Obtén los modelos
         cur.execute("SELECT DISTINCT modelo FROM modelo;")
         modelo = cur.fetchall()
 

@@ -4,7 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../static/css/Admin.css" />
-    <title>Admin</title>
+    <link
+      rel="shortcut icon"
+      href="../static/img/favicon.ico"
+      type="image/x-icon"
+    />
+    <title>Dashboard</title>
   </head>
   <body>
     <main>
@@ -46,7 +51,12 @@
           <div class="create-h1">
             <h1>Agrega un Repuesto</h1>
           </div>
-          <form action="/admin/add" method="post" enctype="multipart/form-data">
+          <form
+            action="/admin/add"
+            method="post"
+            enctype="multipart/form-data"
+            class="form-repuestos"
+          >
             <input type="hidden" name="tipo" value="repuesto" />
             <div class="create-input">
               <span>Nombre:</span>
@@ -171,7 +181,12 @@
           <div class="create-h1">
             <h1>Agrega un Accesorio</h1>
           </div>
-          <form action="/admin/add" method="post" enctype="multipart/form-data">
+          <form
+            action="/admin/add"
+            method="post"
+            enctype="multipart/form-data"
+            class="form-accesorios"
+          >
             <input type="hidden" name="tipo" value="accesorio" />
             <div class="create-input">
               <span>Nombre: </span>
@@ -202,7 +217,11 @@
               <input type="file" name="imagen" id="" />
             </div>
             <div class="cont-guardar">
-              <input type="submit" value="Enviar" class="btn guardar guardar-acce" />
+              <input
+                type="submit"
+                value="Enviar"
+                class="btn guardar guardar-acce"
+              />
             </div>
           </form>
         </div>
