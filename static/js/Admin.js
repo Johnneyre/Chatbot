@@ -113,3 +113,63 @@ document
       }
     }
   });
+
+document
+  .querySelector(".form-repuestos")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    var formData = new FormData(this);
+
+    fetch(this.action, {
+      method: this.method,
+      body: formData,
+    })
+      .then(function (response) {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Error: " + response.statusText);
+        }
+      })
+      .then(function (responseJson) {
+        if (responseJson.error) {
+          alert(responseJson.error);
+        } else {
+          window.location.href = responseJson.redirect_url;
+        }
+      })
+      .catch(function (error) {
+        console.log("An error occurred: " + error.message);
+      });
+  });
+
+document
+  .querySelector(".form-accesorios")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    var formData = new FormData(this);
+
+    fetch(this.action, {
+      method: this.method,
+      body: formData,
+    })
+      .then(function (response) {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Error: " + response.statusText);
+        }
+      })
+      .then(function (responseJson) {
+        if (responseJson.error) {
+          alert(responseJson.error);
+        } else {
+          window.location.href = responseJson.redirect_url;
+        }
+      })
+      .catch(function (error) {
+        console.log("An error occurred: " + error.message);
+      });
+  });

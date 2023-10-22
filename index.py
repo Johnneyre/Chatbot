@@ -168,6 +168,13 @@ def add_product():
         cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
         if tipo == 'repuesto':
+            # Verificar si ya existe un repuesto con el mismo nombre
+            cur.execute(
+                "SELECT * FROM repuestos WHERE repuestos = %s", (name,))
+            existing_product = cur.fetchone()
+
+            if existing_product is not None:
+                return jsonify(error="Ya existe un repuesto con el nombre: " + name)
             marcas = request.form['marca']
             modelo = request.form['modelo']
             cilindraje = request.form['cilindraje']
@@ -200,16 +207,24 @@ def add_product():
             cur.execute(
                 "INSERT INTO repuestos (repuestos, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen) VALUES (%s, %s, %s, %s, %s, %s, %s)",
                 (name, id_marcas, id_modelo, id_cilindraje, cantidad, precio, imagen))
-        elif tipo == 'accesorio':
 
+        elif tipo == 'accesorio':
+            # Verificar si ya existe un accesorio con el mismo nombre
+            cur.execute(
+                "SELECT * FROM accesorio WHERE accesorio = %s", (name,))
+            existing_product = cur.fetchone()
+
+            if existing_product is not None:
+                return jsonify(error="Ya existe un accesorio con el nombre: " + name)
             cur.execute(
                 "INSERT INTO accesorio (accesorio, cantidad, precio, image) VALUES (%s, %s, %s, %s)",
                 (name, cantidad, precio, imagen))
+
         conn.commit()
     except Exception as e:
         conn.rollback()  # Rollback the transaction in case of error
         print(f"An error occurred: {e}")
-    return redirect(url_for('admin'))
+    return jsonify(redirect_url=url_for('admin'))
 
 
 # ! Consultas UPDATE
