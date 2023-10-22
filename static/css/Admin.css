@@ -8,6 +8,12 @@
   font-family: "Roboto", sans-serif;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 html {
   min-height: 100vh;
   margin: 0;
