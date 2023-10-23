@@ -167,6 +167,7 @@
                   <a
                     href="{{ url_for('delete', tipo='repuesto', id=row['id_repuestos']) }}"
                     class="btn eliminar"
+                    onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?')"
                     >Eliminar</a
                   >
                 </td>
@@ -253,7 +254,10 @@
                     class="btn editar"
                     >Editar</a
                   >
-                  <a href="{{ url_for('delete', tipo='accesorio', id=row['id_accesorio']) }}" class="btn eliminar" onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?')">Eliminar</a>
+                  <a 
+                  href="{{ url_for('delete', tipo='accesorio', id=row['id_accesorio']) }}" 
+                  class="btn eliminar" 
+                  onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?')">Eliminar</a>
                 </td>
               </tr>
               {% endfor %}
