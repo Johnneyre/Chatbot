@@ -166,3 +166,10 @@ a {
     border: solid rgb(78, 33, 33) 1px;
     transition: background-color 0.2s ease-in-out;
 }
+
+
+.modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
