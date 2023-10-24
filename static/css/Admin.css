@@ -307,10 +307,27 @@ thead {
   overflow: auto;
 }
 
+tr {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
 th,
 td {
   padding: 20px 10px;
   width: 165px;
+}
+
+.acc > table > thead > tr > th {
+  width: 100%;
+}
+
+.acc > table > tbody > tr > td {
+  width: 100%;
+  padding: 20px 10px 0 10px;
+
 }
 
 td {
