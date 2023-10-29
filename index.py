@@ -3,14 +3,15 @@ from flask import Flask, make_response, render_template, request, redirect, url_
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
 import psycopg2
 import psycopg2.extras
+import os
 
 app = Flask(__name__)
 app.secret_key = "administra"
 
-DB_HOST = "Localhost"
-DB_NAME = "chatbot"
-DB_USER = "postgres"
-DB_PASS = "admin"
+DB_HOST = os.getenv("DB_HOST")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASS = os.getenv("DB_PASS")
 
 conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER,
                         password=DB_PASS, host=DB_HOST)
