@@ -6,8 +6,21 @@
   box-sizing: border-box;
 }
 
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #000;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #fff;
+  border-radius: 20px;
+}
+
 .app__container {
-  min-height: 95.9vh;
+  min-height: 96.3vh;
   background-color: #000000;
 }
 
@@ -29,8 +42,6 @@
 }
 
 #header ul {
-  width: 26%;
-  min-width: 360px;
   margin-top: 20px;
 }
 
@@ -92,12 +103,12 @@
 }
 
 .logo {
-  margin-left: 60px;
+  margin-left: 6%;
 }
 
 .contenedor {
   margin: 0 auto;
-  min-height: 75vh;
+  height: 75vh;
   width: 90%;
   background-color: rgb(48, 40, 40);
   border-radius: 20px;
@@ -127,7 +138,7 @@
 .container__buton-2 {
   display: flex;
   justify-content: end;
-  margin-top: 16px;
+  margin-top: 20;
   cursor: auto !important;
 }
 
@@ -174,6 +185,7 @@ h1 {
 p {
   font-size: 18px;
   margin: 30px 0 0 0;
+  line-height: 24px;
 }
 
 footer {
@@ -190,12 +202,23 @@ footer > a:hover {
   color: white;
 }
 
+@media (max-width: 981px) {
+  .contenedor {
+    width: 94%;
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-left: 30px;
+  }
 
+  h1 {
+    font-size: 58px;
+  }
+}
 
 @media (max-width: 770px) {
-
   .contenedor {
-    padding: 35px 35px 15px 35px;
+    padding: 30px 30px 10px 30px;
+    height: 100%;
   }
 
   #header {
@@ -203,15 +226,16 @@ footer > a:hover {
   }
 
   #header > .nav-bar {
-    width: 55%;
-    margin: 0 20px;
+    margin-left: 20px;
+    margin-right: 20px;
     font-size: 17px;
   }
 
   .button-main {
     width: 100%;
     max-width: 100%;
-    margin-top: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
   }
 
   .contenedor-saludo {
@@ -222,20 +246,52 @@ footer > a:hover {
     width: 100%;
   }
 
-  #saludo {
-    margin: 0 0 10px 0;
-    font-size: 35px;
+  h1 {
+    font-size: 46px;
   }
 
   .contenedor-text {
     width: 100%;
+    margin-bottom: 11%;
+    height: 63%;
+    margin-top: 0rem;
+  }
+
+  .direccion,
+  .informacion-de-nosotros {
+    font-size: 1.02rem;
   }
 
   .direccion {
-    margin: 0;
+    margin-top: 7%;
   }
 
   .informacion-de-nosotros {
     width: 72%;
+  }
+}
+
+@media (max-width: 565px) {
+  h1 {
+    font-size: 2.3rem;
+  }
+}
+
+@media (max-width: 404px) {
+  .contenedor {
+    padding-top: 1rem;
+  }
+
+  .direccion {
+    margin-top: 5rem;
+  }
+
+  .button-main {
+    margin-top: 1rem;
+  }
+
+  h1 {
+    margin-top: 4rem;
+    font-size: 2.3rem;
   }
 }
