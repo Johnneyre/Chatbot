@@ -297,6 +297,7 @@ td {
 .sobre-nosotros--text {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   padding: 30px 30px;
   background-color: #41414170;
   border-radius: 15px;

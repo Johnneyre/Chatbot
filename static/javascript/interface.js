@@ -377,7 +377,7 @@ function updateProductList(products) {
           </div>
           <div class="boton-whatsapp--text">
             <a href="https://web.whatsapp.com/" target="_blank"
-              >Ir a Google Map</a
+              >Ir a whatsapp</a
               >
           </div>
         </div>
