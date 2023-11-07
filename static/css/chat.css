@@ -60,12 +60,12 @@
   overflow-y: auto;
 }
 
-.msg_card_body::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 7px;
   background: rgba(80, 59, 59, 0.459);
 }
 
-.msg_card_body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background-color: #300a0ad0;
 }
 
@@ -297,6 +297,7 @@ td {
 .sobre-nosotros--text {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   padding: 30px 30px;
   background-color: #41414170;
   border-radius: 15px;
@@ -651,8 +652,11 @@ td {
     flex-wrap: wrap;
     justify-content: space-around;
     text-align: center;
-    width: 100%;
-    background-color: azure;
+    width: 50%;
+  }
+
+  .sobre-nosotros--text {
+    height: 70%;
   }
 
   .sobre-nosotros--ubicacion > p {
@@ -660,7 +664,7 @@ td {
   }
 
   .sobre-nosotros--ubicacion > img {
-    height: 110px;
+    height: 100px;
     margin-left: 10px;
     object-fit: cover;
     float: left;
@@ -672,7 +676,37 @@ td {
   }
 
   .img {
-    width: 40%;
+    width: 30%;
+  }
+
+  .producto {
+    padding: 0 15px;
+  }
+
+  .product-btn {
+    width: 70%;
+  }
+
+  .boton-whatsapp{
+    width: 90%;
+  }
+
+  .boton-whatsapp--icon > img{
+    height: 20px;
+  }
+
+  .boton-whatsapp--text > a {
+    font-size: 12px;
+  }
+
+  .producto-inf {
+    overflow: hidden;
+    font-size: 12px;
+  }
+
+  .boton-ubi {
+    width: 70%;
+    font-size: 12px;
   }
 }
 
