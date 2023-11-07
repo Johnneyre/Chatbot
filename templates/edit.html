@@ -5,6 +5,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/static/css/edit.css" />
+  <link
+      rel="shortcut icon"
+      href="../static/img/favicon.ico"
+      type="image/x-icon"
+    />
   <title>Editar Producto</title>
 </head>
 
@@ -93,7 +98,7 @@
           .querySelector("form")
           .addEventListener("submit", function (event) {
             var inputs = this.querySelectorAll(
-              'input[type="text"], input[type="number"], input[type="file"], select'
+              'input[type="text"], input[type="number"], select'
             );
 
             for (var i = 0; i < inputs.length; i++) {
