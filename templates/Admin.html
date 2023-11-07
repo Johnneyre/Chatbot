@@ -179,7 +179,7 @@
         </div>
       </div>
       <div class="cont-acc" id="acc">
-        <div class="create">
+        <div class="create accc">
           <div class="create-h1">
             <h1>Agrega un Accesorio</h1>
           </div>
@@ -241,10 +241,10 @@
             <tbody>
               {% for row in accesorios %}
               <tr>
-                <td>{{row["accesorio"]}}</td>
-                <td>{{row["cantidad"]}}</td>
-                <td>{{row["precio"]}} COP</td>
-                <td>
+                <td data-label="Nombre">{{row["accesorio"]}}</td>
+                <td data-label="Cantidad">{{row["cantidad"]}}</td>
+                <td data-label="Precio">{{row["precio"]}} COP</td>
+                <td data-label="Imagen">
                   <img
                     src="{{ url_for('show_image', tipo='accesorio', id=row['id_accesorio']) }}"
                     alt="Imagen del accesorio"

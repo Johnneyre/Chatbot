@@ -18,18 +18,14 @@ html {
   min-height: 100vh;
   margin: 0;
   background: rgb(44, 47, 59);
-  background: -webkit-linear-gradient(
-    to right,
-    rgb(59, 34, 34),
-    rgb(70, 54, 54),
-    rgb(43, 32, 32)
-  );
-  background: linear-gradient(
-    to right,
-    rgb(61, 41, 38),
-    rgb(65, 50, 50),
-    rgb(78, 33, 33)
-  );
+  background: -webkit-linear-gradient(to right,
+      rgb(59, 34, 34),
+      rgb(70, 54, 54),
+      rgb(43, 32, 32));
+  background: linear-gradient(to right,
+      rgb(61, 41, 38),
+      rgb(65, 50, 50),
+      rgb(78, 33, 33));
 }
 
 body {
@@ -98,7 +94,7 @@ form {
   object-fit: fill;
 }
 
-.img-cont > img {
+.img-cont>img {
   object-fit: fill;
   position: relative;
 }
@@ -113,12 +109,12 @@ form {
   max-width: 100px;
 }
 
-.edit-input > span {
+.edit-input>span {
   color: white;
   font-weight: 600;
 }
 
-.edit-input > input,
+.edit-input>input,
 select {
   border-radius: 10px;
   width: 50%;
@@ -171,4 +167,16 @@ a {
   border-radius: 20px;
   border: solid rgb(78, 33, 33) 1px;
   transition: background-color 0.2s ease-in-out;
+}
+
+@media screen and (max-width: 900px) {
+  .create-h1 {
+    padding-top: 20px;
+    /* background-color: aquamarine; */
+  }
+
+  form{
+    margin-top: -5px;
+    align-items: center;
+  }
 }
