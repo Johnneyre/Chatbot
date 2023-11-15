@@ -112,6 +112,10 @@ select {
   margin-top: -17px;
 }
 
+#output_image {
+    max-width: 40%;
+}
+
 .edit-input > span {
   color: white;
   font-weight: 600;

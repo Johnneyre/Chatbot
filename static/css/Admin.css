@@ -327,11 +327,6 @@ td {
 .acc > table > tbody > tr > td {
   width: 100%;
   padding: 20px 10px 0 10px;
-
-}
-
-td {
-  border-bottom: solid 1px rgba(80, 59, 59, 0.8);
 }
 
 td > img {
@@ -416,18 +411,6 @@ tbody {
   min-width: 100px;
 }
 
-/* @media screen and (max-width: 900px){
-  table {
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* th, td {
-    display: flex;
-    flex-direction: column;
-  } */
-/* } */
-
 @media screen and (max-width: 900px) {
   table {
     border: 0px;
@@ -439,7 +422,6 @@ tbody {
 
   table tr {
     margin-bottom: 8px;
-    border-bottom: 4px solid #ddd;
     display: block;
   }
 
@@ -452,7 +434,6 @@ tbody {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #ddd;
     width: 100%;
     padding-left: 20px;
     padding-right: 20px;
@@ -483,27 +464,62 @@ tbody {
     border-radius: 20px;
   }
 
-  .create-input{
+  .create-input {
     width: 100%;
     margin-top: 10px;
   }
 
   form {
-    padding: 60px 0 50px 0;
+    padding: 8rem 0 50px 0;
     height: 100%;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
     overflow-y: scroll;
     overflow-x: hidden;
+    gap: 5%;
   }
 
-  .cont-guardar{
-    width: 50%;
-    margin: auto;
+  .cont-guardar {
+    width: 100%;
+    margin-top: 20px;
+    padding-right: 25px;
+    justify-content: end;
   }
 
   .form-accesorios {
     padding: 20px 0;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .create {
+    padding: 10px;
+  }
+
+  form {
+    height: 90%;
+  }
+
+  .create-h1 {
+    font-size: 0.9rem;
+  }
+
+  .guardar {
+    max-width: none;
+  }
+
+  .cont-guardar {
+    justify-content: center;
+    padding-right: 0;
+  }
+
+  .create-input span {
+    display: none;
+  }
+
+  .create-input > input,
+  select {
+    width: 85%;
   }
 }

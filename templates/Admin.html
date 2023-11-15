@@ -141,7 +141,7 @@
                 <th>Cantidad</th>
                 <th>Precio</th>
                 <th>Imagen</th>
-                <th> </th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -152,7 +152,7 @@
                 <td data-label="Modelo">{{row["modelo"]}}</td>
                 <td data-label="Cilindraje">{{row["cilindraje"]}}</td>
                 <td data-label="Cantidad">{{row["cantidad"]}}</td>
-                <td data-label="Precio">{{row["precio"]}}</td>
+                <td data-label="Precio">${{row["precio"]}}</td>
                 <td data-label="Imagen">
                   <img
                     src="{{ url_for('show_image', tipo='repuesto', id=row['id_repuestos']) }}"
@@ -235,7 +235,7 @@
                 <th>Cantidad</th>
                 <th>Precio</th>
                 <th>Imagen</th>
-                <th> </th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -243,7 +243,7 @@
               <tr>
                 <td data-label="Nombre">{{row["accesorio"]}}</td>
                 <td data-label="Cantidad">{{row["cantidad"]}}</td>
-                <td data-label="Precio">{{row["precio"]}} COP</td>
+                <td data-label="Precio">${{row["precio"]}}</td>
                 <td data-label="Imagen">
                   <img
                     src="{{ url_for('show_image', tipo='accesorio', id=row['id_accesorio']) }}"
@@ -256,10 +256,12 @@
                     class="btn editar"
                     >Editar</a
                   >
-                  <a 
-                  href="{{ url_for('delete', tipo='accesorio', id=row['id_accesorio']) }}" 
-                  class="btn eliminar" 
-                  onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?')">Eliminar</a>
+                  <a
+                    href="{{ url_for('delete', tipo='accesorio', id=row['id_accesorio']) }}"
+                    class="btn eliminar"
+                    onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?')"
+                    >Eliminar</a
+                  >
                 </td>
               </tr>
               {% endfor %}
@@ -269,6 +271,6 @@
       </div>
     </main>
     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
-    <script src="../static/js/Admin.js"></script>
+    <script src="../static/javascript/Admin.js"></script>
   </body>
 </html>

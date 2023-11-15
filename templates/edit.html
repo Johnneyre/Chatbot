@@ -66,7 +66,7 @@
         </div>
 
         <div class="edit-input img-act">
-          <span>Imagen actual:</span>
+          <span class="span_img">Imagen actual:</span>
           <div class="img-cont">
             <img id="output_image" class="img-actual"
               src="{{ url_for('show_image', tipo='repuesto', id=product['id_repuestos']) }}"
@@ -81,7 +81,7 @@
 
         <div class="cont-edit">
           <a href="/admin" class="btn cancelar"><span>Cancelar</span></a>
-          <input type="submit" value="Actualizar" class="btn cancelar" />
+          <input type="submit" value="Actualizar" class="btn-enviar" />
         </div>
       </form>
       <script>
