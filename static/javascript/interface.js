@@ -23,7 +23,7 @@ const select3 = document.querySelector(".select-3");
 // funciones
 
 function mostrarReload() {
-  reload.style.display = "block";
+  reload.style.display = "flex";
   setTimeout(function () {
     reload.style.opacity = "1";
   }, 100);
@@ -32,6 +32,7 @@ function mostrarReload() {
 function mostrarR1() {
   r1.innerText = opcion1;
   r1.style.display = "block";
+  r1.style.textTransform = "capitalize";
   r1a.style.display = "block";
   setTimeout(function () {
     r1.style.opacity = "1";
@@ -59,6 +60,7 @@ function mostrarO2() {
 function mostrarR2() {
   r2.innerText = opcion2;
   r2.style.display = "block";
+  r2.style.textTransform = "capitalize";
   r2a.style.display = "block";
   setTimeout(function () {
     r2.style.opacity = "1";
@@ -377,7 +379,7 @@ function updateProductList(products) {
           </div>
           <div class="boton-whatsapp--text">
             <a href="https://web.whatsapp.com/" target="_blank"
-              >Ir a Google Map</a
+              >Ir a whatsapp</a
               >
           </div>
         </div>

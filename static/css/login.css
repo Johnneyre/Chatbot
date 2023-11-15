@@ -59,13 +59,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* gap: 2px; */
   color: white;
 }
 
 .nav-bar li:first-of-type a {
   padding: 0px 10px;
-  /* background: transparent; */
   transition: 0.3s all ease;
   gap: 7px;
 }
@@ -167,7 +165,7 @@ form {
   color: white;
   border-radius: 20px;
   border: solid rgb(78, 33, 33) 1px;
-  height: 35px;
+  height: 20%;
   width: 50%;
   transition: width 0.5s, height 0.7s;
   box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);

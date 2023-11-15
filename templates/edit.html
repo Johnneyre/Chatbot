@@ -10,13 +10,13 @@
       href="../static/img/favicon.ico"
       type="image/x-icon"
     />
-  <title>Editar Producto</title>
+  <title>Editar Repuesto</title>
 </head>
 
 <body>
   <main>
     <div class="create-h1">
-      <h1>Editar Producto</h1>
+      <h1>Editar Repuesto</h1>
     </div>
     <div class="edit">
       <form action="{{ url_for('edit_product', id=product['id_repuestos']) }}" method="post"
@@ -66,7 +66,7 @@
         </div>
 
         <div class="edit-input img-act">
-          <span>Imagen actual:</span>
+          <span class="span_img">Imagen actual:</span>
           <div class="img-cont">
             <img id="output_image" class="img-actual"
               src="{{ url_for('show_image', tipo='repuesto', id=product['id_repuestos']) }}"
@@ -81,7 +81,7 @@
 
         <div class="cont-edit">
           <a href="/admin" class="btn cancelar"><span>Cancelar</span></a>
-          <input type="submit" value="Actualizar" class="btn cancelar" />
+          <input type="submit" value="Actualizar" class="btn-enviar" />
         </div>
       </form>
       <script>
