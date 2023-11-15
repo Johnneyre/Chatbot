@@ -99,6 +99,7 @@ select {
 
 .img-cont {
   border-radius: 15px;
+  max-width: 45%;
 }
 
 .img-actual {
@@ -113,7 +114,8 @@ select {
 }
 
 #output_image {
-    max-width: 40%;
+  max-width: 40%;
+  min-width: 78px;
 }
 
 .edit-input > span {
@@ -205,49 +207,22 @@ a {
   .edit-input {
     width: 92%;
   }
-
-  .edit-input:nth-child(7) {
-    width: 75%;
-    margin-left: 0;
-    margin-right: 0;
-    justify-content: space-between !important;
-    flex: none;
-    margin: 30px 0 7px 0;
-  }
 }
 
 @media screen and (max-width: 400px) {
-  .edit-input:nth-child(1) span {
-    display: none;
-  }
-  .edit-input:nth-child(2) span {
-    display: none;
-  }
-  .edit-input:nth-child(3) span {
-    display: none;
-  }
-  .edit-input:nth-child(4) span {
-    display: none;
-  }
-  .edit-input:nth-child(5) span {
-    display: none;
-  }
-  .edit-input:nth-child(6) span {
-    display: none;
-  }
   .edit-input > input,
   select {
     border-radius: 10px;
     width: 90%;
     padding: 0 8px;
   }
-  .edit-input:nth-child(7) {
-    width: 75%;
-  }
-  .edit-input:nth-child(8) {
+  .edit-input:nth-child(4) {
     margin-bottom: 1.8rem;
   }
-  .edit-input:nth-child(8) span {
+  .edit-input:nth-child(5) {
+    margin-bottom: 1.8rem;
+  }
+  .edit-input:nth-child(5) span {
     margin-bottom: 1rem;
   }
   .cont-edit {
