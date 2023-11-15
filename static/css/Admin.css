@@ -330,6 +330,7 @@ td {
 }
 
 td > img {
+  max-height: 150px;
   width: 100%;
   min-width: 110px;
   border-radius: 10px;
